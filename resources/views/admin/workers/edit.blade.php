@@ -1,73 +1,31 @@
-@extends('layouts.admin')
-@section('title')Редактировать @endsection
+@extends('layouts.app')
+@section('title')Редактировать данные сотрудника @endsection
 @section('content')
-<h1 class="text-center ">Наши сотрудники</h1>
 
-<div class="row">
-
-<div class="col-lg-12 margin-tb">
-
-    <div class="pull-left">
-
-        <h2>Редактировать записи</h2>
-
+<div class="row text-center">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Редактирование запись</h2>
+        </div>
     </div>
-
-    <div class="pull-right">
-
-        <a class="btn btn-primary" href="{{ route('admin.workers.index') }}">Назад</a>
-
-    </div>
-
-</div>
-
 </div>
 
 
+<div class="container container__create-form">
 
-@if ($errors->any())
-
-<div class="alert alert-danger">
-
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-
-    <ul>
-
-        @foreach ($errors->all() as $error)
-
-            <li>{{ $error }}</li>
-
-        @endforeach
-
-    </ul>
-
-</div>
-
-@endif
-
-
-
-<form action="{{ route('admin.workers.update',$worker->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.workers.update',$worker->worker_id) }}" method="POST">
 
 @csrf
-
 @method('PUT')
-
-
 
  <div class="row">
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
-
-        <div class="form-group">
-
-            <strong>Имя:</strong>
-
-            <input type="text" name="name" value="{{ $worker->name }}" class="form-control" placeholder="Имя">
-
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Имя:</strong>
+                <input type="text" name="name" value="{{ $worker->name }}" class="form-control" placeholder="Имя">
+            </div>
         </div>
-
-    </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12">
 
@@ -87,7 +45,7 @@
 
             <strong>Отчество:</strong>
 
-            <input type="text" name="patronymic" value="{{ $worker->price }}" class="form-control" placeholder="Отчество">
+            <input type="text" name="patronymic" value="{{ $worker->patronymic }}" class="form-control" placeholder="Отчество">
 
         </div>
 
@@ -121,9 +79,9 @@
 
         <div class="form-group">
 
-            <strong>Пол:</strong>
+            <strong>Дата приема на работу:</strong>
 
-            <input type="text" name="gender" value="{{ $worker->gender }}" class="form-control" placeholder="Пол">
+            <input type="date" name="hire_date" value="{{ $worker->hire_date }}" class="form-control" placeholder="Дата приема на работу">
 
         </div>
 
@@ -133,9 +91,12 @@
 
         <div class="form-group">
 
-            <strong>Телефон:</strong>
+            <strong>Образование:</strong>
 
-            <input type="text" name="phone" value="{{ $worker->phone }}" class="form-control" placeholder="Телефон">
+            <label for="yes">Есть образование</label>
+            <input type="radio" id="yes" name="education" value="1"><br>
+            <label for="no">Нет образования</label>
+            <input type="radio" id="no" name="education" value="0"><br>
 
         </div>
 
@@ -146,9 +107,9 @@
 
 <div class="form-group">
 
-    <strong>Еmail:</strong>
+    <strong>Номер телефона:</strong>
 
-    <input type="text" name="email" value="{{ $worker->email }}" class="form-control" placeholder="Еmail">
+    <input type="number" name="phone_number" value="{{ $worker->phone_number }}" class="form-control" placeholder="Номер телефона">
 
 </div>
 
@@ -158,25 +119,22 @@
 
         <div class="form-group">
 
-            <strong>Фото:</strong>
+            <strong>Email адрес:</strong>
 
-            <input type="file" name="image" value="{{ $worker->image }}" class="form-control" placeholder="Фото">
+            <input type="email" name="email" value="{{ $worker->email }}" class="form-control" placeholder="Email адрес">
 
         </div>
 
     </div>
 
 
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-
-      <button type="submit" class="btn btn-primary">Нажать!</button>
-
-    </div>
-
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center button-group">
+    <button type="submit" class="btn btn-primary">Редактировать</button>
+    <a class="btn btn-primary" href="{{route('admin.workers.index')}}">Назад</a>
 </div>
 
-
-
+</div>
+</div>
 </form>
 
 @endsection

@@ -1,96 +1,136 @@
 @extends('layouts.app')
-@section('title')Главная страница @endsection
+@section('title')Акксесуары для умного дома @endsection
 @section('content')
-<h1 class="text-center ">Изделия Золотого Оттенка</h1>
+<h1 class="text-center ">Аксессуары для умного дома</h1><br><br>
 
+<div class="container">
 <div class="row">
+<div class="col-lg-12 margin-tb">
+    <div class="pull-left">
 
-        <div class="col-lg-12 margin-tb">
+        <div id="myModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeWindow()">&times;</span>
+        <h2>Информация об аксесуаре:</h2>
+        <div id="productDetails" class="details-bd"></div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
 
-            <div class="pull-left">
+</div>
+<form action="{{ route('products.filter') }}" method="GET" class="mb-4">
 
-                
+    <div class="form-group1 price-filter">
+        <label for="min-price">Минимальная цена: <span id="min-price-label">{{ isset($minPrice) ? $minPrice : 0 }}</span></label>
+        <input type="range" name="min_price" id="min-price" min="0" max="10000" value="{{ isset($minPrice) ? $minPrice : 0 }}" step="1" oninput="updateMinPrice()">
 
-            </div>
-
-            <div class="pull-right">
-
-                
-
-            </div>
-
-        </div>
-
+        <label for="max-price">Максимальная цена: <span id="max-price-label">{{ isset($maxPrice) ? $maxPrice : 10000 }}</span></label>
+        <input type="range" name="max_price" id="max-price" min="0" max="10000" value="{{ isset($maxPrice) ? $maxPrice : 10000 }}" step="1" oninput="updateMaxPrice()">
     </div>
 
-   
+    <button type="submit" class="btn btn-primary">Применить фильтр</button>
+</form>
 
-    @if ($message = Session::get('success'))
 
-        <div class="alert alert-success">
+<div class="container">
+    <div class="row-products">
 
-            <p>{{ $message }}</p>
+        <div class="col-md-9">
+            <h3>Продукты</h3>
+            <div class="products">
+                @foreach($products as $product)
+                    <div class="col-md-4 mb-4 blok">
+                        <div class="card">
+                            <img src="{{ asset($product->product_image) }}" class="card-img-top" style="height: 308px; width: 308px;" alt="{{ $product->title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $product->title }}</h5>
+                                <p class="card-text">{{ $product->price }} ₽</p>
 
+                                <div class="action-buttons">
+                                    <input type="button" class="pokazat" style="display: inline-block; margin-right: 6px;" onclick="showProductDetails({{ json_encode($product) }})" />
+
+
+                                    <form action="{{ route('cart.add', $product->product_id) }}" method="POST" style="display: inline-block;">
+                                        @csrf
+                                        <button type="submit" class="Add-in-cart"></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
+    </div>
+</div>
 
-    @endif
+<script type="text/javascript">
+function showProductDetails(product) {
+    var detailsHtml = `
+     <div class="window-info" style="position: relative; padding-right: 95px;">
+        <div style="margin-right: 160px;">
+            <div><strong>Название:</strong> ${product.title}</div>
+            <div><strong>Цена:</strong> ${product.price} ₽</div>
+            <div><strong>Бренд:</strong> ${product.brand}</div>
+            <div><strong>Доставка:</strong> ${product.delivery}</div>
+            <div><strong>Категория:</strong> ${product.category}</div>
+            <div><strong>Гарантия:</strong> ${product.warranty}</div>
+            <div><strong>Материал:</strong> ${product.material}</div>
+            <div><strong>Питание от:</strong> ${product.power_supply}</div>
+        </div>
+        <img src="${product.product_image}" alt="${product.title}" style="position: absolute; right: 0; top: 0; width: 240px; height: auto;" />
+     </div>
+    `;
 
-   
+    // Заполнение модального окна данными о работнике
+    document.getElementById('productDetails').innerHTML = detailsHtml;
 
-    <table class="table table-bordered">
+    // Показываем модальное окно
+    document.getElementById('myModal').style.display = "block";
+}
 
-        <tr>
+function closeWindow() {
+    // Скрываем модальное окно
+    document.getElementById('myModal').style.display = "none";
+}
 
-            <th>id</th>
-            <th>Тип</th>
-            <th>Материал</th>
-            <th>Цена</th>
-            <th>Масса</th>
-            <th>Бренд</th>
-            <th>Коллекция</th>
-            
-            <th width="300" height="100">Фото</th>
-            <th width="280px">Действия</th>
+function updateMinPrice() {
+    const minPriceInput = document.getElementById('min-price');
+    const minPriceLabel = document.getElementById('min-price-label');
+    minPriceLabel.innerText = minPriceInput.value;
 
-        </tr>
+    // Убедитесь, что минимальная цена не превышает максимальную
+    const maxPriceInput = document.getElementById('max-price');
+    if (parseInt(minPriceInput.value) > parseInt(maxPriceInput.value)) {
+        maxPriceInput.value = minPriceInput.value;
+        document.getElementById('max-price-label').innerText = maxPriceInput.value;
+    }
+}
 
-        @foreach ($products as $product)
+function updateMaxPrice() {
+    const maxPriceInput = document.getElementById('max-price');
+    const maxPriceLabel = document.getElementById('max-price-label');
+    maxPriceLabel.innerText = maxPriceInput.value;
 
-        <tr>
+    // Убедитесь, что максимальная цена не меньше минимальной
+    const minPriceInput = document.getElementById('min-price');
+    if (parseInt(maxPriceInput.value) < parseInt(minPriceInput.value)) {
+        minPriceInput.value = maxPriceInput.value;
+        document.getElementById('min-price-label').innerText = minPriceInput.value;
+    }
+}
 
-            <td>{{ ++$i }}</td>
-            <td>{{ $product->type }}</td>
-            <td>{{ $product->material }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->weight }}</td>
-            <td>{{ $product->brand }}</td>
-            <td>{{ $product->collection }}</td>
-            
-            <td><img src="{{$product->image }}" class="db" ></td>
+function applyFilter() {
+    const minPrice = document.getElementById('min-price').value;
+    const maxPrice = document.getElementById('max-price').value;
 
-            <td>
+    // Здесь вы можете добавить код для применения фильтрации товаров
+    console.log(`Применение фильтра: от ${minPrice} до ${maxPrice}`);
+}
 
-            <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Показать</a>
-</br></br>
-            <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-auto">
-                @csrf
-                @method('POST')
-                <button type="submit" class="btn btn-primary">В корзину!</button>
-            </form>
-
+</script>
 
 
-
-            </td>
-
-        </tr>
-
-        @endforeach
-
-    </table>
-    
-
-    
-    
-
-    @endsection
+@endsection

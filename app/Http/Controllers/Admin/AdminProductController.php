@@ -1,0 +1,133 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Products;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+
+class AdminProductController extends Controller
+{
+    public function index(): View
+    {
+        $products = Products::all();
+        return view('admin.products.index', compact('products'));
+    }
+    
+    public function create(): View
+    {
+        return view('admin.products.create');
+    }
+        
+    public function store(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+            'brand' => 'required',
+            'delivery' => 'required',
+            'category' => 'required',
+            'warranty' => 'required',
+            'material' => 'required',
+            'power_supply' => 'required',
+        ]);
+        $file_name = "";
+        if ($request->hasFile('product_image')) {
+            $file_name = '/img/products/' . time() . '.' . $request->product_image->getClientOriginalExtension();
+            $request->product_image->move(public_path('img/products'), $file_name);
+        } else {
+            echo "Фото не загружено";
+        }
+        
+        $products = new Products;
+        $products->title = $request->title;
+        $products->price = $request->price;
+        $products->brand = $request->brand;
+        $products->delivery = $request->delivery;
+        $products->category = $request->category;
+        $products->warranty = $request->warranty;
+        $products->material = $request->material;
+        $products->power_supply = $request->power_supply;
+        $products->product_image = $file_name;
+        $products->save();
+
+        return redirect()->route('admin.products.index')->with('Выполнено!','Готово!');
+    }
+    
+    public function update(Request $request, Products $product): RedirectResponse
+    {
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+            'brand' => 'required',
+            'delivery' => 'required',
+            'category' => 'required',
+            'warranty' => 'required',
+            'material' => 'required',
+            'power_supply' => 'required',
+        ]);
+
+        $file_name = $product->product_image;
+        if($request->hasFile('product_image')) {
+            $file_name = '/img/products/'.time().'.'.$request->product_image->getClientOriginalExtension();
+            $request->product_image->move(public_path('img/products'),$file_name);
+        }
+
+        $product->title = $request->title;
+        $product->price = $request->price;
+        $product->brand = $request->brand;
+        $product->delivery = $request->delivery;
+        $product->category = $request->category;
+        $product->warranty = $request->warranty;
+        $product->material = $request->material;
+        $product->power_supply = $request->power_supply;
+        $product->product_image = $file_name;
+        $product->save();
+
+        return redirect()->route('admin.products.index')->with('Выполнено','готово');
+    }
+
+    public function edit(Products $product): View
+    {
+        return view('admin.products.edit', compact('product'));
+    }
+    
+    
+    public function destroy(Products $product): RedirectResponse
+    {
+        $product->delete(); 
+        return redirect()->route('admin.products.index')->with('выполнено','изделие удалёно.');
+    }
+
+    public function filter(Request $request): View
+{
+    $query = Products::query();
+
+    // Фильтрация по категории
+    if ($request->has('category') && $request->category != '') {
+        $query->where('category', $request->category);
+    }
+
+    // Фильтрация по цене
+    if ($request->has('min_price') && $request->has('max_price')) {
+        $query->whereBetween('price', [$request->min_price, $request->max_price]);
+        // Сохраняем значения для передачи обратно в представление
+        $minPrice = $request->min_price;
+        $maxPrice = $request->max_price;
+    } else {
+        // Если фильтры не применяются, устанавливаем значения по умолчанию
+        $minPrice = 0;
+        $maxPrice = 10000;
+    }
+
+    $products = $query->get();
+
+    return view('admin.products.index', compact('products', 'minPrice', 'maxPrice'));
+}
+
+
+
+        
+}

@@ -4,68 +4,109 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+    <!-- CSRF Token1 -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css'])
-   
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/home.css', 'resources/css/app.css', 'resources/css/about.css', 'resources/css/contact.css', 'resources/css/pageBD.css'])
 
-    @yield('custom_js')
-    
 </head>
 <body>
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4 px-5">Золотой Оттенок</span>
-      </a>
-
-      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/">Главная</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/contact">Наши контакты</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/about">О мастерой</a>
-
-        @auth 
-        @if (Auth::user())
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/products">Наши товары</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/workers">Сотрудники</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/orders">Заказы</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="/suppliers">Поставщики</a>
-        <a class="me-3 py-2 text-light text-decoration-none btn btn-primary" href="{{ url('/cart')  }}">Корзина</a>
-        @endif
-        @endauth
-        
-        @if (Auth::check())
-        <div class="dropdown me-2">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-  {{ Auth::user()->name }}
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a type="submit" class="btn btn-primary w-80 dropdown-item" href="{{ route('logout') }}">Выйти</a> </li>
-  </ul>
-</div> 
-        @else
-        <a type="submit" class="btn btn-primary w-80" href="{{ route('login') }}">Войти</a>
-        @endif
-      </nav>
-    </div>
-
-
     
+@if(Auth::check() && Auth::user()->isAdmin())
+    @include('layouts.admin') <!-- Подключаем админскую шапку -->
+@else
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom header">
+        <a href="/" class="d-flex align-items-center text-decoration-none">
+            <span class="fs-4 px-5">Smart Home - ваш умный дом</span>
+        </a>
 
+        <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto nav-menu">
+            <a class="me-3 py-2 text-decoration-none" href="/contact">Наши контакты</a>
+            <a class="me-3 py-2 text-decoration-none" href="/about">О нас</a>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+            @auth 
+                @if (Auth::user())
+                    <a class="me-3 py-2 text-decoration-none" href="/products">Товары</a>
+                    <a class="me-3 py-2 text-decoration-none" href="/workers">Сотрудники</a>
+                    <a class="me-3 py-2 text-decoration-none" href="/vacancies">Вакансии</a>
+
+                    <a class="me-3 py-gray text-decoration-none btn btn-primary" href="{{ url('/cart') }}">Корзина</a>
+                @endif
+            @endauth
+            
+            @if (Auth::check())
+                <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a type="submit" class="btn btn-primary w-80 dropdown-item" href="{{ route('logout') }}">Выйти</a></li>
+                    </ul>
+                </div> 
+            @else
+                <a type="submit" class="btn btn-primary w-80" href="{{ route('login') }}">Войти</a>
+            @endif
+        </nav>
     </div>
-  </body>
-  <div class="footer">
-  <p>&copy; 2024 Ювелирная мастерская. Все права защищены.</p>
-  </div>
+@endif
+
+<main class="py-4">
+    @yield('content')
+</main>
+
+<footer class="footer">
+        <div class="container">
+            <div class="footer__contacts">
+                <a class="footer__link footer__link-mail" href="mailto:fastfood_usa@gmail.com"></a>
+                <a href="#!" class="footer__link footer__link-web"></a>
+            </div>
+
+            <nav class="footer__nav">
+                <ul class="footer__list">
+                    <li class="footer__list-title footer__menu">
+                        <h3>Примеры работ</h3>
+                        <ul class="footer__inner-list">
+                            <li class="footer__list-item"><a href="#1">Малый бюджет</a></li>
+                            <li class="footer__list-item"><a href="#2">Средний бюджет</a></li>
+                            <li class="footer__list-item"><a href="#3">Высокий бюждет</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="footer__list-title footer__info">
+                        <h3>Информация</h3>
+                        <ul class="footer__inner-list">
+                            <li class="footer__list-item"><a href="/about">О нас</a></li>
+                            <li class="footer__list-item"><a href="/contact">Контакты</a></li>
+                            <li class="footer__list-item"><a href="/logout">Войти</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="footer__list-title footer__links">
+                        <h3>Ссылки</h3>
+                        <ul class="footer__inner-list">
+                            <li class="footer__list-item"><a href="#7">Наши мастера</a></li>
+                            <li class="footer__list-item"><a href="#8">Поддержка</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="footer__socials">
+                <h3>Социальные сети</h3>
+                <div class="footer__socials-icons">
+                    <ul class="footer__icons-list">
+                        <li class="footer__list-item"><a href="#facebook"><img src="/img//facebook 1.png" alt="facebook"></a></li>
+                        <li class="footer__list-item"><a href="#twitter"><img src="/img/twitter 1.png" alt="twitter"></a></li>
+                        <li class="footer__list-item"><a href="#instagram"><img src="/img/instagram 1.png" alt="instagram"></a></li>
+                        <li class="footer__list-item"><a href="#linkedin"><img src="/img/linkedin 1.png" alt="linkedin"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
 </html>

@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\AdminUser;
+use App\Models\User;
+use App\Models\Worker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,13 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this -> call(AdminUserSeeder::class);
-         \App\Models\AdminUser::factory(1)->create();
-
-       AdminUser::factory(1)->create([
-            "name" => "Admin",
-            "email" => "admin@email.ru",
-            "password" =>bcrypt("Q1qqqqqq")
-       ]);
+        $this->call(WorkerSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }

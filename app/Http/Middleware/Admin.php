@@ -1,12 +1,12 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class Admin
 {
@@ -15,11 +15,26 @@ class Admin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
-    {
-        if(Auth::user() && Auth::user()->Admin()){
+    public function handle(Request $request, Closure $next)
+{
+    if (Auth::check()) {
+        Log::info('User is authenticated', ['user' => Auth::user()]);
+        
+        // Проверяем роль
+        if (Auth::user()->role === 'admin') {
+            Log::info('User is an admin', ['user' => Auth::user()]);
             return $next($request);
+        } else {
+            Log::info('User is not an admin', ['user' => Auth::user()]);
         }
-        return redirect('home');
+    } else {
+        Log::info('User is not authenticated');
     }
+
+    return redirect('/about');
+}
+
+
+
+
 }

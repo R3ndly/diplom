@@ -1,35 +1,20 @@
-@extends('layouts.admin')
-@section('title') Создание @endsection
+@extends('layouts.app')
+@section('title') Добавление сотрудника @endsection
 @section('content')
 
-<h1 class="text-center">Наши изделия<h1>
-
-<div class="row">
+<div class="row text-center">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>добавить сотрудника</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{route('admin.workers.index')}}">Назад</a>
+            <h2>Добавить сотрудника</h2>
         </div>
     </div>
 </div>
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <strong>Проблема!</strong>There were some problems with your input.<br><br>
-    <ul>
-        @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+<div class="container container__create-form">
 
 <form action="{{route('admin.workers.store')}}" method="POST" enctype="multipart/form-data">
-
+    
 @csrf
-
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -38,93 +23,73 @@
                 <input type="text" name="name" class="form-control" placeholder="Имя">
             </div>
         </div>
-    </div>
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Фамилия:</strong>
-            <input type="text" name="surname" class="form-control" placeholder="Фамилия">
+    
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Фамилия:</strong>
+                <input type="text" name="surname" class="form-control" placeholder="Фамилия">
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Отчество:</strong>
-            <input type="text" name="patronymic" class="form-control" placeholder="Отчество">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Отчество:</strong>
+                <input type="text" name="patronymic" class="form-control" placeholder="Отчество">
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Должность:</strong>
-            <input type="text" name="position" class="form-control" placeholder="Должность">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Должность:</strong>
+                <input type="text" name="position" class="form-control" placeholder="Должность">
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Зарплата:</strong>
-            <input type="text" name="salary" class="form-control" placeholder="Зарплата">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Зарплата:</strong>
+                <input type="text" name="salary" class="form-control" placeholder="Зарплата">
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Пол:</strong>
-            <input type="text" name="gender" class="form-control" placeholder="Пол">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Дата приема на работу:</strong>
+                <input type="date" name="hire_date" class="form-control" placeholder="Дата приема на работу">
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Телефон:</strong>
-            <input type="text" name="phone" class="form-control" placeholder="Телефон">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Образование:</strong>
+                <label for="yes">Имеется</label>
+                <input type="radio" id="yes" name="education" value="1"><br>
+                <label for="no">Отсутствует</label>
+                <input type="radio" id="no" name="education" value="0"><br>
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Email:</strong>
-            <input type="text" name="email" class="form-control" placeholder="Email">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Номер телефона:</strong>
+                <input type="tel" name="phone_number" class="form-control" placeholder="Номер телефона">
+            </div>
         </div>
-    </div>
 
-
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Фото:</strong>
-            <input type="file" name="image" class="form-control" placeholder="Фото">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Email адрес:</strong>
+                <input type="email" name="email" class="form-control" placeholder="Email адрес">
+            </div>
         </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center button-group">
+        <button type="submit" class="btn btn-primary">Добавить</button>
+        <a class="btn btn-primary" href="{{route('admin.workers.index')}}">Назад</a>
     </div>
 
-
-<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-    <button type="submit" class="btn btn-primary">Нажать!</button>
-</div>
-</div>
 
 </form>
-
+</div>
 @endsection

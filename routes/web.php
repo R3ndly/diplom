@@ -4,11 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\WorkerController;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\Admin\AdminWorkerController;
+use App\Http\Controllers\WorkersController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\AdminVacanciesController;
+use App\Http\Controllers\VacanciesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +32,16 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::middleware("auth")->group(function(){
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::resource('products', ProductController::class);
-        Route::resource('workers', WorkerController::class);
-        Route::resource('orders', OrdersController::class);
-        Route::resource('suppliers', SuppliersController::class);
-        
-        
+
+        Route::resource('workers', WorkersController::class);
+
+        Route::get('/vacancies', [VacanciesController::class, 'index'])->name('vacancies.index');
+
+        Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
+        Route::get('/products/filter', [ProductsController::class, 'filter'])->name('products.filter');
+
+        Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+        Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
         
         Route::get('/cart', [CartController::class, 'main'])->name('cart.index');
         Route::post('/cart/{product}/add', [CartController::class, 'add'])->name('cart.add');
@@ -51,9 +58,14 @@ Route::middleware("guest")->group(function(){
         Route::post('/register_process', [AuthController::class, 'register'])->name('register_procces');
 });
 
+Route::middleware("admin")->group(function(){
+        Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+        Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
+        Route::post('/admin/products', [AdminProductController::class, 'store'])->name('admin.products.store');
+        Route::get('/admin/products/{product}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+        Route::put('/admin/products/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
+        Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
+        Route::get('/admin/products/filter', [AdminProductController::class, 'filter'])->name('admin.products.filter');
 
-
-
-/*Auth::routes();
-
-Route::get('/', [HomeController::class, 'home']);*/
+        Route::resource('vacancies', AdminVacanciesController::class);
+});

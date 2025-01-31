@@ -1,0 +1,286 @@
+/* Стили формы создания */
+.container__create-form {
+    max-width: 600px; /* Максимальная ширина формы */
+    margin: 0 auto; /* Центрирование формы */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругление углов */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+    align-items: center; /* Центрирование по горизонтали */
+}
+
+.form-group {
+    width: 100%; /* Занять всю ширину контейнера */
+    margin-bottom: 15px; /* Отступ между группами форм */
+}
+
+/* Стили для меток полей ввода */
+strong {
+    display: block; /* Блочный элемент для меток */
+    margin-bottom: 5px; /* Отступ снизу для меток */
+    font-weight: bold; /* Жирный шрифт */
+}
+
+/* Стили для полей ввода */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+textarea {
+    width: 100%; /* Ширина на всю ширину контейнера */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Цвет рамки */
+    border-radius: 4px; /* Скругление углов полей ввода */
+    transition: border-color 0.3s; /* Плавный переход цвета рамки при фокусе */
+}
+
+/* Стили для полей ввода при фокусе */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
+    border-color: #007bff; /* Цвет рамки при фокусе */
+}
+
+/* Стили для кнопок */
+.btn {
+    padding: 10px 15px; /* Внутренние отступы кнопок */
+    border-radius: 4px; /* Скругление углов кнопок */
+}
+
+/* Стили для кнопки добавления сотрудника */
+.btn-primary {
+    /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем рамку у кнопки */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Темнее цвет фона при наведении */
+}
+
+/* Стили для предупреждений об ошибках */
+.alert {
+    margin-bottom: 20px; /* Отступ снизу для предупреждений об ошибках */
+}
+
+.button-group {
+    display: flex; /* Используем Flexbox */
+    justify-content: space-between; /* Равномерное распределение пространства между кнопками */
+    width: 100%; /* Занять всю ширину контейнера */
+    margin-top: 20px; /* Отступ сверху для группы кнопок */
+}
+
+/* Стили для кнопок внутри группы */
+.button-group .btn {
+    flex: 1; /* Кнопки занимают равное пространство */
+    margin: 0 10px; /* Отступы между кнопками */
+}
+
+/* стили для модального окна*/
+.modal {
+    display: none; /* Скрыть модальное окно по умолчанию */
+    position: fixed; /* Окно фиксировано относительно окна браузера */
+    z-index: 1; /* На переднем плане */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включить прокрутку, если необходимо */
+    background-color: rgba(0,0,0,0.4); /* Черный фон с прозрачностью */
+}
+
+
+.modal-content {
+    background-color: #312F30;
+    margin: 15% auto; /* Центрирование по вертикали */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ширина окна */
+}
+
+.close {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px; /* Отступ сверху */
+    right: 15px; /* Отступ справа */
+    color: #aaa; /* Цвет крестика */
+    font-size: 28px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    cursor: pointer; /* Указатель при наведении */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.details-bd {
+    display: flex; /* Используем Flexbox */
+    flex-wrap: wrap; /* Позволяем элементам переноситься на новую строку */
+}
+
+.window-info {
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+}
+
+.window-info div {
+    margin-bottom: 10px; /* Отступ между строками */
+}
+
+.window-info strong {
+    width: 150px; /* Фиксированная ширина для меток */
+    display: inline-block; /* Блочный элемент для меток */
+}
+ .okno{
+    padding-bottom: 20px;
+ }
+
+ .pokazat{
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/Показать.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
+ .izmenit{
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/Редактировать.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
+ .ydalit{
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/Удалить.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
+ .pokazat:hover,
+.izmenit:hover,
+.ydalit:hover,
+.Add-in-cart:hover {
+    opacity: 0.7; /* Плавное изменение прозрачности при наведении */
+}
+
+.action-buttons {
+    display: flex; /* Используем Flexbox для горизонтального расположения */
+    gap: 10px; /* Отступы между кнопками */
+}
+
+
+.action-buttons button {
+    width: 50px; /* Ширина кнопок */
+    height: 50px; /* Высота кнопок */
+    border-style: hidden; /* Убираем рамку у кнопок */
+    cursor: pointer; /* Указатель при наведении */
+}
+
+
+/* Общие стили для таблицы */
+.table {
+    width: 100%; /* Занять всю ширину контейнера */
+    border-collapse: collapse; /* Убираем границы между ячейками */
+    background-color: transparent; /* Фон таблицы прозрачный или тот же, что и фон страницы */
+}
+
+/* Стили для строк таблицы */
+.table tr {
+    background-color: #f9f9f9; /* Цвет фона для строк (можно изменить на желаемый) */
+    margin-bottom: 10px; /* Отступ между строками */
+}
+
+/* Стили для ячеек таблицы */
+.table td, .table th {
+    padding: 15px; /* Внутренние отступы в ячейках */
+    text-align: left; /* Выравнивание текста по левому краю */
+}
+
+/* Стили для заголовков таблицы */
+.table th {
+    background-color: #007bff; /* Цвет фона заголовков (можно изменить на желаемый) */
+    color: white; /* Цвет текста заголовков */
+}
+
+/* Эффект при наведении на строки таблицы */
+.table tr:hover {
+    background-color: #e0e0e0; /* Цвет фона строки при наведении (можно изменить) */
+}
+
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    width:  1170px;
+    
+}
+
+.row-products{
+    margin-top: -151px;
+}
+
+.card {
+    width: 310px;
+    background-color: #312F30;
+    color: white;
+}
+
+.card-img-tom{
+    height: 308px;
+    width: 308px;
+}
+
+
+.list-group{
+    margin-left: 20px;
+}
+
+.list-group-item{
+    width: 65%;
+}
+
+.form-group1{
+    width: 200px;
+}
+
+.Cart-info {
+    display: flex;
+    flex-direction: column; /* Устанавливаем вертикальное направление */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    margin-bottom: 20px; /* Добавляем отступ снизу для разделения с остальным контентом */
+}
+
+.Add-in-cart{
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/Карзина.png);
+    background-size: 100% auto;
+    border-style: hidden;
+}
+
+.table {
+    background-color: transparent; /* Прозрачный фон для таблицы */
+}
+
+.table th {
+    background-color: #007bff; /* Цвет фона заголовков */
+    color: white; /* Цвет текста заголовков */
+}
+
+.table td {
+    border: none; /* Убираем границы ячеек */
+    padding: 15px; /* Внутренние отступы в ячейках */
+}
+
+.oformit{
+    width: 1170px;
+    padding-bottom: 5px;
+}

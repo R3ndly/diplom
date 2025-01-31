@@ -1,33 +1,78 @@
 @extends('layouts.app')
-@section('title')Главная страница Золотого Оттенка @endsection
+@section('title', 'Главная страница аксесуаров для умного дома')
 @section('content')
+<main class="main">
+    <section class="welcome">
+        <div class="container d-flex align-items-center">
+            <div class="welcome__text">
+                <h4 class="welcome__subtitle">Smart Home - самые умные дома!</h4>
+                <h1 class="welcome__title">Зачем нужны умные дома?</h1>
+                <p class="welcome__description">Мы считаем, что самый простой способ объяснить концепцию умного дома заключается в том, что это естественная эволюция наших домов.
+                     Умный дом принципиально не отличается от «обычного» дома — это просто его улучшение. Точно так же, как электричество сделало наши дома лучше и функциональнее, так и связь улучшает то, как мы живем и используем наши дома.</p>
+                <a href="#SHOP" class="btn">Заказать!</a>
+            </div>
+            <img src="/img/home.png" class="welcome__img" alt="Умный дом">
+        </div>
+    </section>
 
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner bg-secondary">
-    <div class="carousel-item active ">
-      <img src="/img/1.jpg" class="d-block" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="/img/2.jpg" class="d-block" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="/img/3.webp" class="d-block" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Предыдущий</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Следующий</span>
-  </button>
-</div>
-</br></br>
-<div class="bg-secondary text-light ">
-<p class="text-center ">Мы делаем самые лучшие украшения в Иркутской области.</p>
-<p class="text-center">Среди наших мастеров специалисты с опытом свыше 10 лет.</p>
-<p class="text-center">Наши изделия: кольца, подвески, браслеты, серьги и заколки.</p>
-</div>
-</br></br></br>
+
+
+        <section class="advantages-list">
+            <div class="container">
+                <div class="advantages-list__card">
+                    <h4 class="advantages-list__title">Экономия на коммунальных платежах</h4>
+                    <p class="advantages-list__description">Умные технологии позволяют оптимизировать потребление энергии и ресурсов, что может снизить расходы на коммунальные услуги до 35%</p>
+                </div>
+
+                <div class="advantages-list__card">
+                    
+                    <h4 class="advantages-list__title">Повышение безопасности</h4>
+                    <p class="advantages-list__description">Умные дома оснащены системами видеонаблюдения, сигнализации и датчиками, которые могут обнаруживать утечки газа или воды. </p>
+                </div>
+
+                <div class="advantages-list__card">
+                    
+                    <h4 class="advantages-list__title">Комфорт и удобство</h4>
+                    <p class="advantages-list__description">Умный дом позволяет автоматизировать множество рутинных задач, таких как управление освещением и температурой. Владельцы могут настроить систему под себя</p>
+                </div>
+
+                <div class="advantages-list__card">
+               
+                <h4 class="advantages-list__title">Удаленный доступ и управление</h4>
+                <p class="advantages-list__description">Владельцы могут управлять всеми устройствами в доме через мобильное приложение, находясь вдали от дома, что делает жизнь более удобной, нежели в обычном доме</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="order">
+            <div class="container">
+                <img src="./img/secret.jpg" alt="Burger King" class="order__img">
+
+                <div class="order__text">
+                    <h3 class="order__title">Мы самые крупные в России!</h3>
+                    <p class="order__description">Наша компания была первой среди стран СНГ, которая начала продавать умные дома.<br>Мы строились, развивались и улучшались - всё ради ВАС!</p>
+                </div>
+            </div>
+            
+        </section>
+
+        <div class="feedback">
+            <div class="container">
+                <img src="./img/feedback.png" alt="Отзывы клиентов" class="feedback__img">
+                <blockquote class="feedback__text">
+                    <p class="feedback__description">Благодарим за хороший сервис, за самый умный дом и быстро выполненую работу. Благодаря компрании Smart Home мы прикоснулись к будущему и к большему количеству комфорта!</p>
+                    <cite class="feedback__author">Отзывы клиентов</cite>
+                    <span class="feedback__sub-author">Со всего СНГ</span>
+                </blockquote>
+
+            </div>
+        </div>
+
+        <div class="download">
+            <div class="container">
+                <p class="download__title">Загрузить примеры работ с интерьером и функционалом умного дома</p>
+                <a href="./images/burger.png" class="btn" download="">Скачать!</a>
+            </div>
+        </div>
+    </main>
 @endsection

@@ -4,19 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use App\Models\Product;
+use App\Models\Products;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-   
-
-    public function add(Request $request, Product $product){
+    public function add(Request $request, Products $product){
 
         $cart = Cart::firstOrCreate(
          [
             'user_id' => Auth::id(),
-            'product_id' => $product->id,
+            'product_id' => $product->product_id,
         ],
             ['quantity' => 0]
     );
@@ -31,16 +29,27 @@ class CartController extends Controller
         if ($cart->quantity == 0) {
             $cart->delete();
         }
-        return redirect()->back()->with('success', 'Украшение удалено.');
+        return redirect()->back()->with('success', 'удалено.');
     }
 
-    public function main(){
+    public function main()
+    {
+        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
 
-          $cartItems = Cart::where('user_id', Auth::id())->get();
+        // Логирование для отладки
+        foreach ($cartItems as $item) {
+            if (!$item->product) {
+                Log::warning("Продукт не найден для cart item ID: " . $item->id);
+            }
+        }
+
         $total = $cartItems->sum(function ($item) {
-            return $item->quantity * $item->product->price;
+            return $item->product ? $item->quantity * $item->product->price : 0;
         });
+
         return view('cart.index', compact('cartItems', 'total'));
-     }
+    }
+
+
  
 }

@@ -34,6 +34,6 @@ class AdminController extends Controller
     {
         auth("admin")->logout();
 
-        return redirect(route("home"));
+        return redirect(route("/"));
     }
 }

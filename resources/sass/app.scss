@@ -10,32 +10,24 @@ img.db{
     max-width: 60%;
     max-height: 40%;
 }
-.footer {
-    background-color: black;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    width: 100%;
-    font-size: 19px;
-    font-weight: bold;
-    color: #fafaff;
+
+th{
+    background-color: #312F30;
 }
 
-.cart{
-    width: 200px;
-    height: auto;
-    border-radius: 5px;
+.table > :not(caption) > * > * {
+    background-color: #312F30;
+    color:white;
 }
 
-.d-block {
-    width: 50%;
-    height: auto; 
-    display: block; 
-    margin: 0 auto; 
-}
-.map{
-    text-align: center;
-}
+/* Общие стили для таблицы */
 
 
+
+.table tbody tr {
+    margin-bottom: 15px; /* Отступ между строками */
+}
+
+.table tbody tr td {
+    padding: 15px; /* Внутренние отступы в ячейках */
+}

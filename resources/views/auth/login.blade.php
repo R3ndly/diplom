@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container d-flex justify-content-center align-items-center vh-10">
-    <div class="card shadow p-4">
+    <div class="card-1 shadow p-4 login__form">
         <h1 class="text-center mb-4">Вход</h1>
 
         <form method="POST" action="{{ route('login_procces') }}" class="mb-4">

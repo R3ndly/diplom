@@ -12,18 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('workers', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->string('surname')->nullable();
-            $table->string('patronymic')->nullable();
-            $table->string('position')->nullable();
-            $table->string('salary')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('image')->nullable();
+            $table->bigIncrements('worker_id');
+            $table->string('name');  // Имя работника
+            $table->string('surname');  // Фамилия
+            $table->string('patronymic');  // Отчество
+            $table->text('position');  // Должность
+            $table->decimal('salary', 10, 2);  // Зарплата
+            $table->date('hire_date');  // Дата приема на работу
+            $table->boolean('education');  // Образование
+            $table->string('phone_number', 15);  // Номер телефона
+            $table->string('email')->unique();  // Email адрес (уникальное поле)
         });
     }
+
 
     /**
      * Reverse the migrations.
