@@ -67,5 +67,5 @@ Route::middleware("admin")->group(function(){
         Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
         Route::get('/admin/products/filter', [AdminProductController::class, 'filter'])->name('admin.products.filter');
 
-        Route::resource('vacancies', AdminVacanciesController::class);
+        Route::resource('/admin/vacancies', AdminVacanciesController::class);
 });

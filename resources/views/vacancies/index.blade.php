@@ -34,7 +34,6 @@
         @foreach ($vacancies as $vacancy)
 <tr>
     <td id="vacancyTitle_{{ $vacancy->vacancies_id }}">{{ $vacancy->title }}</td>
-    <td>{{ $vacancy->title }}</td>
     <td>{{ $vacancy->department }}</td>
     <td>{{ $vacancy->location }}</td>
     <td>{{ $vacancy->type }}</td>

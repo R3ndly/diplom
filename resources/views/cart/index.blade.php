@@ -4,14 +4,17 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center oformit">
         <h2>Корзина на {{ $total }} ₽ </h2>
+
+        @if($cartItems->isNotEmpty())
         <form method="GET" action="{{ route('orders.create') }}" class="mb-0">
             @csrf
             <button type="submit" class="btn btn-primary">Оформить доставку</button>
         </form>
+        @endif
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="min-height: 300px;">
     <table class="table table-striped">
         @foreach($cartItems as $item)
         <tr>

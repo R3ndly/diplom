@@ -22,7 +22,7 @@ class OrderController extends Controller
         $cartItems = Cart::where('user_id', $user->user_id)->with('product')->get();
 
         
-        $shippingCosts = [200, 400, 500, 600, 1200];
+        $shippingCosts = [100, 150];
         
         foreach ($cartItems as $item) {
 

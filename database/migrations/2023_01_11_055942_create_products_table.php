@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('product_id'); // Уникальный идентификатор продукта
             $table->string('title'); // Название продукта
             $table->decimal('price', 10, 2); // Цена продукта
-            $table->string('brand')->unique(); // Установите уникальный индекс
+            $table->string('brand'); // Установите уникальный индекс
             $table->date('delivery'); // Дата доставки
             $table->string('category'); // Категория продукта
             $table->string('warranty'); // Гарантия

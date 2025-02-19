@@ -27,7 +27,7 @@
                 @if (Auth::user())
                     <a class="me-3 py-2 text-decoration-none" href="/admin/products">Товары</a>
                     <a class="me-3 py-2 text-decoration-none" href="/admin/workers">Сотрудники</a>
-                    <a class="me-3 py-2 text-decoration-none" href="/vacancies">Вакансии</a>
+                    <a class="me-3 py-2 text-decoration-none" href="/admin/vacancies">Вакансии</a>
 
                     <a class="me-3 py-gray text-decoration-none btn btn-primary" href="{{ url('/cart') }}">Корзина</a>
                 @endif
