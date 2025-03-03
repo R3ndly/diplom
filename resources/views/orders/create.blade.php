@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title') Оформление доставки @endsection
 @section('content')
-<div class="container" style="flex-direction: column;">
+<div class="container delivery-block" style="flex-direction: column;">
     <div class="card-1 shadow p-4 login__form delivery-card">
         <h2>Оформление доставки</h2><br>
 

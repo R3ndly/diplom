@@ -24,7 +24,7 @@
         </a>
 
         <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto nav-menu">
-            <a class="me-3 py-2 text-decoration-none" href="/contact">Наши контакты</a>
+            <a class="me-3 py-2 text-decoration-none" href="/contact">Контакты</a>
             <a class="me-3 py-2 text-decoration-none" href="/about">О нас</a>
 
             @auth 
@@ -38,16 +38,16 @@
             @endauth
             
             @if (Auth::check())
-                <div class="dropdown me-2">
+                <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a type="submit" class="btn btn-primary w-80 dropdown-item" href="{{ route('logout') }}">Выйти</a></li>
+                        <li><a type="submit" class="btn btn-primary dropdown-item" href="{{ route('logout') }}">Выйти</a></li>
                     </ul>
                 </div> 
             @else
-                <a type="submit" class="btn btn-primary w-80" href="{{ route('login') }}">Войти</a>
+                <a type="submit" class="btn btn-primary" href="{{ route('login') }}">Войти</a>
             @endif
         </nav>
     </div>
@@ -71,7 +71,7 @@
                         <ul class="footer__inner-list">
                             <li class="footer__list-item"><a href="#1">Малый бюджет</a></li>
                             <li class="footer__list-item"><a href="#2">Средний бюджет</a></li>
-                            <li class="footer__list-item"><a href="#3">Высокий бюждет</a></li>
+                            <li class="footer__list-item"><a href="#3">Большой бюждет</a></li>
                         </ul>
                     </li>
 

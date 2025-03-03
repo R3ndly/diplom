@@ -4,25 +4,23 @@
 <h1 class="text-center">Наши сотрудники</h1>
 
 <div class="row">
-<div class="col-lg-12 margin-tb">
-    <div class="pull-left">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
 
-        <div id="myModal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close" onclick="closeWindow()">&times;</span>
-        <h2>Информация о сотруднике</h2>
-        <div id="workerDetails" class="details-bd"></div>
+            <div id="myModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeWindow()">&times;</span>
+                    <h2>Информация о сотруднике</h2>
+                <div id="workerDetails" class="details-bd"></div>
+            </div>
+        </div>
     </div>
+
+        <div class="pull-right">
+            <a class="btn btn-primary w-80" href="{{ route('admin.workers.create') }}"> Добавить сотрудника</a>
+        </div>
 </div>
 
-    </div>
-
-    <div class="pull-right">
-        <a class="btn btn-primary w-80" href="{{ route('admin.workers.create') }}"> Добавить сотрудника</a>
-    </div>
-</div>
-
-</div>
 <div class="container">
     <table class="table">
         <tr class="title__table">
@@ -34,30 +32,29 @@
         </tr>
 
         @foreach ($workers as $worker)
-<tr>
-    <td id="workerName_{{ $worker->worker_id }}">{{ $worker->name }}</td>
-    <td>{{ $worker->surname }}</td>
-    <td>{{ $worker->position }}</td>
-    <td>{{ $worker->hire_date }}</td>
+        <tr>
+            <td id="workerName_{{ $worker->worker_id }}">{{ $worker->name }}</td>
+            <td>{{ $worker->surname }}</td>
+            <td>{{ $worker->position }}</td>
+            <td>{{ $worker->hire_date }}</td>
 
-    <td>
-        <div class="action-buttons">
-            <input type="button" class="pokazat" onclick="showWorkerDetails({{ json_encode($worker) }})" />
+            <td>
+                <div class="action-buttons">
+                    <input type="button" class="pokazat" onclick="showWorkerDetails({{ json_encode($worker) }})" />
 
-            <form action="{{ route('admin.workers.destroy', $worker->worker_id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="ydalit"></button>
-            </form>
+                    <form action="{{ route('admin.workers.destroy', $worker->worker_id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="ydalit"></button>
+                    </form>
 
-            <form action="{{ route('admin.workers.edit', $worker->worker_id) }}" method="GET">
-                <button type="submit" class="izmenit"></button>
-            </form>
-        </div>
-    </td>
-
-</tr>
-@endforeach
+                    <form action="{{ route('admin.workers.edit', $worker->worker_id) }}" method="GET">
+                        <button type="submit" class="izmenit"></button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
     </table>
 </div>
 
@@ -66,15 +63,13 @@ function showWorkerDetails(worker) {
     var educationText = worker.education ? "Имеется" : "Отсутствует";
     var detailsHtml = `
      <div class="window-info">
-        <div><strong>Имя:</strong> ${worker.name}</div>
-        <div><strong>Фамилия:</strong> ${worker.surname}</div>
-        <div><strong>Отчество:</strong> ${worker.patronymic}</div>
+        <div><strong>ФИО:</strong>${worker.surname} ${worker.name} ${worker.patronymic}</div>
         <div><strong>Должность:</strong> ${worker.position}</div>
-        <div><strong>Зарплата:</strong> ${worker.salary}</div>
-        <div><strong>Дата приема на работу:</strong> ${worker.hire_date}</div>
+        <div><strong>Зарплата:</strong> ${worker.salary} руб.</div>
+        <div><strong>Трудоустроен с:</strong> ${worker.hire_date}</div>
         <div><strong>Образование:</strong> ${educationText}</div>
         <div><strong>Номер телефона:</strong> ${worker.phone_number}</div>
-        <div><strong>Email адрес:</strong> ${worker.email}</div>
+        <div><strong>электронная почта:</strong> ${worker.email}</div>
         </div>
     `;
 

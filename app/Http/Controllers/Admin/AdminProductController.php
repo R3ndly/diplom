@@ -13,8 +13,19 @@ class AdminProductController extends Controller
     public function index(): View
     {
         $products = Products::all();
-        return view('admin.products.index', compact('products'));
+
+        $brands = Products::distinct()->pluck('brand')->toArray();
+        $categories = Products::distinct()->pluck('category')->toArray();
+        $warranties = Products::distinct()->pluck('warranty')->toArray();
+        $materials = Products::distinct()->pluck('material')->toArray();
+        $powerSupplies = Products::distinct()->pluck('power_supply')->toArray();
+
+        $minPrice = request()->input('min_price', 0);
+        $maxPrice = request()->input('max_price', 10000);
+
+        return view('admin.products.index', compact('products', 'brands', 'categories', 'warranties', 'materials', 'powerSupplies', 'minPrice', 'maxPrice'));
     }
+
     
     public function create(): View
     {
@@ -105,27 +116,49 @@ class AdminProductController extends Controller
 {
     $query = Products::query();
 
-    // Фильтрация по категории
+    if ($request->has('brand') && $request->brand != '') {
+        $query->where('brand', $request->brand);
+    }
+
     if ($request->has('category') && $request->category != '') {
         $query->where('category', $request->category);
     }
 
-    // Фильтрация по цене
+    if ($request->has('warranty') && $request->warranty != '') {
+        $query->where('warranty', $request->warranty);
+    }
+
+    if ($request->has('material') && $request->material != '') {
+        $query->where('material', $request->material);
+    }
+
+    if ($request->has('power_supply') && $request->power_supply != '') {
+        $query->where('power_supply', $request->power_supply);
+    }
+
     if ($request->has('min_price') && $request->has('max_price')) {
         $query->whereBetween('price', [$request->min_price, $request->max_price]);
-        // Сохраняем значения для передачи обратно в представление
+
         $minPrice = $request->min_price;
         $maxPrice = $request->max_price;
     } else {
-        // Если фильтры не применяются, устанавливаем значения по умолчанию
         $minPrice = 0;
         $maxPrice = 10000;
     }
 
     $products = $query->get();
 
-    return view('admin.products.index', compact('products', 'minPrice', 'maxPrice'));
+    $brands = Products::distinct()->pluck('brand')->toArray();
+    $categories = Products::distinct()->pluck('category')->toArray();
+    $warranties = Products::distinct()->pluck('warranty')->toArray();
+    $materials = Products::distinct()->pluck('material')->toArray();
+    $powerSupplies = Products::distinct()->pluck('power_supply')->toArray();
+
+    return view('admin.products.index', compact('products', 'brands', 'categories', 'warranties', 'materials', 'powerSupplies', 'minPrice', 'maxPrice',
+
+));
 }
+
 
 
 

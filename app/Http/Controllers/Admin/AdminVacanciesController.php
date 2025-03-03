@@ -20,7 +20,12 @@ class AdminVacanciesController extends Controller
     {
         return view('admin.vacancies.create');
     }
-        
+
+    public function show(Vacancies $vacancy): View
+    {
+        $date = date('d-m-Y', strtotime($vacancy->published_at));
+        return view('admin.vacancies.show', compact('vacancy', 'date'));
+    }
 
     public function store(Request $request): RedirectResponse
     {

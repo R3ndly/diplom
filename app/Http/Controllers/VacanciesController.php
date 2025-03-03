@@ -16,4 +16,10 @@ class VacanciesController extends Controller
 
         return view('vacancies.index', compact('vacancies'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
+
+    public function show(Vacancies $vacancy): View
+    {
+        $date = date('d-m-Y', strtotime($vacancy->published_at));
+        return view('vacancies.show', compact('vacancy', 'date'));
+    }
 }

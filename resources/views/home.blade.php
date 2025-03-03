@@ -46,7 +46,7 @@
 
         <section class="order">
             <div class="container">
-                <img src="./img/secret.jpg" alt="Burger King" class="order__img">
+                <img src="./img/secret.jpg" class="order__img">
 
                 <div class="order__text">
                     <h3 class="order__title">Мы самые крупные в России!</h3>

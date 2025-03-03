@@ -7,9 +7,24 @@
 }
 
 .login__form{
-    background-color: #312F30;
-    color: white;
+    background-color: #fff;
+    color: black;
 }
 .text-center {
     text-align: center;
+}
+
+.about-us {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-us__img {
+    max-width: 485px;
+}
+
+.about-us__text {
+    max-width: 600px;
+    font-size: 20px;
 }

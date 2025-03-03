@@ -1,7 +1,8 @@
 /* Стандартные стили для всех страниц */
 .dropdown-menu {
     background-color: #1C1C1C; 
-    border: none; 
+    border: none;
+    padding: 0;
 }
 
 .dropdown-item {
@@ -13,8 +14,8 @@
 }
 
 body {
-    background-color: #1C1C1C;
-    color: #fff;
+    background-color: #dff1f1;
+    color: #202020;
     margin: 0;
     padding: 0;
 }
@@ -22,11 +23,18 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     margin: 0;
+    color: #1765b3;
+}
+
+strong {
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 p {
     margin: 0;
     padding: 0;
+    
 }
 
 img {
@@ -50,8 +58,12 @@ ul {
 }
 
 a {
-    color:#fff;
+    color: #1765b3; 
     text-decoration: none;
+}
+
+a:hover {
+    color: #104a82;
 }
 
 .price + .old-price {
@@ -78,7 +90,7 @@ a {
     width: 165px;
     height: 49px;
 
-    background-color: #f6762c;
+    background-color: #FF7F50;
     border-radius: 5px;
 
     font-size: 16px;
@@ -87,7 +99,8 @@ a {
 }
 
 .btn:hover{
-    opacity: 0.7;
+    background-color: #E5673F;
+    opacity: 0.9;
 }
 
 .btn--small {
@@ -101,6 +114,7 @@ a {
 /* Шапка */
 .header {
     padding-top: 15px;
+    background-color: #ffffff;
 }
 
 .header .container{
@@ -134,14 +148,13 @@ a {
 
 /* Footer */
 .footer {
-    height: 390px;
-    
+    background-color: #ffffff;
 }
 
 .footer .container {
     display: flex;
     justify-content: space-between;
-    padding: 130px 0;
+    padding: 100px 0;
 }
 
 .footer a {
@@ -197,3 +210,10 @@ a {
     width: 108px;
 }
 
+.delivery-block {
+    min-height: 450px;
+}
+
+.delivery-card {
+    margin-top: 35px;
+}

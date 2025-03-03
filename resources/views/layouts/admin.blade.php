@@ -20,7 +20,7 @@
       </a>
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto nav-menu">
-            <a class="me-3 py-2 text-decoration-none" href="/contact">Наши контакты</a>
+            <a class="me-3 py-2 text-decoration-none" href="/contact">Контакты</a>
             <a class="me-3 py-2 text-decoration-none" href="/about">О нас</a>
 
             @auth 

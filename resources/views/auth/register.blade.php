@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title') Регистрация @endsection
 @section('content')
-<div class="container d-flex justify-content-center align-items-center vh-180">
-    <div class="card shadow p-4" style="width: 24rem;">
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="login__form p-4 " style="width: 24rem;">
         <h1 class="text-center mb-4">Регистрация</h1>
 
         <form method="POST" action="{{ route('register_procces') }}" class="mb-4">

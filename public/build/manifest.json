@@ -1,7 +1,43 @@
 {
+  "public/img/Карзина.png": {
+    "file": "assets/Карзина-YfGovowT.png",
+    "src": "public/img/Карзина.png"
+  },
+  "public/img/Показать.png": {
+    "file": "assets/Показать-DcT_v7vn.png",
+    "src": "public/img/Показать.png"
+  },
+  "public/img/Редактировать.png": {
+    "file": "assets/Редактировать-DUps_Fam.png",
+    "src": "public/img/Редактировать.png"
+  },
+  "public/img/Удалить.png": {
+    "file": "assets/Удалить-DDC6rbHP.png",
+    "src": "public/img/Удалить.png"
+  },
+  "resources/css/about.css": {
+    "file": "assets/about-DMvKZkA3.css",
+    "src": "resources/css/about.css",
+    "isEntry": true
+  },
   "resources/css/app.css": {
     "file": "assets/app-LtKtwZJt.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/contact.css": {
+    "file": "assets/contact-DnKq0Cn3.css",
+    "src": "resources/css/contact.css",
+    "isEntry": true
+  },
+  "resources/css/home.css": {
+    "file": "assets/home-CVTD6qX4.css",
+    "src": "resources/css/home.css",
+    "isEntry": true
+  },
+  "resources/css/pageBD.css": {
+    "file": "assets/pageBD-CFIxHHym.css",
+    "src": "resources/css/pageBD.css",
     "isEntry": true
   },
   "resources/js/app.js": {

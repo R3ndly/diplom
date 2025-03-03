@@ -36,6 +36,8 @@ Route::middleware("auth")->group(function(){
         Route::resource('workers', WorkersController::class);
 
         Route::get('/vacancies', [VacanciesController::class, 'index'])->name('vacancies.index');
+        Route::get('/vacancies/{vacancy}', [VacanciesController::class, 'show'])->name('vacancies.show');
+
 
         Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
         Route::get('/products/filter', [ProductsController::class, 'filter'])->name('products.filter');
