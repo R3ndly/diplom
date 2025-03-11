@@ -1,4 +1,17 @@
 /* Стандартные стили для всех страниц */
+.header {
+    flex-direction: row;
+}
+
+.header__title {
+    font-size: 20px;
+}
+
+.nav-menu {
+    margin-right: 15px;
+    display: flex;
+}
+
 .dropdown-menu {
     background-color: #1C1C1C; 
     border: none;
@@ -34,7 +47,6 @@ strong {
 p {
     margin: 0;
     padding: 0;
-    
 }
 
 img {
@@ -43,8 +55,8 @@ img {
 
 .container{
     box-sizing: border-box;
-    padding: 0 15px;
-    max-width: 1170px;
+    padding: 0 1vw;
+    max-width: 69vw;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -66,49 +78,23 @@ a:hover {
     color: #104a82;
 }
 
-.price + .old-price {
-    padding-left: 2px;
-}
-
-.price {
-    color: #F6762C;
-    font-size: 20px;
-    letter-spacing: 10%;
-}
-
-.old-price {
-    color: #F6762C;
-    opacity: 0.5;
-    text-decoration: line-through;
-}
-
 .btn{
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 165px;
-    height: 49px;
-
-    background-color: #FF7F50;
+    width: 9.7vw;
+    height: 5.7vh;
     border-radius: 5px;
 
+    background-color: #FF7F50;
     font-size: 16px;
-
     transition: opacity 0.3s;;
 }
 
 .btn:hover{
     background-color: #E5673F;
     opacity: 0.9;
-}
-
-.btn--small {
-    font-size: 12px;
-    width: 150px;
-    height: 40px;
-
-    margin-top: 12px;
 }
 
 /* Шапка */
@@ -123,28 +109,94 @@ a:hover {
     align-items: center;
 }
 
-.header__list {
-    display: flex;
-    gap: 28px;
+@media (max-width: 1134px) {
+    .nav-menu a {
+        font-size: 14px;
+    }
 }
 
-.header__list a {
-    font-size: 14px;
-    opacity: 0.7;
-
-    transition: opacity 0.2s;
+@media (max-width: 1094px) {
+    .dropdown button {
+        font-size: 16px;
+    }
+    .btn {
+        font-size: 15.4px;
+    }
+    .header__title {
+        font-size: 18px;
+    }
 }
 
-.header__list a.active {
-    font-family: "Roboto-Medium";
-    font-size: 15px;
-    font-weight: bold;
-    opacity: 1;
+@media (max-width: 1062px) {
+    .nav-menu a{
+        font-size: 13.5px;
+    }
 }
 
-.header__list a:hover {
-    opacity: 0.95;
+@media (max-width: 1005px) {
+    .header__title {
+        width: 295px;
+    }
 }
+
+@media (max-width: 861px) {
+    .header {
+        flex-direction: column;
+    }
+    .header__title {
+        width: 440px;
+        margin-bottom: 10px;
+        font-size: 19px;
+    }
+    .nav-menu {
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-menu {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 727px) {
+    .btn {
+        width: 71px;
+    }
+}
+@media (max-width: 544px) {
+    .nav-menu {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 479px) {
+    .nav-menu a {
+        font-size: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .nav-menu a:nth-child(6) {
+        grid-column: 2;
+        grid-row: 2;
+        margin: 0;
+    }
+    .nav-menu div:nth-child(7) {
+        grid-column: 4;
+        grid-row: 2;
+    }
+}
+
+@media (max-width: 444px) {
+    .header__title {
+        width: 360px;
+        font-size: 15px;
+    }
+}
+
 
 /* Footer */
 .footer {
@@ -154,12 +206,12 @@ a:hover {
 .footer .container {
     display: flex;
     justify-content: space-between;
-    padding: 100px 0;
+    padding: 6.2rem 0;
 }
 
 .footer a {
     font-family: "Roboto-Regular";
-    font-size: 12px;
+    font-size: 0.76rem;
     opacity: 0.75;
     transition: 0.3s;
 }
@@ -177,43 +229,123 @@ a:hover {
     flex-direction: column;
 }
 
-.footer__link-mail {
-    padding: 22px 0 10px
-}
-
-.footer__link-mail::before {
-    
-    padding-right: 10px;
-}
-
-.footer__link-web::before {
-    
-    padding-right: 7px;
-}
-
 .footer__nav .footer__list {
     display: flex;
     justify-content: space-between;
 
-    width: 580px;
-    margin-right: 100px;
+    width: 35vw;
+    margin-right: 6.3rem;
 }
 
 .footer__list-item {
-   padding-top: 12px;
+   padding-top: 0.76rem;
 }
 
 .footer__icons-list {
     display: flex;
     justify-content: space-between;
 
-    width: 108px;
+    width: 6.36vw;
 }
 
 .delivery-block {
-    min-height: 450px;
+    min-height: 47.7vh;
 }
 
 .delivery-card {
-    margin-top: 35px;
+    margin-top: 2vh;
+}
+
+
+@media (max-width: 1560px) {
+    .footer__list-title h3 {
+        font-size: 18px;
+    }
+    .footer__list-item a {
+        font-size: 11px;
+    }
+    .footer__socials h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1142px) {
+    .footer__nav .footer__list {
+        width: 410px;
+    }
+    .footer__icons-list {
+        width: 8.4vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .footer__nav .footer__list {
+        margin-right: 50px;
+    }
+    .footer__icons-list {
+        width: 15vw;
+    }
+    .footer__list-item  {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 735px) {
+    .footer .container {
+        display: flex;
+        flex-direction: column;
+        padding: 40px 0 60px 0;
+    }
+    .footer__nav .footer__list {
+        margin: 0;
+        width: 440px;
+    }
+    .footer__socials {
+        margin-top: 35px;
+    }
+    .footer__list-item {
+        margin: 0;
+    }
+    .footer__icons-list {
+        width: auto;
+    }
+}
+
+@media (max-width: 512px) {
+    .footer__nav .footer__list {
+        width: 420px;
+    }
+}
+
+@media (max-width: 470px) {
+    .footer__nav .footer__list {
+        width: 410px;
+    }
+}
+
+@media (max-width: 444px) {
+    .footer__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer__inner-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer__list-title {
+        margin-bottom: 25px;
+    }
+    .footer__list-title h3 {
+        font-size: 20px;
+    }
+    .footer__list-item a {
+        font-size: 13px;
+    }
+    .footer__socials {
+        margin-top: 10px;
+    }
 }

@@ -14,12 +14,12 @@
     
 </head>
 <body>
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom header">
-        <a href="/" class="d-flex align-items-center text-decoration-none">
-        <span class="fs-4 px-5">Smart Home - ваш умный дом ADMIN</span>
+<div class="d-flex align-items-center pb-3 mb-4 border-bottom header">
+        <a href="/" class="d-flex align-items-center text-decoration-none header__title">
+        <span class="px-5">Smart Home - ваш умный дом ADMIN</span>
       </a>
 
-      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto nav-menu">
+      <nav class=" mt-2 mt-md-0 ms-md-auto nav-menu">
             <a class="me-3 py-2 text-decoration-none" href="/contact">Контакты</a>
             <a class="me-3 py-2 text-decoration-none" href="/about">О нас</a>
 

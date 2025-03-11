@@ -3,7 +3,7 @@
 @section('content')
 <main class="main">
     <section class="welcome">
-        <div class="container d-flex align-items-center">
+        <div class="container align-items-center">
             <div class="welcome__text">
                 <h4 class="welcome__subtitle">Smart Home - самые умные дома!</h4>
                 <h1 class="welcome__title">Зачем нужны умные дома?</h1>
@@ -33,7 +33,7 @@
                 <div class="advantages-list__card">
                     
                     <h4 class="advantages-list__title">Комфорт и удобство</h4>
-                    <p class="advantages-list__description">Умный дом позволяет автоматизировать множество рутинных задач, таких как управление освещением и температурой. Владельцы могут настроить систему под себя</p>
+                    <p class="advantages-list__description">Умный дом позволяет автоматизировать множество рутинных задач, таких как управление светом и температурой. Владельцы могут настроить систему под себя</p>
                 </div>
 
                 <div class="advantages-list__card">
@@ -46,7 +46,7 @@
 
         <section class="order">
             <div class="container">
-                <img src="./img/secret.jpg" class="order__img">
+                <img src="./img/доля_рынка.jpg" class="order__img">
 
                 <div class="order__text">
                     <h3 class="order__title">Мы самые крупные в России!</h3>

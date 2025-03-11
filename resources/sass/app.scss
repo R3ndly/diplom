@@ -11,6 +11,9 @@ img.db{
     max-height: 40%;
 }
 
+.dropdown-menu {
+    --bs-dropdown-min-width: 0;
+}
 
 /* Общие стили для таблицы */
 

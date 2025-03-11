@@ -1,4 +1,8 @@
 {
+  "public/img/backToIndex.png": {
+    "file": "assets/backToIndex-hF6NaJiD.png",
+    "src": "public/img/backToIndex.png"
+  },
   "public/img/Карзина.png": {
     "file": "assets/Карзина-YfGovowT.png",
     "src": "public/img/Карзина.png"
@@ -16,27 +20,27 @@
     "src": "public/img/Удалить.png"
   },
   "resources/css/about.css": {
-    "file": "assets/about-DMvKZkA3.css",
+    "file": "assets/about-BMcAuqFu.css",
     "src": "resources/css/about.css",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-LtKtwZJt.css",
+    "file": "assets/app-CS58lW_0.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/contact.css": {
-    "file": "assets/contact-DnKq0Cn3.css",
+    "file": "assets/contact-DHngN2Mw.css",
     "src": "resources/css/contact.css",
     "isEntry": true
   },
   "resources/css/home.css": {
-    "file": "assets/home-CVTD6qX4.css",
+    "file": "assets/home-B9Pp8oZh.css",
     "src": "resources/css/home.css",
     "isEntry": true
   },
   "resources/css/pageBD.css": {
-    "file": "assets/pageBD-CFIxHHym.css",
+    "file": "assets/pageBD-CzJ6R1yh.css",
     "src": "resources/css/pageBD.css",
     "isEntry": true
   },
@@ -47,7 +51,7 @@
     "isEntry": true
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-DhBFfXU5.css",
+    "file": "assets/app-CZEOlMSA.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
   }
