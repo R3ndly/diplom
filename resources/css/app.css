@@ -1,15 +1,7 @@
 /* Стандартные стили для всех страниц */
-.header {
-    flex-direction: row;
-}
-
-.header__title {
-    font-size: 20px;
-}
-
-.nav-menu {
-    margin-right: 15px;
-    display: flex;
+.login__form{
+    background-color: #fff;
+    color: black;
 }
 
 .dropdown-menu {
@@ -101,12 +93,22 @@ a:hover {
 .header {
     padding-top: 15px;
     background-color: #ffffff;
+    flex-direction: row;
 }
 
 .header .container{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header__title {
+    font-size: 20px;
+}
+
+.nav-menu {
+    margin-right: 15px;
+    display: flex;
 }
 
 @media (max-width: 1134px) {
