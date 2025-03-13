@@ -33,7 +33,7 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::middleware("auth")->group(function(){
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        Route::resource('workers', WorkersController::class);
+        
 
         Route::get('/vacancies', [VacanciesController::class, 'index'])->name('vacancies.index');
         Route::get('/vacancies/{vacancy}', [VacanciesController::class, 'show'])->name('vacancies.show');

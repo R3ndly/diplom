@@ -109,7 +109,7 @@
 
     <strong>Номер телефона:</strong>
 
-    <input type="number" name="phone_number" value="{{ $worker->phone_number }}" class="form-control" placeholder="Номер телефона">
+    <input type="text" name="phone_number" value="{{ $worker->phone_number }}" class="form-control" placeholder="Номер телефона">
 
 </div>
 

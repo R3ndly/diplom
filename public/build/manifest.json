@@ -25,7 +25,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-DVPTjpBS.css",
+    "file": "assets/app-aiFrdK1i.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -40,8 +40,13 @@
     "isEntry": true
   },
   "resources/css/pageBD.css": {
-    "file": "assets/pageBD-CzJ6R1yh.css",
+    "file": "assets/pageBD-BW8Y23ko.css",
     "src": "resources/css/pageBD.css",
+    "isEntry": true
+  },
+  "resources/css/vacancies.css": {
+    "file": "assets/vacancies-4iRH0RGa.css",
+    "src": "resources/css/vacancies.css",
     "isEntry": true
   },
   "resources/js/app.js": {

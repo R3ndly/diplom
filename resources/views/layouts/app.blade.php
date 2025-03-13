@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/home.css', 'resources/css/app.css', 'resources/css/about.css', 'resources/css/contact.css', 'resources/css/pageBD.css'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/home.css', 'resources/css/app.css', 'resources/css/about.css', 'resources/css/contact.css', 'resources/css/pageBD.css', 'resources/css/vacancies.css'])
 
 </head>
 <body>
@@ -24,21 +24,20 @@
         </a>
 
         <nav class="mt-2 mt-md-0 ms-md-auto nav-menu">
-            <a class="me-3 py-2 text-decoration-none" href="/contact">Контакты</a>
-            <a class="me-3 py-2 text-decoration-none" href="/about">О нас</a>
+            <a class="py-2 text-decoration-none" href="/contact">Контакты</a>
+            <a class="py-2 text-decoration-none" href="/about">О нас</a>
 
             @auth 
                 @if (Auth::user())
-                    <a class="me-3 py-2 text-decoration-none" href="/products">Товары</a>
-                    <a class="me-3 py-2 text-decoration-none" href="/workers">Сотрудники</a>
-                    <a class="me-3 py-2 text-decoration-none" href="/vacancies">Вакансии</a>
+                    <a class="py-2 text-decoration-none" href="/products">Товары</a>
+                    <a class="py-2 text-decoration-none" href="/vacancies">Вакансии</a>
 
-                    <a class="me-3 py-gray text-decoration-none btn btn-primary" href="{{ url('/cart') }}">Корзина</a>
+                    <a class="py-gray text-decoration-none btn btn-primary" href="{{ url('/cart') }}">Корзина</a>
                 @endif
             @endauth
             
             @if (Auth::check())
-                <div class="dropdown me-2">
+                <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </button>

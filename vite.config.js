@@ -12,6 +12,7 @@ export default defineConfig({
                 'resources/css/contact.css',
                 'resources/css/home.css',
                 'resources/css/pageBD.css',
+                'resources/css/vacancies.css',
             ],
             refresh: true,
         }),

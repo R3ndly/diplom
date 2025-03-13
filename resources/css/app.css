@@ -4,18 +4,27 @@
     color: black;
 }
 
-.dropdown-menu {
-    background-color: #1C1C1C; 
-    border: none;
-    padding: 0;
+/* Стили для полей ввода */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+textarea {
+    width: 100%; /* Ширина на всю ширину контейнера */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Цвет рамки */
+    border-radius: 4px; /* Скругление углов полей ввода */
+    transition: border-color 0.3s; /* Плавный переход цвета рамки при фокусе */
 }
 
-.dropdown-item {
-    color: #fff;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+/* Стили для полей ввода при фокусе */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
+    border-color: #007bff;
 }
 
 body {
@@ -78,6 +87,7 @@ a:hover {
     width: 9.7vw;
     height: 5.7vh;
     border-radius: 5px;
+    padding: 10px 15px;
 
     background-color: #FF7F50;
     font-size: 16px;
@@ -88,6 +98,38 @@ a:hover {
     background-color: #E5673F;
     opacity: 0.9;
 }
+
+.btn-primary {
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-info {
+    display: block;
+    margin: 10px auto 0;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.button-group .btn {
+    flex: 1;
+    margin: 0 10px;
+}
+
 
 /* Шапка */
 .header {
@@ -109,6 +151,14 @@ a:hover {
 .nav-menu {
     margin-right: 15px;
     display: flex;
+}
+
+.nav-menu a{
+    margin-right: 15px;
+}
+
+.dropdown-menu { 
+    padding: 0;
 }
 
 @media (max-width: 1134px) {
@@ -166,7 +216,8 @@ a:hover {
         width: 71px;
     }
 }
-@media (max-width: 544px) {
+
+@media (max-width: 600px) {
     .nav-menu {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -180,6 +231,7 @@ a:hover {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0;
     }
     .nav-menu a:nth-child(6) {
         grid-column: 2;
@@ -193,6 +245,19 @@ a:hover {
 }
 
 @media (max-width: 444px) {
+    .nav-menu {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    .nav-menu a:nth-child(6) {
+        grid-column: 1;
+        grid-row: 3;
+        margin: 0;
+    }
+    .nav-menu div:nth-child(7) {
+        grid-column: 3;
+        grid-row: 3;
+    }
     .header__title {
         width: 360px;
         font-size: 15px;
@@ -326,6 +391,9 @@ a:hover {
 }
 
 @media (max-width: 444px) {
+    .footer__nav .footer__list {
+        width: 400px;
+    }
     .footer__list {
         display: flex;
         flex-direction: column;

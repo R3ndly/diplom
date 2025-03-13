@@ -20,9 +20,6 @@ class AdminWorkerController extends Controller
     {
         return view('admin.workers.create');
     }
-        
-
-    
     
     public function store(Request $request): RedirectResponse
     {
