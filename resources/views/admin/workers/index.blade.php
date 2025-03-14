@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('title')Страница сотрудников @endsection
 @section('content')
+
 <h1 class="text-center">Наши сотрудники</h1>
 
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-
             <div id="myModal" class="modal" style="display:none;">
                 <div class="modal-content">
                     <span class="close" onclick="closeWindow()">&times;</span>
@@ -15,14 +15,13 @@
             </div>
         </div>
     </div>
-
         <div class="pull-right">
             <a class="btn btn-primary w-80" href="{{ route('admin.workers.create') }}"> Добавить сотрудника</a>
         </div>
 </div>
 
 <div class="container">
-    <table class="table">
+    <table class="table__workers">
         <tr class="title__table">
             <th>Имя</th>
             <th>Фамилия</th>

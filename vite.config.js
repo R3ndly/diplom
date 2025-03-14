@@ -13,6 +13,8 @@ export default defineConfig({
                 'resources/css/home.css',
                 'resources/css/pageBD.css',
                 'resources/css/vacancies.css',
+                'resources/css/cart.css',
+                'resources/css/products.css',
             ],
             refresh: true,
         }),

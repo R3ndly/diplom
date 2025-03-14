@@ -7,6 +7,14 @@
     justify-content: center;
 }
 
+.back-to-index {
+    width: 54px;
+    height: 54px;
+    background: no-repeat url(/public/img/backToIndex.png);
+    background-size: 100% auto;
+    border-style: hidden;
+}
+
 .vacancies_block {
     background-color: #fff;
     border-radius: 16px;
@@ -102,5 +110,21 @@
         width: 100px;
         height: 40px;
         padding: 5px 0;
+    }
+}
+
+/* Для vacancies/show.blade.php*/
+@media (max-width: 890px) {
+    .about_vacancy h1 {
+        font-size: 28px;
+    }
+    .about_vacancy h3 {
+        font-size: 23px;
+    }
+    .about_vacancy h4 {
+        font-size: 20px;
+    }
+    .about_vacancy p {
+        font-size: 18px;
     }
 }

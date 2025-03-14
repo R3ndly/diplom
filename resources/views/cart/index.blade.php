@@ -20,7 +20,7 @@
         @foreach($cartItems as $item)
             <div class="block_product">
                 <div class="cart_img">
-                    <img src="{{ $item->product->product_image }}" class="cart" style="height: 200px;" alt="{{ $item->product->title }}">
+                    <img src="{{ $item->product->product_image }}" class="image__product">
                 </div>
                 <div class="cart_specifications">
                     <div class="cart_title">

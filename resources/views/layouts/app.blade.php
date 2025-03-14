@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/home.css', 'resources/css/app.css', 'resources/css/about.css', 'resources/css/contact.css', 'resources/css/pageBD.css', 'resources/css/vacancies.css'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/home.css', 'resources/css/app.css', 'resources/css/about.css', 'resources/css/contact.css', 'resources/css/pageBD.css', 'resources/css/vacancies.css', 'resources/css/cart.css', 'resources/css/products.css'])
 
 </head>
 <body>

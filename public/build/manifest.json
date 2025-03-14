@@ -29,6 +29,11 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/cart.css": {
+    "file": "assets/cart-CLR8MXvd.css",
+    "src": "resources/css/cart.css",
+    "isEntry": true
+  },
   "resources/css/contact.css": {
     "file": "assets/contact-TkmtuaJU.css",
     "src": "resources/css/contact.css",
@@ -40,12 +45,17 @@
     "isEntry": true
   },
   "resources/css/pageBD.css": {
-    "file": "assets/pageBD-BW8Y23ko.css",
+    "file": "assets/pageBD-CSx7fkz9.css",
     "src": "resources/css/pageBD.css",
     "isEntry": true
   },
+  "resources/css/products.css": {
+    "file": "assets/products-BJwQ98ko.css",
+    "src": "resources/css/products.css",
+    "isEntry": true
+  },
   "resources/css/vacancies.css": {
-    "file": "assets/vacancies-4iRH0RGa.css",
+    "file": "assets/vacancies-DpBXmwTW.css",
     "src": "resources/css/vacancies.css",
     "isEntry": true
   },
