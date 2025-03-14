@@ -10,6 +10,15 @@
     align-items: center;
 }
 
+.container__table__workers {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+
+    flex-direction: column;
+    align-items: center;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -28,6 +37,11 @@
     border: 1px solid #888;
     width: 35%;
     font-size: 15px;
+}
+
+/* Стили траницы workers/index.blade.php */
+.pull-right {
+    margin-left: 25px;
 }
 
 .close {
@@ -123,7 +137,6 @@
 
 .table__workers tr {
     background-color: #f9f9f9;
-    margin-bottom: 10px;
 }
 
 .table__workers td, .table__workers th {
@@ -140,4 +153,82 @@
 
 .table__workers tr:hover {
     background-color: #e0e0e0;
+}
+
+@media (max-width: 1230px) {
+    .table__workers th, .table__workers td {
+        padding: 5px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1080px) {
+    .date_of_employment {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .table__workers th, .table__workers td {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 870px) {
+    .table__workers th, .table__workers td {
+        font-size: 17px;
+        padding: 3px;
+    }
+}
+
+@media (max-width: 810px) {
+    .table__workers th, .table__workers td {
+        font-size: 16px;
+    }
+    .action-buttons {
+        gap: 3px;
+    }
+}
+
+@media (max-width: 772px) {
+    .table__workers th, .table__workers td {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 740px) {
+    .action-buttons button, .pokazat {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 722px) {
+    .table__workers th, .table__workers td {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 566px) {
+    .table__workers th, .table__workers td {
+        font-size: 13px;
+        padding: 2px;
+    }
+    .action-buttons {
+        gap: 2px;
+    }
+    .action-buttons button, .pokazat {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 466px) {
+    .table__workers th, .table__workers td {
+        font-size: 12px;
+    }
+    .action-buttons button, .pokazat {
+        width: 38px;
+        height: 38px;
+    }
 }

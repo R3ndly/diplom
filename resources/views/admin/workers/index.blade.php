@@ -20,22 +20,22 @@
         </div>
 </div>
 
-<div class="container">
+<div class="container container__table__workers">
     <table class="table__workers">
         <tr class="title__table">
-            <th>Имя</th>
+            <th class="name__worker">Имя</th>
             <th>Фамилия</th>
             <th>Должность</th>
-            <th>Дата приема на работу</th>
+            <th class="date_of_employment">Дата приема на работу</th>
             <th width="280px">Действия</th>
         </tr>
 
         @foreach ($workers as $worker)
         <tr>
-            <td id="workerName_{{ $worker->worker_id }}">{{ $worker->name }}</td>
+            <td class="name__worker" id="workerName_{{ $worker->worker_id }}">{{ $worker->name }}</td>
             <td>{{ $worker->surname }}</td>
             <td>{{ $worker->position }}</td>
-            <td>{{ $worker->hire_date }}</td>
+            <td class="date_of_employment">{{ $worker->hire_date }}</td>
 
             <td>
                 <div class="action-buttons">
