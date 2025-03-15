@@ -6,9 +6,8 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-
             <div id="myModal" class="modal" style="display:none;">
-                <div class="modal-content">
+                <div class="modal-content products-window">
                     <span class="close" onclick="closeWindow()">&times;</span>
                     <h2>Информация о сотруднике</h2>
                 <div id="productDetails" class="details-bd"></div>
@@ -21,7 +20,7 @@
         </div>
 </div>
 
-<div class="row">
+
     <div class="filters-container">
         <form action="{{ route('admin.products.filter') }}" method="GET" class="filters">
             <div class="form-group1 price-filter">
@@ -83,15 +82,21 @@
             <button type="submit" class="btn btn-primary">Отфильтровать</button>
         </form>
     </div>
-    <div class="col-md-9 products-container">
+    <div class="products-container">
         <div class="products">
             @foreach($products as $product)
-                <div class="mb-4 blok">
                     <div class="card">
-                        <img src="{{ asset($product->product_image) }}" class="card-img-top" style="height: 328px; width: 320px;" alt="{{ $product->title }}">
+                        <div class="card-img-top">
+                            <img src="{{ asset($product->product_image) }}">
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product->title }}</h5>
-                            <p class="card-text">{{ $product->price }} ₽</p>
+                            <h5 class="card-title">
+                                {{ Str::limit($product->title , 49) }}
+                                @if(strlen($product->title) > 190)
+                                    <span>...</span>
+                                @endif
+                            </h5>
+                            <p class="price__product">{{ $product->price }} ₽</p>
 
                             <div class="action-buttons">
                                 <input type="button" class="pokazat" style="display: inline-block; margin-right: 6px;" onclick="showProductDetails({{ json_encode($product) }})" />
@@ -113,40 +118,31 @@
                             </div>
                         </div>
                     </div>
-                </div>
             @endforeach
         </div>
     </div>
-</div>
-</div>
 
 <script type="text/javascript">
 function showProductDetails(product) {
     var detailsHtml = `
-     <div class="window-info" style="position: relative; padding-right: 95px;">
-        <div style="margin-right: 160px;">
-            <div><strong>Название:</strong> ${product.title}</div>
-            <div><strong>Цена:</strong> ${product.price} ₽</div>
-            <div><strong>Бренд:</strong> ${product.brand}</div>
-            <div><strong>Доставка:</strong> ${product.delivery}</div>
-            <div><strong>Категория:</strong> ${product.category}</div>
-            <div><strong>Гарантия:</strong> ${product.warranty}</div>
-            <div><strong>Материал:</strong> ${product.material}</div>
-            <div><strong>Питание от:</strong> ${product.power_supply}</div>
-        </div>
-        <img src="${product.product_image}" alt="${product.title}" style="position: absolute; right: 0; top: 0; width: 240px; height: auto;" />
-     </div>
+    <div class="window-info">
+        <div><strong>Название:</strong> ${product.title}</div>
+        <div><strong>Цена:</strong> ${product.price} ₽</div>
+        <div><strong>Бренд:</strong> ${product.brand}</div>
+        <div><strong>Доставка:</strong> ${product.delivery}</div>
+        <div><strong>Категория:</strong> ${product.category}</div>
+        <div><strong>Гарантия:</strong> ${product.warranty}</div>
+        <div><strong>Материал:</strong> ${product.material}</div>
+        <div><strong>Питание от:</strong> ${product.power_supply}</div>
+        <img src="${product.product_image}" alt="${product.title}" style=" right: 0; top: 0; width: 240px; height: auto;" />
+    </div>
     `;
 
-    // Заполнение модального окна данными о работнике
     document.getElementById('productDetails').innerHTML = detailsHtml;
-
-    // Показываем модальное окно
     document.getElementById('myModal').style.display = "block";
 }
 
 function closeWindow() {
-    // Скрываем модальное окно
     document.getElementById('myModal').style.display = "none";
 }
 
@@ -155,7 +151,6 @@ function updateMinPrice() {
     const minPriceLabel = document.getElementById('min-price-label');
     minPriceLabel.innerText = minPriceInput.value;
 
-    // Убедитесь, что минимальная цена не превышает максимальную
     const maxPriceInput = document.getElementById('max-price');
     if (parseInt(minPriceInput.value) > parseInt(maxPriceInput.value)) {
         maxPriceInput.value = minPriceInput.value;
@@ -168,7 +163,6 @@ function updateMaxPrice() {
     const maxPriceLabel = document.getElementById('max-price-label');
     maxPriceLabel.innerText = maxPriceInput.value;
 
-    // Убедитесь, что максимальная цена не меньше минимальной
     const minPriceInput = document.getElementById('min-price');
     if (parseInt(maxPriceInput.value) < parseInt(minPriceInput.value)) {
         minPriceInput.value = maxPriceInput.value;
@@ -179,12 +173,8 @@ function updateMaxPrice() {
 function applyFilter() {
     const minPrice = document.getElementById('min-price').value;
     const maxPrice = document.getElementById('max-price').value;
-
-    // Здесь вы можете добавить код для применения фильтрации товаров
-    console.log(`Применение фильтра: от ${minPrice} до ${maxPrice}`);
 }
 
 </script>
-
 
 @endsection

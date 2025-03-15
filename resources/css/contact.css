@@ -102,7 +102,7 @@
 
 @media (max-width: 1200px) {
     .row {
-        justify-content: space-between;
+        justify-content: space-around;
         margin: 5px 0;
     }
 }

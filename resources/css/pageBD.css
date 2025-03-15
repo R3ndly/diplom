@@ -155,10 +155,29 @@
     background-color: #e0e0e0;
 }
 
+@media (max-width: 1240px) {
+    .modal-content {
+        padding: 15px;
+        font-size: 14.5px;
+    }
+    .modal-content h2 {
+        font-size: 22px;
+    }
+    .window-info strong {
+        width: 140px;
+    }
+}
+
 @media (max-width: 1230px) {
     .table__workers th, .table__workers td {
         padding: 5px;
         text-align: center;
+    }
+}
+
+@media (max-width: 1160px) {
+    .window-info strong {
+        width: 100%;
     }
 }
 
@@ -168,9 +187,21 @@
     }
 }
 
+@media (max-width: 990px) {
+    .modal-content h2 {
+        font-size: 20px;
+    }
+}
+
 @media (max-width: 900px) {
     .table__workers th, .table__workers td {
         font-size: 18px;
+    }
+    .modal-content {
+        font-size: 14px;
+    }
+    .modal-content h2 {
+        font-size: 19px;
     }
 }
 
@@ -178,6 +209,14 @@
     .table__workers th, .table__workers td {
         font-size: 17px;
         padding: 3px;
+    }
+    .modal-content {
+        flex-direction: column;
+        align-items: center;
+        width: 250px;
+    }
+    .modal-content h2 {
+        width: 200px;
     }
 }
 

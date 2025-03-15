@@ -157,6 +157,10 @@ a:hover {
     margin-right: 15px;
 }
 
+.nav-menu .dropdown-item {
+    margin-right: -15px;
+}
+
 .dropdown-menu { 
     padding: 0;
 }
