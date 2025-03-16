@@ -25,12 +25,12 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-OQjg2CpO.css",
+    "file": "assets/app-CVpcfbBW.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/cart.css": {
-    "file": "assets/cart-CLR8MXvd.css",
+    "file": "assets/cart-Dklj6GWv.css",
     "src": "resources/css/cart.css",
     "isEntry": true
   },
@@ -45,7 +45,7 @@
     "isEntry": true
   },
   "resources/css/pageBD.css": {
-    "file": "assets/pageBD-yJYY3elk.css",
+    "file": "assets/pageBD-Dy4oOv08.css",
     "src": "resources/css/pageBD.css",
     "isEntry": true
   },
@@ -60,7 +60,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-C6eGUCpC.js",
+    "file": "assets/app-CdvwmOZ0.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

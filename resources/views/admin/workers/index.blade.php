@@ -18,6 +18,7 @@
         <div class="pull-right">
             <a class="btn btn-primary w-80" href="{{ route('admin.workers.create') }}"> Добавить сотрудника</a>
         </div>
+        
 </div>
 
 <div class="container container__table__workers">
@@ -55,6 +56,7 @@
         </tr>
         @endforeach
     </table>
+    <div class="paginate__menu">{{ $workers->links() }}</div>
 </div>
 
 <script type="text/javascript">

@@ -12,7 +12,7 @@ class AdminWorkerController extends Controller
 {
     public function index(): View
     {
-        $workers = Worker::paginate(1000);
+        $workers = Worker::simplePaginate(20);
         return view('admin.workers.index', compact('workers'));
     }
     

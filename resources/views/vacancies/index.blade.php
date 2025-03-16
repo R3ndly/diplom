@@ -23,5 +23,6 @@
             </div>
         @endforeach
     </div>
+    <div class="paginate__menu">{{ $vacancies->links() }}</div>
 </div>
 @endsection

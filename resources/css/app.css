@@ -130,6 +130,9 @@ a:hover {
     margin: 0 10px;
 }
 
+.paginate__menu {
+    width: 303px;
+}
 
 /* Шапка */
 .header {

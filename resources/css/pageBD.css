@@ -19,6 +19,10 @@
     align-items: center;
 }
 
+.container__table__workers table {
+    margin-bottom: 30px;
+}
+
 .modal {
     display: none;
     position: fixed;

@@ -13,7 +13,7 @@ class AdminOrdersController extends Controller
 {
     public function index(): View
     {
-        $orders = Orders::paginate(10);
+        $orders = Orders::all();
 
         return view('admin.orders.index',compact('orders'))->with('i', (request()->input('page', 1) - 1) * 5);
     }

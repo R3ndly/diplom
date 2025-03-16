@@ -120,6 +120,7 @@
                     </div>
             @endforeach
         </div>
+        <div class="paginate__menu">{{ $products->links() }}</div>
     </div>
 
 <script type="text/javascript">
