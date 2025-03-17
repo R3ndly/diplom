@@ -12,7 +12,7 @@ class AdminVacanciesController extends Controller
 {
     public function index(): View
     {
-        $vacancies = Vacancies::simplePaginate(20);
+        $vacancies = Vacancies::simplePaginate(12);
         return view('admin.vacancies.index', compact('vacancies'));
     }
     

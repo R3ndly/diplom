@@ -2,6 +2,12 @@
     min-height: 450px;
 }
 
+.vacancies-page .paginate__menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .vacancies-container {
     flex-wrap: wrap;
     justify-content: center;

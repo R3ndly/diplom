@@ -12,9 +12,9 @@ class VacanciesController extends Controller
 {
     public function index(): View
     {
-        $vacancies = Vacancies::simplePaginate(20);
+        $vacancies = Vacancies::simplePaginate(12);
 
-        return view('vacancies.index', compact('vacancies'))->with('i', (request()->input('page', 1) - 1) * 10);
+        return view('vacancies.index', compact('vacancies'));
     }
 
     public function show(Vacancies $vacancy): View
