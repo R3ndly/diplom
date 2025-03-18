@@ -104,8 +104,8 @@
                         </div>
                     </div>
             @endforeach
+            <div class="paginate__menu">{{ $products->links() }}</div>
         </div>
-        <div class="paginate__menu">{{ $products->links() }}</div>
     </div>
 
 <script type="text/javascript">

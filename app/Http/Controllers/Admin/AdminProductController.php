@@ -12,7 +12,7 @@ class AdminProductController extends Controller
 {
     public function index(): View
     {
-        $products = Products::simplePaginate(20);
+        $products = Products::simplePaginate(21);
 
         $brands = Products::distinct()->pluck('brand')->toArray();
         $categories = Products::distinct()->pluck('category')->toArray();

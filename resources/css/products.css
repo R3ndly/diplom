@@ -10,6 +10,12 @@
     margin-left: 0px;
 }
 
+.products .paginate__menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .filters {
     display: flex;
     flex-direction: column;
