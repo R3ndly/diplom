@@ -25,6 +25,10 @@
     max-width: 28.4vw;
 }
 
+.about_vacancy {
+    min-height: 450px;
+}
+
 @media (max-width: 1630px) {
 }
 

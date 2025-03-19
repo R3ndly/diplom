@@ -59,7 +59,7 @@ class ProductsController extends Controller
             $maxPrice = 10000;
         }
 
-        $products = $query->get();
+        $products = $query->simplePaginate(21);
 
         $brands = Products::distinct()->pluck('brand')->toArray();
         $categories = Products::distinct()->pluck('category')->toArray();

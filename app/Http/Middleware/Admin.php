@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class Admin
 {
     /**
@@ -16,25 +15,17 @@ class Admin
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next)
-{
-    if (Auth::check()) {
-        Log::info('User is authenticated', ['user' => Auth::user()]);
-        
-        // Проверяем роль
-        if (Auth::user()->role === 'admin') {
-            Log::info('User is an admin', ['user' => Auth::user()]);
-            return $next($request);
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role === 'admin') {
+                return $next($request);
+            } else {
+                Log::info('User is not an admin', ['user' => Auth::user()]);
+                abort(403);
+            }
         } else {
-            Log::info('User is not an admin', ['user' => Auth::user()]);
+            Log::info('User is not authenticated');
+            return redirect('/login');
         }
-    } else {
-        Log::info('User is not authenticated');
     }
-
-    return redirect('/about');
-}
-
-
-
-
 }

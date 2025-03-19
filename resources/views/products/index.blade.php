@@ -93,7 +93,7 @@
                                 <p class="card-text">{{ $product->price }} ₽</p>
 
                                 <div class="action-buttons">
-                                    <input type="button" class="pokazat" style="display: inline-block; margin-right: 6px;" onclick="showProductDetails({{ json_encode($product) }})" />
+                                    <input type="button" class="pokazat" style="display: inline-block; margin-right: 6px;" onclick="showProductDetails({{ json_encode($product) }}, {{ json_encode(asset($product->product_image)) }})" />
 
                                     <form action="{{ route('cart.add', $product->product_id) }}" method="POST" style="display: inline-block;">
                                         @csrf
@@ -109,7 +109,7 @@
     </div>
 
 <script type="text/javascript">
-function showProductDetails(product) {
+function showProductDetails(product, productImage) {
     var detailsHtml = `
     <div class="window-info">
         <div><strong>Название:</strong> ${product.title}</div>
@@ -120,7 +120,7 @@ function showProductDetails(product) {
         <div><strong>Гарантия:</strong> ${product.warranty}</div>
         <div><strong>Материал:</strong> ${product.material}</div>
         <div><strong>Питание от:</strong> ${product.power_supply}</div>
-        <img src="${product.product_image}" style="right: 0; top: 0; width: 240px; height: auto;" />
+        <img src="${productImage}" style="right: 0; top: 0; width: 240px; height: auto;" />
     </div>
     `;
 
