@@ -1,17 +1,14 @@
 <?php
-
 namespace Tests\Feature;
 
-use App\Models\User; // Убедитесь, что у вас есть модель User
-use App\Models\Vacancies; // Убедитесь, что у вас есть модель Vacancies
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\User;
+use App\Models\Vacancies;
 
 class VacanciesTest extends TestCase
 {
- 
-
     protected function setUp(): void
     {
         parent::setUp();
