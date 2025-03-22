@@ -1,23 +1,11 @@
 <?php
-
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Products;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\AdminProductController;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
-
 
 class getPriceWithTaxTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_get_rigth_price_with_tax()
     {
         // Создаем экземпляр продукта с ценой 100

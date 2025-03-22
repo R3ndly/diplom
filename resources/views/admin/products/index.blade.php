@@ -16,7 +16,7 @@
     </div>
 
         <div class="pull-right">
-            <a class="btn btn-primary w-80" href="{{ route('admin.products.create') }}"> Добавить аксессуар</a>
+            <a class="btn btn-primary w-80" href="{{ route('admin.products.create') }}">Добавить аксессуар</a>
         </div>
 </div>
 

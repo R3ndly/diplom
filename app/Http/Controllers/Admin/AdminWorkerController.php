@@ -35,8 +35,6 @@ class AdminWorkerController extends Controller
             'email' => 'required',
         ]);
 
-        
-
         $worker = new Worker;
         $worker->name = $request->name;
         $worker->surname = $request->surname;
@@ -66,7 +64,6 @@ class AdminWorkerController extends Controller
             'email' => 'required',
         ]);
 
-        
         $worker->name = $request->name;
         $worker->surname = $request->surname;
         $worker->patronymic = $request->patronymic;
@@ -86,11 +83,9 @@ class AdminWorkerController extends Controller
         return view('admin.workers.edit', compact('worker'));
     }
     
-    
     public function destroy(Worker $worker): RedirectResponse
     {
         $worker->delete(); 
         return redirect()->route('admin.workers.index')->with('выполнено','изделие удалёно.');
-    }
-        
+    }       
 }

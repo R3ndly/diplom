@@ -64,7 +64,7 @@ class AdminProductController extends Controller
         $products->product_image = $file_name;
         $products->save();
 
-        return redirect()->route('admin.products.index')->with('Выполнено!','Готово!');
+        return redirect()->route('admin.products.index');
     }
     
     public function update(Request $request, Products $product): RedirectResponse
@@ -97,7 +97,7 @@ class AdminProductController extends Controller
         $product->product_image = $file_name;
         $product->save();
 
-        return redirect()->route('admin.products.index')->with('Выполнено','готово');
+        return redirect()->route('admin.products.index');
     }
 
     public function edit(Products $product): View
@@ -109,7 +109,7 @@ class AdminProductController extends Controller
     public function destroy(Products $product): RedirectResponse
     {
         $product->delete(); 
-        return redirect()->route('admin.products.index')->with('выполнено','изделие удалёно.');
+        return redirect()->route('admin.products.index');
     }
 
     public function filter(Request $request): View

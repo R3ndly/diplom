@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    public function index(): View
+    {
+        $orders = Orders::all();
+
+        return view('orders.index',compact('orders'));
+    }
+
     public function create()
     {
         return view('orders.create');

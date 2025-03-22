@@ -19,7 +19,7 @@ class VacanciesController extends Controller
 
     public function show(Vacancies $vacancy): View
     {
-        $date = date('d-m-Y', strtotime($vacancy->published_at));
+        $date = date('d.m.Y', strtotime($vacancy->published_at));
         return view('vacancies.show', compact('vacancy', 'date'));
     }
 }

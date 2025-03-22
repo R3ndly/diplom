@@ -23,7 +23,14 @@
                 <p>Место работы: {{ $vacancy->location }}</p>
                 <p>Оклад: {{ $vacancy->salary }} руб.</p>
                 <a href="{{ route('admin.vacancies.edit', $vacancy->vacancy_id) }}" class="">Редактировать</a>
-                <a href="{{ route('admin.vacancies.show', $vacancy->vacancy_id) }}" class="btn btn-info">Подробнее</a>
+                <div class="button_in_vacancies_block">
+                    <a href="{{ route('admin.vacancies.show', $vacancy->vacancy_id) }}" class="btn btn-info">Подробнее</a>
+                    <form action="{{ route('admin.vacancies.destroy', $vacancy->vacancy_id) }}" method="POST" style="display: inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-info">Удалить</button>
+                    </form>
+                </div>
             </div>
         @endforeach
     </div>

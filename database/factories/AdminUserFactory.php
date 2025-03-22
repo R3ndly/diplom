@@ -30,6 +30,7 @@ class AdminUserFactory extends Factory
                 'name' => 'admin',
                 'email' => 'admin@email.ru',
                 'password' => static::$password ??= Hash::make('Q1qqqqqq'),
+                'role' => 'admin',
         
         ];
     }

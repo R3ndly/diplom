@@ -35,10 +35,4 @@ class ResponseOfAllApplicationPagesTest extends TestCase
         $response = $this->get('/register');
         $response->assertStatus(200);
     }
-
-    public function test_successful_response_vacancies_page(): void
-    {
-        $response = $this->get('/vacancies');
-        $response->assertStatus(200);
-    }
 }

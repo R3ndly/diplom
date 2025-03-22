@@ -12,7 +12,7 @@ class WorkerFactory extends Factory
 
         return [
             'name' => $faker->firstNameMale(),
-            'surname' => $faker->lastName(),
+            'surname' => $faker->lastNameMale(),
             'patronymic' => $faker->firstNameMale(),
             'position' => $faker->jobTitle(), 
             'salary' => $faker->numerify('##000'),

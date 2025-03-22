@@ -50,6 +50,15 @@
     font-size: 19px;
 }
 
+.button_in_vacancies_block {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button_in_vacancies_block .btn-info {
+    margin: 0;
+}
+
 @media (max-width: 1150px) {
     .btn {
         width: 111px;
@@ -77,7 +86,7 @@
 
 @media (max-width: 640px) {
     .vacancies_block {
-        height: 420px;
+        height: 405px;
     }
     .vacancies_block .description {
         height: 168px;
@@ -86,7 +95,7 @@
 
 @media (max-width: 600px) {
     .vacancies_block {
-        height: 450px;
+        height: 430px;
     }
     .vacancies_block .description {
         height: 200px;
@@ -101,7 +110,7 @@
 
 @media (max-width: 470px) {
     .vacancies_block {
-        height: 460px;
+        height: 430px;
     }
     .vacancies_block .description {
         height: 210px;

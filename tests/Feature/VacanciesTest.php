@@ -18,8 +18,8 @@ class VacanciesTest extends TestCase
             ['email' => 'admin@mail.ru'],
             [
                 'name' => 'Admin',
-                'password' => bcrypt('Q1qqqqqq'), // Используйте хешированный пароль
-                'role' => 'admin', // Убедитесь, что у вас есть поле role
+                'password' => bcrypt('Q1qqqqqq'),
+                'role' => 'admin',
             ]
         );
 
