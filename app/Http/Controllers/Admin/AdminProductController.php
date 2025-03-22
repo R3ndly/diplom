@@ -116,24 +116,11 @@ class AdminProductController extends Controller
     {
         $query = Products::query();
 
-        if ($request->has('brand') && $request->brand != '') {
-            $query->where('brand', $request->brand);
-        }
-
-        if ($request->has('category') && $request->category != '') {
-            $query->where('category', $request->category);
-        }
-
-        if ($request->has('warranty') && $request->warranty != '') {
-            $query->where('warranty', $request->warranty);
-        }
-
-        if ($request->has('material') && $request->material != '') {
-            $query->where('material', $request->material);
-        }
-
-        if ($request->has('power_supply') && $request->power_supply != '') {
-            $query->where('power_supply', $request->power_supply);
+        $filters = ['brand', 'category', 'warranty', 'material', 'power_supply'];
+        foreach($filters as $filter) {
+            if ($request->has($filter) && $request->$filter != '') {
+                $query->where($filter, $request->$filter);
+            }
         }
 
         if ($request->has('min_price') && $request->has('max_price')) {
@@ -146,7 +133,7 @@ class AdminProductController extends Controller
             $maxPrice = 10000;
         }
 
-        $products = $query->simplePaginate(21);
+        $products = $query->simplePaginate(21)->appends($request->all());
 
         $brands = Products::distinct()->pluck('brand')->toArray();
         $categories = Products::distinct()->pluck('category')->toArray();

@@ -57,27 +57,32 @@ Route::middleware("guest")->group(function(){
 });
 
 Route::middleware("admin")->group(function() {
-        Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
-        Route::get('/admin/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');
-        Route::post('/admin/products', [AdminProductController::class, 'store'])->name('admin.products.store');
-        Route::get('/admin/products/{product}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
-        Route::put('/admin/products/{product}', [AdminProductController::class, 'update'])->name('admin.products.update');
-        Route::delete('/admin/products/{product}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
-        Route::get('/admin/products/filter', [AdminProductController::class, 'filter'])->name('admin.products.filter');
+        Route::controller(AdminProductController::class)->group(function () {
+                Route::get('/admin/products', 'index')->name('admin.products.index');
+                Route::get('/admin/products/create', 'create')->name('admin.products.create');
+                Route::post('/admin/products', 'store')->name('admin.products.store');
+                Route::get('/admin/products/{product}/edit', 'edit')->name('admin.products.edit');
+                Route::put('/admin/products/{product}', 'update')->name('admin.products.update');
+                Route::delete('/admin/products/{product}', 'destroy')->name('admin.products.destroy');
+                Route::get('/admin/products/filter', 'filter')->name('admin.products.filter');
+        });
 
-        Route::get('/admin/vacancies', [AdminVacanciesController::class, 'index'])->name('admin.vacancies.index');
-        Route::get('/admin/vacancies/create', [AdminVacanciesController::class, 'create'])->name('admin.vacancies.create');
-        Route::post('/admin/vacancies', [AdminVacanciesController::class, 'store'])->name('admin.vacancies.store');
-        Route::get('/admin/vacancies/{vacancy}/edit', [AdminVacanciesController::class, 'edit'])->name('admin.vacancies.edit');
-        Route::put('/admin/vacancies/{vacancy}', [AdminVacanciesController::class, 'update'])->name('admin.vacancies.update');
-        Route::delete('/admin/vacancies/{vacancy}', [AdminVacanciesController::class, 'destroy'])->name('admin.vacancies.destroy');
-        Route::get('/admin/vacancies/{vacancy}', [AdminVacanciesController::class, 'show'])->name('admin.vacancies.show');
+        Route::controller(AdminVacanciesController::class)->group(function () {
+                Route::get('/admin/vacancies', 'index')->name('admin.vacancies.index');
+                Route::get('/admin/vacancies/create', 'create')->name('admin.vacancies.create');
+                Route::post('/admin/vacancies', 'store')->name('admin.vacancies.store');
+                Route::get('/admin/vacancies/edit/{vacancy}', 'edit')->name('admin.vacancies.edit');
+                Route::put('/admin/vacancies/{vacancy}', 'update')->name('admin.vacancies.update');
+                Route::delete('/admin/vacancies/{vacancy}', 'destroy')->name('admin.vacancies.destroy');
+                Route::get('/admin/vacancies/{vacancy}', 'show')->name('admin.vacancies.show');
+        });
 
-        Route::get('/admin/workers', [AdminWorkerController::class, 'index'])->name('admin.workers.index');
-        Route::get('/admin/workers/create', [AdminWorkerController::class, 'create'])->name('admin.workers.create');
-        Route::post('/admin/workers', [AdminWorkerController::class, 'store'])->name('admin.workers.store');
-        Route::put('/admin/workers/update/{worker}', [AdminWorkerController::class, 'update'])->name('admin.workers.update');
-        Route::get('/admin/workers/{worker}/edit', [AdminWorkerController::class, 'edit'])->name('admin.workers.edit');
-        Route::delete('/admin/workers/{worker}', [AdminWorkerController::class, 'destroy'])->name('admin.workers.destroy');
-        //Route::get('/admin/workers/{worker}', [AdminWorkerController::class, 'show'])->name('admin.workers.show');
+        Route::controller(AdminWorkerController::class)->group(function () {
+                Route::get('/admin/workers', 'index')->name('admin.workers.index');
+                Route::get('/admin/workers/create', 'create')->name('admin.workers.create');
+                Route::post('/admin/workers', 'store')->name('admin.workers.store');
+                Route::get('/admin/workers/edit/{worker}', 'edit')->name('admin.workers.edit');
+                Route::put('/admin/workers/{worker}', 'update')->name('admin.workers.update');
+                Route::delete('/admin/workers/{worker}', 'destroy')->name('admin.workers.destroy');
+        });
 });

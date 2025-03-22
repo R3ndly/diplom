@@ -3,6 +3,14 @@
     "file": "assets/backToIndex-hF6NaJiD.png",
     "src": "public/img/backToIndex.png"
   },
+  "public/img/feedback.png": {
+    "file": "assets/feedback-CiInSjWk.png",
+    "src": "public/img/feedback.png"
+  },
+  "public/img/home.png": {
+    "file": "assets/home-Dg2DdLOV.png",
+    "src": "public/img/home.png"
+  },
   "public/img/Карзина.png": {
     "file": "assets/Карзина-YfGovowT.png",
     "src": "public/img/Карзина.png"
@@ -18,6 +26,10 @@
   "public/img/Удалить.png": {
     "file": "assets/Удалить-DDC6rbHP.png",
     "src": "public/img/Удалить.png"
+  },
+  "public/img/доля_рынка.jpg": {
+    "file": "assets/доля_рынка-Dh8RqVhi.jpg",
+    "src": "public/img/доля_рынка.jpg"
   },
   "resources/css/about.css": {
     "file": "assets/about-BNCrOMdn.css",
@@ -55,15 +67,20 @@
     "isEntry": true
   },
   "resources/css/vacancies.css": {
-    "file": "assets/vacancies-nHxzUS9N.css",
+    "file": "assets/vacancies-BcF-nelK.css",
     "src": "resources/css/vacancies.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CdvwmOZ0.js",
+    "file": "assets/app-CoB7uN7u.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "assets": [
+      "assets/home-Dg2DdLOV.png",
+      "assets/доля_рынка-Dh8RqVhi.jpg",
+      "assets/feedback-CiInSjWk.png"
+    ]
   },
   "resources/sass/app.scss": {
     "file": "assets/app-CZEOlMSA.css",
