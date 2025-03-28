@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index(): View
-    {
-        $orders = Orders::all();
-
-        return view('orders.index',compact('orders'));
-    }
-
     public function create()
     {
         return view('orders.create');
@@ -50,6 +43,6 @@ class OrderController extends Controller
 
         Cart::where('user_id', $user->user_id)->delete();
 
-        return redirect()->route('cart.index')->with('success', 'Заказ успешно оформлен!');
+        return redirect()->route('cart.index');
     }
 }

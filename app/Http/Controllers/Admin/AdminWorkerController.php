@@ -47,7 +47,7 @@ class AdminWorkerController extends Controller
         $worker->email = $request->email;
         $worker->save();
 
-        return redirect()->route('admin.workers.index')->with('Выполнено!','Готово!');
+        return redirect()->route('admin.workers.index');
     }
     
     public function update(Request $request, Worker $worker): RedirectResponse
@@ -75,7 +75,7 @@ class AdminWorkerController extends Controller
         $worker->email = $request->email;
         $worker->save();
 
-        return redirect()->route('admin.workers.index')->with('Выполнено','готово');
+        return redirect()->route('admin.workers.index');
     }
 
     public function edit(Worker $worker): View
@@ -86,6 +86,21 @@ class AdminWorkerController extends Controller
     public function destroy(Worker $worker): RedirectResponse
     {
         $worker->delete(); 
-        return redirect()->route('admin.workers.index')->with('выполнено','изделие удалёно.');
-    }       
+        return redirect()->route('admin.workers.index');
+    }
+
+    public function worker_docx(Worker $worker) {
+        require_once base_path('/vendor/autoload.php');
+
+        $document = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('/app/templates/template.docx'));
+
+        $document->setValue('name', $worker->name);
+        $document->setValue('surname', $worker->surname);
+        $document->setValue('patronymic', $worker->patronymic);
+        $document->setValue('hire_date', $worker->hire_date);
+
+        $document->saveAs('resignation_letter.docx');
+
+        return response()->download('resignation_letter.docx');;
+    }
 }

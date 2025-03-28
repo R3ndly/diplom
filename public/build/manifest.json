@@ -11,6 +11,10 @@
     "file": "assets/home-Dg2DdLOV.png",
     "src": "public/img/home.png"
   },
+  "public/img/word.png": {
+    "file": "assets/word-Z1yJdlnU.png",
+    "src": "public/img/word.png"
+  },
   "public/img/Карзина.png": {
     "file": "assets/Карзина-YfGovowT.png",
     "src": "public/img/Карзина.png"
@@ -57,7 +61,7 @@
     "isEntry": true
   },
   "resources/css/pageBD.css": {
-    "file": "assets/pageBD-Dy4oOv08.css",
+    "file": "assets/pageBD-DlS9urgL.css",
     "src": "resources/css/pageBD.css",
     "isEntry": true
   },

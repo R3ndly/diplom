@@ -84,5 +84,6 @@ Route::middleware("admin")->group(function() {
                 Route::get('/admin/workers/edit/{worker}', 'edit')->name('admin.workers.edit');
                 Route::put('/admin/workers/{worker}', 'update')->name('admin.workers.update');
                 Route::delete('/admin/workers/{worker}', 'destroy')->name('admin.workers.destroy');
+                Route::get('/admin/workers/{worker}/word', 'worker_docx')->name('admin.workers.word');
         });
 });

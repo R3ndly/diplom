@@ -111,10 +111,19 @@
     border-style: hidden;
  }
 
+ .MSWord {
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/word.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
  .pokazat:hover,
 .izmenit:hover,
 .ydalit:hover,
-.back-to-index,
+.MSWord:hover,
+.back-to-index:hover,
 .Add-in-cart:hover {
     opacity: 0.7;
 }

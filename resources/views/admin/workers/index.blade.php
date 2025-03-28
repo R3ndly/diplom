@@ -31,30 +31,39 @@
             <th width="280px">Действия</th>
         </tr>
 
-        @foreach ($workers as $worker)
+        <?php foreach ($workers as $worker): ?>
         <tr>
-            <td class="name__worker" id="workerName_{{ $worker->worker_id }}">{{ $worker->name }}</td>
-            <td>{{ $worker->surname }}</td>
-            <td>{{ $worker->position }}</td>
-            <td class="date_of_employment">{{ $worker->hire_date }}</td>
+            <td class="name__worker" id="<?php echo $worker->worker_id; ?>">
+                <?php echo $worker->name; ?>
+            </td>
+            <td><?php echo $worker->surname; ?></td>
+            <td><?php echo $worker->position; ?></td>
+            <td class="date_of_employment"><?php echo $worker->hire_date; ?></td>
 
             <td>
                 <div class="action-buttons">
-                    <input type="button" class="pokazat" onclick="showWorkerDetails({{ json_encode($worker) }})" />
-
-                    <form action="{{ route('admin.workers.destroy', $worker->worker_id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
+                    <!-- Кнопка "Показать" -->
+                    <input type="button" class="pokazat" onclick="showWorkerDetails(<?php echo htmlspecialchars(json_encode($worker), ENT_QUOTES, 'UTF-8'); ?>)" />
+                    
+                    <!-- Кнопка "Удалить" -->
+                    <form action="/admin/workers/delete/<?php echo $worker->worker_id; ?>" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <button type="submit" class="ydalit"></button>
                     </form>
-
-                    <form action="{{ route('admin.workers.edit', $worker->worker_id) }}" method="GET">
+                    
+                    <!-- Кнопка "Изменить" (ваш основной запрос) -->
+                    <form action="/admin/workers/edit/<?php echo $worker->worker_id; ?>" method="GET">
                         <button type="submit" class="izmenit"></button>
+                    </form>
+
+                    <form action="/admin/workers/<?php echo $worker->worker_id ?>/word" method="GET">
+                        <button type="submit" class="MSWord"></button>
                     </form>
                 </div>
             </td>
         </tr>
-        @endforeach
+        <?php endforeach; ?>
     </table>
     <div class="paginate__menu">{{ $workers->links() }}</div>
 </div>
