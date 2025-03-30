@@ -92,7 +92,7 @@ class AdminWorkerController extends Controller
     public function worker_docx(Worker $worker) {
         require_once base_path('/vendor/autoload.php');
 
-        $document = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('/app/templates/template.docx'));
+        $document = new \PhpOffice\PhpWord\TemplateProcessor('../resources/templates/template.docx');
 
         $document->setValue('name', $worker->name);
         $document->setValue('surname', $worker->surname);
