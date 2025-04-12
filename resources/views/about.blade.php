@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+    @vite(['resources/css/about.css'])
+@endsection
 @section('title')Об умных нас@endsection
 @section('content')
 

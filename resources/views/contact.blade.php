@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+    @vite(['resources/css/contact.css'])
+@endsection
 @section('title')О мастерской Золотой Оттенок@endsection
 @section('content')
 

@@ -22,4 +22,8 @@ class Vacancies extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function getFormattedTime() {
+        return $this->published_at->format('d.m.Y');
+    }
 }

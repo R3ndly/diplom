@@ -12,8 +12,7 @@ class AdminVacanciesController extends Controller
 {
     public function index(): View
     {
-        $vacancies = Vacancies::simplePaginate(12);
-        return view('admin.vacancies.index', compact('vacancies'));
+        return view('admin.vacancies.index');
     }
     
     public function create(): View
@@ -21,10 +20,9 @@ class AdminVacanciesController extends Controller
         return view('admin.vacancies.create');
     }
 
-    public function show(Vacancies $vacancy): View
+    public function show($vacancy_id): View
     {
-        $date = date('d.m.Y', strtotime($vacancy->published_at));
-        return view('admin.vacancies.show', compact('vacancy', 'date'));
+        return view('admin.vacancies.show', ['vacancy' => $vacancy_id]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -43,17 +41,9 @@ class AdminVacanciesController extends Controller
         
 
         $vacancies = new Vacancies;
-        $vacancies->title = $request->title;
-        $vacancies->description = $request->description;
-        $vacancies->department = $request->department;
-        $vacancies->location = $request->location;
-        $vacancies->type = $request->type;
-        $vacancies->salary = $request->salary;
-        $vacancies->contact_email = $request->contact_email;
-        $vacancies->contact_phone = $request->contact_phone;
-        $vacancies->save();
+        $$vacancies = Vacancies::create($request->all());
 
-        return redirect()->route('admin.vacancies.index')->with('Выполнено!','Готово!');
+        return redirect()->route('admin.vacancies.index')->with('success', 'Record added');;
     }
     
     public function update(Request $request, Vacancies $vacancy): RedirectResponse

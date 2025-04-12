@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+    @vite(['resources/css/cart.css'])
+@endsection
 @section('title') Ваша корзина товаров @endsection
 @section('content')
 

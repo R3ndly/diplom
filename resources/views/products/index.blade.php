@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+    @vite(['resources/css/products.css'])
+@endsection
 @section('title')Акксесуары для умного дома @endsection
 @section('content')
 <h1 class="text-center ">Аксессуары для умного дома</h1><br>

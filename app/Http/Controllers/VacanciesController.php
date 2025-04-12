@@ -14,12 +14,11 @@ class VacanciesController extends Controller
     {
         $vacancies = Vacancies::simplePaginate(12);
 
-        return view('vacancies.index', compact('vacancies'));
+        return view('vacancies.index');
     }
 
-    public function show(Vacancies $vacancy): View
+    public function show($vacancy_id): View
     {
-        $date = date('d.m.Y', strtotime($vacancy->published_at));
-        return view('vacancies.show', compact('vacancy', 'date'));
+        return view('vacancies.show', ['vacancy' => $vacancy_id]);
     }
 }

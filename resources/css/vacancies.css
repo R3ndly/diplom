@@ -58,6 +58,9 @@
 .button_in_vacancies_block .btn-info {
     margin: 0;
 }
+.about_vacancy {
+    min-height: 450px;
+}
 
 @media (max-width: 1150px) {
     .btn {
@@ -98,7 +101,7 @@
         height: 430px;
     }
     .vacancies_block .description {
-        height: 200px;
+        height: 195px;
     }
     .vacancies_block h3 {
         font-size: 19px;
