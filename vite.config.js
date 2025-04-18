@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/css/app.css',
+                'resources/js/admin/vacancies/index.js',
                 'resources/css/about.css',
                 'resources/css/contact.css',
                 'resources/css/home.css',

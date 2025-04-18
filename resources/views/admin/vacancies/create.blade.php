@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+    @vite(['resources/css/vacancies.css'])
+@endsection
 @section('title') Добавление вакансии @endsection
 @section('content')
 

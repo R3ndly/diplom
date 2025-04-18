@@ -29,7 +29,7 @@
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-OQjg2CpO.css",
+    "file": "assets/app-Ds70DRwt.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -59,15 +59,24 @@
     "isEntry": true
   },
   "resources/css/vacancies.css": {
-    "file": "assets/vacancies-BC6AZWyR.css",
+    "file": "assets/vacancies-ZntwgcB5.css",
     "src": "resources/css/vacancies.css",
     "isEntry": true
   },
+  "resources/js/admin/vacancies/index.js": {
+    "file": "assets/index-Bc_5KE4r.js",
+    "name": "index",
+    "src": "resources/js/admin/vacancies/index.js",
+    "isEntry": true
+  },
   "resources/js/app.js": {
-    "file": "assets/app-CdvwmOZ0.js",
+    "file": "assets/app-DijEtLgi.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "resources/js/admin/vacancies/index.js"
+    ]
   },
   "resources/sass/app.scss": {
     "file": "assets/app-CZEOlMSA.css",

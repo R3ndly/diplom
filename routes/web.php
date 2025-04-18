@@ -70,11 +70,8 @@ Route::middleware("admin")->group(function() {
         Route::controller(AdminVacanciesController::class)->group(function () {
                 Route::get('/admin/vacancies', 'index')->name('admin.vacancies.index');
                 Route::get('/admin/vacancies/create', 'create')->name('admin.vacancies.create');
-                Route::post('/admin/vacancies', 'store')->name('admin.vacancies.store');
-                Route::get('/admin/vacancies/edit/{vacancy}', 'edit')->name('admin.vacancies.edit');
-                Route::put('/admin/vacancies/{vacancy}', 'update')->name('admin.vacancies.update');
-                Route::delete('/admin/vacancies/{vacancy}', 'destroy')->name('admin.vacancies.destroy');
                 Route::get('/admin/vacancies/{vacancy}', 'show')->name('admin.vacancies.show');
+                Route::get('/admin/vacancies/edit/{vacancy}', 'edit')->name('admin.vacancies.edit');
         });
 
         Route::controller(AdminWorkerController::class)->group(function () {

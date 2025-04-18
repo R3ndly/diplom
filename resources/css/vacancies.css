@@ -2,6 +2,10 @@
     min-height: 450px;
 }
 
+.pull-right {
+    margin-left: 25px;
+}
+
 .vacancies-page .paginate__menu {
     width: 100%;
     display: flex;
@@ -60,6 +64,15 @@
 }
 .about_vacancy {
     min-height: 450px;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-container button {
+ margin: 0 5px;
 }
 
 @media (max-width: 1150px) {

@@ -9,9 +9,12 @@
 
     <title>@yield('title')</title>
 
-    <!-- Scripts -->
+    <!-- Scripts 
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/home.css', 'resources/css/app.css', 'resources/css/about.css', 'resources/css/contact.css', 'resources/css/pageBD.css', 'resources/css/vacancies.css', 'resources/css/cart.css', 'resources/css/products.css'])
+    -->
     
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/css/app.css', 'resources/css/pageBD.css'])
+    @yield('styles')
 </head>
 <body>
 <div class="d-flex align-items-center pb-3 mb-4 border-bottom header">

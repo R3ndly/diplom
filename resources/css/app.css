@@ -130,6 +130,10 @@ a:hover {
     margin: 0 10px;
 }
 
+.margin-tb {
+    padding: 0;
+}
+
 /* Шапка */
 .header {
     padding-top: 15px;

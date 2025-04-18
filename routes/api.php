@@ -26,3 +26,5 @@ use App\Http\Controllers\ApiVacanciesController;
 Route::get('/vacancies', [ApiVacanciesController::class, 'index']);
 Route::post('/vacancies', [ApiVacanciesController::class, 'store']);
 Route::get('/vacancies/{vacancy}', [ApiVacanciesController::class, 'show']);
+Route::put('/vacancies/{vacancy}', [ApiVacanciesController::class, 'update']);
+Route::delete('/vacancies/{vacancy}', [ApiVacanciesController::class, 'destroy']);

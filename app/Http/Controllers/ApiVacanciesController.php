@@ -12,7 +12,7 @@ class ApiVacanciesController extends Controller
 {
     public function index()
     {
-        $vacancies = Vacancies::simplePaginate(12);
+        $vacancies = Vacancies::paginate(12);
 
         return response()->json([
             'success' => true,
@@ -59,7 +59,42 @@ class ApiVacanciesController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Вакансия успешно создана',
-            'data' => $vacancy
         ], 201);
+    }
+
+    public function update(Request $request, $vacancy_id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'department' => 'required',
+            'location' => 'required',
+            'type' => 'required',
+            'salary' => 'nullable',
+            'contact_email' => 'required|email',
+            'contact_phone' => 'required',
+        ]);
+
+        $vacancy = Vacancies::findOrFail($vacancy_id);
+        $vacancy->update($request->all());
+
+        return response()->json(['message' => 'Вакансия успешно обновлена']);
+    }
+
+    public function destroy($vacancy_id)
+    {
+        $vacancy = Vacancies::find($vacancy_id);
+
+        if (!$vacancy) {
+            return response()->json([
+                'message' => 'Вакансия не найдена',
+            ], 404);
+        }
+
+        $vacancy->delete();
+
+        return response()->json([
+            'message' => 'Вакансия успешно удалена',
+        ]);
     }
 }

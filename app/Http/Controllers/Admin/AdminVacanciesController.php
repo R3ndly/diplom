@@ -22,66 +22,11 @@ class AdminVacanciesController extends Controller
 
     public function show($vacancy_id): View
     {
-        return view('admin.vacancies.show', ['vacancy' => $vacancy_id]);
+        return view('admin.vacancies.show');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function edit(): View
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'department' => 'required',
-            'location' => 'required',
-            'type' => 'required',
-            'salary' => 'nullable',
-            'contact_email' => 'required|email',
-            'contact_phone' => 'required',
-        ]);
-
-        
-
-        $vacancies = new Vacancies;
-        $$vacancies = Vacancies::create($request->all());
-
-        return redirect()->route('admin.vacancies.index')->with('success', 'Record added');;
-    }
-    
-    public function update(Request $request, Vacancies $vacancy): RedirectResponse
-    {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'department' => 'required',
-            'location' => 'required',
-            'type' => 'required',
-            'salary' => 'nullable',
-            'contact_email' => 'required|email',
-            'contact_phone' => 'required',
-        ]);
-
-        
-        $vacancy->title = $request->title;
-        $vacancy->description = $request->description;
-        $vacancy->department = $request->department;
-        $vacancy->location = $request->location;
-        $vacancy->type = $request->type;
-        $vacancy->salary = $request->salary;
-        $vacancy->contact_email = $request->contact_email;
-        $vacancy->contact_phone = $request->contact_phone;
-        $vacancy->save();
-
-        return redirect()->route('admin.vacancies.index')->with('Выполнено','готово');
-    }
-
-    public function edit(Vacancies $vacancy): View
-    {
-        return view('admin.vacancies.edit', compact('vacancy'));
-    }
-    
-    public function destroy(Vacancies $vacancy): RedirectResponse
-    {
-        $vacancy->delete(); 
-        return redirect()->route('admin.vacancies.index')->with('выполнено','изделие удалёно.');
-    }
-        
+        return view('admin.vacancies.edit');
+    }        
 }

@@ -14,7 +14,7 @@
                 <div class="column">
                     <div class="photo-item" style="background-image: url('{{ asset('img/zamdir.jpg') }}');">
                         <div class="overlay">
-                            <h2 style="photo-item__title">Семенчук Вячеслав Григорьевич</h2>
+                            <h2>Семенчук Вячеслав Григорьевич</h2>
                             <p style="opacity: 0.65;">Старший Аналитик</p>
                             <div class="social-links">
                                 <img alt="facebook" src="./img/facebook 1.png">
@@ -27,7 +27,7 @@
                 <div class="column">
                     <div class="photo-item" style="background-image: url('{{ asset('img/secret.jpg') }}');">
                         <div class="overlay">
-                            <h2 style="photo-item__title">Вяземский Александр Юрьевич</h2>
+                            <h2>Вяземский Александр Юрьевич</h2>
                             <p style="opacity: 0.65;">Старший маркетолог</p>
                             <div class="social-links">
                                 <img alt="facebook" src="./img/facebook 1.png">
@@ -40,7 +40,7 @@
                 <div class="column">
                     <div class="photo-item" style="background-image: url('{{ asset('img/zambyh.jpg') }}');">
                         <div class="overlay">
-                            <h2 style="photo-item__title">Бакальчук Андрей Валерьевич</h2>
+                            <h2>Бакальчук Андрей Валерьевич</h2>
                             <p style="opacity: 0.65;">Ответственный за отдел разработки</p>
                             <div class="social-links">
                                 <img alt="facebook" src="./img/facebook 1.png">
@@ -56,7 +56,7 @@
                 <div class="column">
                     <div class="photo-item" style="background-image: url('{{ asset('img/byh.jpg') }}');">
                         <div class="overlay">
-                            <h2 style="photo-item__title">Смирнова Валентина Витальевна</h2>
+                            <h2>Смирнова Валентина Витальевна</h2>
                             <p style="opacity: 0.65;">Директор</p>
                             <div class="social-links">
                                 <img alt="facebook" src="./img/facebook 1.png">
@@ -69,7 +69,7 @@
                 <div class="column">
                     <div class="photo-item" style="background-image: url('{{ asset('img/Дизайнер.webp') }}');">
                         <div class="overlay">
-                            <h2 style="photo-item__title">Лебедев Александр Максимович</h2>
+                            <h2>Лебедев Александр Максимович</h2>
                             <p style="opacity: 0.65;">Главный Дизайнер</p>
                             <div class="social-links">
                                 <img alt="facebook" src="./img/facebook 1.png">
@@ -82,7 +82,7 @@
                 <div class="column">
                     <div class="photo-item" style="background-image: url('{{ asset('img/ТехЛИД.jpg') }}');">
                         <div class="overlay">
-                            <h2 style="photo-item__title">Калинин Егор Артёмович</h2>
+                            <h2>Калинин Егор Артёмович</h2>
                             <p style="opacity: 0.65;">ТехЛид</p>
                             <div class="social-links">
                                 <img alt="facebook" src="./img/facebook 1.png">

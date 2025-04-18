@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+    @vite(['resources/css/home.css'])
+@endsection
 @section('title') Авторизация @endsection
 @section('content')
 <br>
