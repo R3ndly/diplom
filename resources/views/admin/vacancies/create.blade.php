@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-    @vite(['resources/css/vacancies.css'])
+    @vite(['resources/css/vacancies.css', 'resources/js/admin/vacancies/create.js'])
 @endsection
 @section('title') Добавление вакансии @endsection
 @section('content')
@@ -80,34 +80,4 @@
         </div>
     </form>
 </div>
-
-<script>
-    document.getElementById('createVacancyForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-
-        const form = event.target;
-        const formData = new FormData(form);
-
-        try {
-            const response = await fetch('/api/vacancies', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify(Object.fromEntries(formData))
-            });
-
-            if(!response.ok) {
-                const ErrorData = await response.json();
-                throw ErrorData;
-            }
-
-            window.location.href = '/admin/vacancies';
-        } catch(error) {
-            console.error('Ошибочка', error);
-        }
-    });
-</script>
 @endsection

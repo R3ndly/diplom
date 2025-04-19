@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vacancies;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 
 class ApiVacanciesController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $vacancies = Vacancies::paginate(12);
 
@@ -20,7 +19,7 @@ class ApiVacanciesController extends Controller
         ]);
     }
 
-    public function show($vacancy_id)
+    public function show(int $vacancy_id): JsonResponse
     {
         $vacancy = Vacancies::findOrFail($vacancy_id);
 
@@ -41,7 +40,7 @@ class ApiVacanciesController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'title' => 'required',
@@ -54,7 +53,7 @@ class ApiVacanciesController extends Controller
             'contact_phone' => 'required',
         ]);
 
-        $vacancy = Vacancies::create($validated);
+        Vacancies::create($validated);
 
         return response()->json([
             'success' => true,
@@ -62,7 +61,7 @@ class ApiVacanciesController extends Controller
         ], 201);
     }
 
-    public function update(Request $request, $vacancy_id)
+    public function update(Request $request, int $vacancy_id): JsonResponse
     {
         $request->validate([
             'title' => 'required',
@@ -81,7 +80,7 @@ class ApiVacanciesController extends Controller
         return response()->json(['message' => 'Вакансия успешно обновлена']);
     }
 
-    public function destroy($vacancy_id)
+    public function destroy(int $vacancy_id): JsonResponse
     {
         $vacancy = Vacancies::find($vacancy_id);
 

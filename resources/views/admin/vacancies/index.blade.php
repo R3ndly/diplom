@@ -12,9 +12,7 @@
         <a class="btn btn-primary" href="/admin/vacancies/create">Добавить вакансию</a>
     </div><br><br>
 
-    <div class="container vacancies-container" id="vacancies-container">
-
-    </div>
+    <div class="container vacancies-container" id="vacancies-container"></div>
 
         <template id="vacancy-template">
             <div class="vacancies_block">

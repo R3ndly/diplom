@@ -23,32 +23,4 @@
         </template>
     </div>
 </div>
-<script> 
-    document.addEventListener('DOMContentLoaded', function () {
-        fetch('/api/vacancies')
-        .then(response => response.json())
-        .then(vacancies => {
-            const container = document.getElementById('vacancies-container');
-            container.replaceChildren();
-            
-            vacancies.vacancies.data.forEach(vacancy => {
-                const template = document.getElementById('vacancy-template');
-                const clone = template.content.cloneNode(true);
-                
-                clone.querySelector('.js-title').textContent = vacancy.title;
-                clone.querySelector('.js-description').textContent = vacancy.description;
-                clone.querySelector('.js-location').textContent += vacancy.location;
-                clone.querySelector('.js-salary').textContent += `${ vacancy.salary } руб.`;
-                
-                clone.querySelector('.js-details-link').href = `/vacancies/${ vacancy.vacancy_id }`;
-                
-                container.appendChild(clone);
-            });
-        })
-        .catch(error => {
-            console.error('Ошибка: ', error);
-            container.innerHTML = `<p style="color: red;">Ошибка загрузки вакансий</p>`;
-        });
-    });
-</script>
 @endsection

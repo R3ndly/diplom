@@ -1,4 +1,4 @@
-export function initVacanciesPage() {
+export function vacanciesIndexPage() {
     let currentPage = 1;
     const container = document.getElementById('vacancies-container');
     const prevBtn = document.getElementById('prev-page');
@@ -12,6 +12,7 @@ export function initVacanciesPage() {
             if(data.success) {
                 renderVacancies(data.vacancies);
                 updatePagination(data.vacancies);
+                sessionStorage.setItem('currentVacancyPage', page);
             } else {
                 showError("Вакансии не найдены");
             }
@@ -39,9 +40,8 @@ export function initVacanciesPage() {
             clone.querySelector('.js-delete-form').action = `/admin/vacancies/${vacancy.vacancy_id}`;
             clone.querySelector('.js-delete-form').addEventListener('submit', (event) => {
                 event.preventDefault();
-                deleteVacancy(`/admin/vacancies/${vacancy.vacancy_id}`, vacancy.vacancy_id);
+                deleteVacancy(`/api/vacancies/${vacancy.vacancy_id}`, vacancy.vacancy_id);
             });
-
 
             container.appendChild(clone);
         });

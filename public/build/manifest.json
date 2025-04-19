@@ -64,18 +64,25 @@
     "isEntry": true
   },
   "resources/js/admin/vacancies/index.js": {
-    "file": "assets/index-Bc_5KE4r.js",
+    "file": "assets/index-B7tXORyQ.js",
     "name": "index",
     "src": "resources/js/admin/vacancies/index.js",
     "isEntry": true
   },
+  "resources/js/admin/vacancies/show.js": {
+    "file": "assets/show-Dboaexo5.js",
+    "name": "show",
+    "src": "resources/js/admin/vacancies/show.js",
+    "isEntry": true
+  },
   "resources/js/app.js": {
-    "file": "assets/app-DijEtLgi.js",
+    "file": "assets/app-C_zyT8od.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "resources/js/admin/vacancies/index.js"
+      "resources/js/admin/vacancies/index.js",
+      "resources/js/admin/vacancies/show.js"
     ]
   },
   "resources/sass/app.scss": {

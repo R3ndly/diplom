@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/css/app.css',
                 'resources/js/admin/vacancies/index.js',
+                'resources/js/admin/vacancies/show.js',
                 'resources/css/about.css',
                 'resources/css/contact.css',
                 'resources/css/home.css',
