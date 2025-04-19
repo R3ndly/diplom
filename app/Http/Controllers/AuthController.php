@@ -3,13 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\HomeController;
 use App\Models\User;
-use App\Models\AdminUser;
-use Illuminate\Support\Facades\Mail;
-use App\Jobs\ForgotUserEmailJob;
-use App\Mail\ForgotPassword;
-
 
 class AuthController extends Controller
 {
@@ -51,7 +45,7 @@ class AuthController extends Controller
             "email" => ["required", "email", "string", "unique:users"],
             "password" => ["required", "confirmed"]
         ]);
-        
+
         $user = User::create([
             "name" => $data["name"],
             "email" => $data["email"],

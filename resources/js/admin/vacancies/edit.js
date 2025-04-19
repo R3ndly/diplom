@@ -1,5 +1,5 @@
 export function vacancyEditPage() {
-    const vacancyId = window.location.split('/').pop();
+    const vacancyId = window.location.pathname.split('/').pop();
 
     function getVacancy() {
         fetch(`/api/vacancies/${vacancyId}`).then(response => response.json())
@@ -18,7 +18,7 @@ export function vacancyEditPage() {
     function updateVacancy() {
         document.getElementById('editVacancyForm').addEventListener('submit', (event) => {
             event.preventDefault();
-            
+
             const formData = {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
@@ -36,7 +36,7 @@ export function vacancyEditPage() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },        
+                },
                 body: JSON.stringify(formData)
             })
             .then(response => {
