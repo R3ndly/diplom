@@ -1,0 +1,77 @@
+{
+  "public/img/backToIndex.png": {
+    "file": "assets/backToIndex-hF6NaJiD.png",
+    "src": "public/img/backToIndex.png"
+  },
+  "public/img/word.png": {
+    "file": "assets/word-Z1yJdlnU.png",
+    "src": "public/img/word.png"
+  },
+  "public/img/Карзина.png": {
+    "file": "assets/Карзина-YfGovowT.png",
+    "src": "public/img/Карзина.png"
+  },
+  "public/img/Показать.png": {
+    "file": "assets/Показать-DcT_v7vn.png",
+    "src": "public/img/Показать.png"
+  },
+  "public/img/Редактировать.png": {
+    "file": "assets/Редактировать-DUps_Fam.png",
+    "src": "public/img/Редактировать.png"
+  },
+  "public/img/Удалить.png": {
+    "file": "assets/Удалить-DDC6rbHP.png",
+    "src": "public/img/Удалить.png"
+  },
+  "resources/css/about.css": {
+    "file": "assets/about-CGfjQD7m.css",
+    "src": "resources/css/about.css",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-Ds70DRwt.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/cart.css": {
+    "file": "assets/cart-B-oYoUrv.css",
+    "src": "resources/css/cart.css",
+    "isEntry": true
+  },
+  "resources/css/contact.css": {
+    "file": "assets/contact-Diuj5dIk.css",
+    "src": "resources/css/contact.css",
+    "isEntry": true
+  },
+  "resources/css/home.css": {
+    "file": "assets/home-B9Pp8oZh.css",
+    "src": "resources/css/home.css",
+    "isEntry": true
+  },
+  "resources/css/pageBD.css": {
+    "file": "assets/pageBD-DlS9urgL.css",
+    "src": "resources/css/pageBD.css",
+    "isEntry": true
+  },
+  "resources/css/products.css": {
+    "file": "assets/products-C1CJTHWt.css",
+    "src": "resources/css/products.css",
+    "isEntry": true
+  },
+  "resources/css/vacancies.css": {
+    "file": "assets/vacancies-ZntwgcB5.css",
+    "src": "resources/css/vacancies.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CdvwmOZ0.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-CZEOlMSA.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true
+  }
+}

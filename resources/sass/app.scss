@@ -1,0 +1,24 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+img.db{
+    max-width: 60%;
+    max-height: 40%;
+}
+
+.dropdown-menu {
+    --bs-dropdown-min-width: 0;
+}
+
+.table tbody tr {
+    margin-bottom: 15px; /* Отступ между строками */
+}
+
+.table tbody tr td {
+    padding: 15px; /* Внутренние отступы в ячейках */
+}

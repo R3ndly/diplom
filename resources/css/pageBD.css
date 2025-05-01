@@ -1,0 +1,286 @@
+/* Стили формы создания */
+.container__create-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container__table__workers {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+
+    flex-direction: column;
+    align-items: center;
+}
+
+.container__table__workers table {
+    margin-bottom: 30px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 35%;
+    font-size: 15px;
+}
+
+/* Стили траницы workers/index.blade.php */
+.pull-right {
+    margin-left: 25px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.details-bd {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.window-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.window-info div {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.window-info strong {
+    width: 150px;
+    display: inline-block;
+}
+
+.pokazat{
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/Показать.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
+ .izmenit{
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/Редактировать.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
+ .ydalit{
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/Удалить.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
+ .MSWord {
+    width: 50px;
+    height: 50px;
+    background: no-repeat url(/public/img/word.png);
+    background-size: 100% auto;
+    border-style: hidden;
+ }
+
+ .pokazat:hover,
+.izmenit:hover,
+.ydalit:hover,
+.MSWord:hover,
+.back-to-index:hover,
+.Add-in-cart:hover {
+    opacity: 0.7;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.action-buttons button {
+    width: 50px;
+    height: 50px;
+    border-style: hidden;
+    cursor: pointer;
+}
+
+.table__workers {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    background-color: transparent;
+}
+
+.table__workers tr {
+    background-color: #f9f9f9;
+}
+
+.table__workers td, .table__workers th {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #312F30;
+    font-size: 19px;
+}
+
+.table__workers th {
+    background-color: #007bff;
+    color: white;
+}
+
+.table__workers tr:hover {
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 1240px) {
+    .modal-content {
+        padding: 15px;
+        font-size: 14.5px;
+    }
+    .modal-content h2 {
+        font-size: 22px;
+    }
+    .window-info strong {
+        width: 140px;
+    }
+}
+
+@media (max-width: 1230px) {
+    .table__workers th, .table__workers td {
+        padding: 5px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1160px) {
+    .window-info strong {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1080px) {
+    .date_of_employment {
+        display: none;
+    }
+}
+
+@media (max-width: 990px) {
+    .modal-content h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .table__workers th, .table__workers td {
+        font-size: 18px;
+    }
+    .modal-content {
+        font-size: 14px;
+    }
+    .modal-content h2 {
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 870px) {
+    .table__workers th, .table__workers td {
+        font-size: 17px;
+        padding: 3px;
+    }
+    .modal-content {
+        flex-direction: column;
+        align-items: center;
+        width: 250px;
+    }
+    .modal-content h2 {
+        width: 200px;
+    }
+}
+
+@media (max-width: 810px) {
+    .table__workers th, .table__workers td {
+        font-size: 16px;
+    }
+    .action-buttons {
+        gap: 3px;
+    }
+}
+
+@media (max-width: 772px) {
+    .table__workers th, .table__workers td {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 740px) {
+    .action-buttons button, .pokazat {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 722px) {
+    .table__workers th, .table__workers td {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 566px) {
+    .table__workers th, .table__workers td {
+        font-size: 13px;
+        padding: 2px;
+    }
+    .action-buttons {
+        gap: 2px;
+    }
+    .action-buttons button, .pokazat {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 466px) {
+    .table__workers th, .table__workers td {
+        font-size: 12px;
+    }
+    .action-buttons button, .pokazat {
+        width: 38px;
+        height: 38px;
+    }
+}
