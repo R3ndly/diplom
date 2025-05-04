@@ -9,20 +9,19 @@ use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    public function add(Products $product){
-
+    /*public function add(Products $product)
+    {
         $cart = Cart::firstOrCreate(
-         [
+        [
             'user_id' => Auth::id(),
             'product_id' => $product->product_id,
         ],
             ['quantity' => 0]
-    );
+        );
         $cart->increment('quantity');
 
-        return redirect()->back();
-
-    }
+        return response()->json(['success' => true]);
+    }*/
 
     public function index(): View
     {

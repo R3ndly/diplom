@@ -6,26 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Products;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 
 
 class ProductsController extends Controller
 {
     public function index(): View
     {
-        $products = Products::simplePaginate(21);
-
-        $brands = Products::distinct()->pluck('brand')->toArray();
-        $categories = Products::distinct()->pluck('category')->toArray();
-        $warranties = Products::distinct()->pluck('warranty')->toArray();
-        $materials = Products::distinct()->pluck('material')->toArray();
-        $powerSupplies = Products::distinct()->pluck('power_supply')->toArray();
-
-        return view('products.index', compact('products', 'brands', 'categories', 'warranties', 'materials', 'powerSupplies'));
+        return view('products.index');
     }
 
 
-    public function filter(Request $request): View
+    /*public function filter(Request $request): View
     {
         $query = Products::query();
 
@@ -68,5 +59,5 @@ class ProductsController extends Controller
         $powerSupplies = Products::distinct()->pluck('power_supply')->toArray();
 
         return view('products.index', compact('products', 'brands', 'categories', 'warranties', 'materials', 'powerSupplies', 'minPrice', 'maxPrice'));
-    }
+    }*/
 }

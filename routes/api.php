@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ApiVacanciesController;
 use App\Http\Controllers\Api\ApiCartController;
 use App\Http\Controllers\Api\ApiWorkersController;
 use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\ApiProductsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,13 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('/cart', 'index');
         Route::delete('/cart/{id}', 'destroy');
         Route::post('/orders', 'store');
+        Route::post('/cart/add/{product}', 'add');
+    });
+
+    Route::controller(ApiProductsController::class)->group(function () {
+        Route::get('/products', 'index');
+        Route::get('/products/filter', 'filter');
+        Route::get('/products/filters', 'getFilters');
     });
 
 });

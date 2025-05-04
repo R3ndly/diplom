@@ -41,7 +41,6 @@ Route::middleware("auth")->group(function(){
         Route::get('/orders/create', [OrderController::class, 'create']);
 
         Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-        Route::post('/cart/{product}/add', [CartController::class, 'add'])->name('cart.add');
 });
 
 Route::middleware("guest")->group(function(){
