@@ -63,7 +63,7 @@ class ApiVacanciesController extends Controller
 
     public function update(Request $request, int $vacancy_id): JsonResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'department' => 'required',
@@ -75,7 +75,7 @@ class ApiVacanciesController extends Controller
         ]);
 
         $vacancy = Vacancies::findOrFail($vacancy_id);
-        $vacancy->update($request->all());
+        $vacancy->update($validated);
 
         return response()->json(['message' => 'Вакансия успешно обновлена']);
     }

@@ -15,8 +15,8 @@ class Products extends Model
 
     protected $keyType = 'int';
 
-    protected $fillable = ['title', 'price', 'brand', 'delivery', 'category', 'warranty', 'material', 'power_supply', 'image'];
-    
+    protected $fillable = ['title', 'price', 'brand', 'delivery', 'category', 'warranty', 'material', 'power_supply', 'product_image'];
+
     public $timestamps = false;
 
     public function carts()

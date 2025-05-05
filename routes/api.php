@@ -8,7 +8,13 @@ use App\Http\Controllers\Api\ApiWorkersController;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiProductsController;
 
-
+Route::get('/test-auth', function () {
+    return response()->json([
+        'user' => auth()->user(),
+        'is_authenticated' => auth()->check(),
+        'is_admin' => auth()->user()->role === 'admin'
+    ]);
+})->middleware('auth:sanctum');
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,7 +50,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
 });
 
-Route::middleware('admin')->group(function() {
+Route::middleware(['auth:sanctum', 'admin'])->group(function() {
     Route::controller(ApiVacanciesController::class)->group(function () {
         Route::post('/vacancies', 'store');
         Route::put('/vacancies/{id}', 'update');
@@ -59,5 +65,11 @@ Route::middleware('admin')->group(function() {
         Route::delete('/workers/{id}', 'destroy');
     });
 
+    Route::controller(ApiProductsController::class)->group(function () {
+        Route::get('/product/{id}', 'show');
+        Route::post('/products', 'store');
+        Route::put('/products/{id}', 'update');
+        Route::delete('/products/{product_id}', 'destroy');
+    });
 });
 

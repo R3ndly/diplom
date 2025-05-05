@@ -16,16 +16,16 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->role === 'admin') {
-                return $next($request);
-            } else {
-                Log::info('User is not an admin', ['user' => Auth::user()]);
-                abort(403);
-            }
+        $user = auth('sanctum')->user();
+        if ($user && $user->role === 'admin') {
+            return $next($request);
+        } elseif ($user) {
+            Log::info('User is not an admin', ['user' => $user]);
+            abort(403);
         } else {
             Log::info('User is not authenticated');
-            return redirect('/login');
+            return response()->json(['message' => 'Unauthenticated'], 401);
         }
+
     }
 }

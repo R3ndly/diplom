@@ -14,7 +14,7 @@ class AdminController extends Controller
         return view("admin.auth.login");
     }
 
-    
+
     public function login(Request $request)
     {
         $data = $request->validate([
@@ -28,7 +28,7 @@ class AdminController extends Controller
 
         return redirect(route("admin.login"))->withErrors(["email" => "Пользователь не найден, либо данные введены не правильно"]);
     }
-    
+
 
     public function logout()
     {

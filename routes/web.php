@@ -54,11 +54,7 @@ Route::middleware("admin")->group(function() {
         Route::controller(AdminProductController::class)->group(function () {
                 Route::get('/admin/products', 'index')->name('admin.products.index');
                 Route::get('/admin/products/create', 'create')->name('admin.products.create');
-                Route::post('/admin/products', 'store')->name('admin.products.store');
-                Route::get('/admin/products/{product}/edit', 'edit')->name('admin.products.edit');
-                Route::put('/admin/products/{product}', 'update')->name('admin.products.update');
-                Route::delete('/admin/products/{product}', 'destroy')->name('admin.products.destroy');
-                Route::get('/admin/products/filter', 'filter')->name('admin.products.filter');
+                Route::get('/admin/products/edit/{id}', 'edit')->name('admin.products.edit');
         });
 
         Route::controller(AdminVacanciesController::class)->group(function () {
