@@ -3,9 +3,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\Response;
 
 class Admin
 {
@@ -21,7 +19,7 @@ class Admin
             return $next($request);
         } elseif ($user) {
             Log::info('User is not an admin', ['user' => $user]);
-            abort(403);
+            return response()->json(['message' => 'User is not an admin'], 403);
         } else {
             Log::info('User is not authenticated');
             return response()->json(['message' => 'Unauthenticated'], 401);

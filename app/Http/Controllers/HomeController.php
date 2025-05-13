@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function home()
+    public function home(): View
     {
         return view('home');
     }
 
-    public function contact()
+    public function contact(): View
     {
         return view('contact');
     }
 
-    public function about()
+    public function about(): View
     {
         return view('about');
     }

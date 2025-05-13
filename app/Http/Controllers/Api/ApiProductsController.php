@@ -54,14 +54,7 @@ class ApiProductsController extends Controller
 
         return response()->json([
             'success' => true,
-            'products' => $products,
-            'filters' => [
-                'brands' => Products::distinct()->pluck('brand')->toArray(),
-                'categories' => Products::distinct()->pluck('category')->toArray(),
-                'warranties' => Products::distinct()->pluck('warranty')->toArray(),
-                'materials' => Products::distinct()->pluck('material')->toArray(),
-                'powerSupplies' => Products::distinct()->pluck('power_supply')->toArray()
-            ]
+            'products' => $products
         ]);
     }
 

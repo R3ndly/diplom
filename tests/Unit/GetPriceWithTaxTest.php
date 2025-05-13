@@ -4,7 +4,7 @@ namespace Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use App\Models\Products;
 
-class getPriceWithTaxTest extends TestCase
+class GetPriceWithTaxTest extends TestCase
 {
     public function test_get_rigth_price_with_tax()
     {

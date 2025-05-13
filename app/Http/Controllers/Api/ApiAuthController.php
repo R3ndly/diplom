@@ -8,36 +8,23 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class ApiAuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (!Auth::attempt($validated)) {
             return response()->json([
                 'message' => 'Неверные учетные данные'
             ], 401);
         }
 
         $user = Auth::user();
-
-        if (!method_exists($user, 'createToken')) {
-            return response()->json([
-                'message' => 'Sanctum не настроен правильно'
-            ], 500);
-        }
 
         $token = $user->createToken('api-token')->plainTextToken;
 
@@ -47,31 +34,21 @@ class ApiAuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password'])
         ]);
 
-        if (!method_exists($user, 'createToken')) {
-            return response()->json([
-                'message' => 'Sanctum не настроен для модели User'
-            ], 500);
-        }
+        Auth::login($user);
 
         $token = $user->createToken('api-token')->plainTextToken;
 

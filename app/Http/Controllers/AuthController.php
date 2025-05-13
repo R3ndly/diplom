@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function showLoginForm(): View
     {
         return view("auth.login");
     }
 
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $data = $request->validate([
             "email" => ["required", "email", "string"],
@@ -26,30 +29,16 @@ class AuthController extends Controller
         return redirect(route("login"))->withErrors(["email" => "Пользователь не найден, либо данные введены не правильно"]);
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         auth("web")->logout();
         session()->flush();
         return redirect(route("home"));
     }
 
-    public function showRegisterForm(Request $request)
+    public function showRegisterForm(): View
     {
-        $data = $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'email', 'unique:users'],
-        'password' => ['required', 'confirmed', 'min:8'],
-    ]);
-
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => bcrypt($data['password'])
-    ]);
-
-    auth('web')->login($user);
-
-    return response()->noContent();
+         return view("auth.register");
     }
 
     public function register(Request $request)

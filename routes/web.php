@@ -36,7 +36,6 @@ Route::middleware("auth")->group(function(){
         Route::get('/vacancies/{vacancy}', [VacanciesController::class, 'show'])->name('vacancies.show');
 
         Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
-        Route::get('/products/filter', [ProductsController::class, 'filter'])->name('products.filter');
 
         Route::get('/orders/create', [OrderController::class, 'create']);
 
