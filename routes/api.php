@@ -8,28 +8,21 @@ use App\Http\Controllers\Api\ApiWorkersController;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiProductsController;
 
-Route::get('/test-auth', function () {
-    return response()->json([
-        'user' => auth()->user(),
-        'is_authenticated' => auth()->check(),
-        'is_admin' => auth()->user()->role === 'admin'
-    ]);
-})->middleware('auth:sanctum');
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+
+
 Route::post('/register', [ApiAuthController::class, 'register']);
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::post('/logout', [ApiAuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/test-auth', function () {
+        return response()->json([
+            'user' => auth()->user(),
+            'is_authenticated' => auth()->check(),
+            'is_admin' => auth()->user()->role === 'admin'
+        ]);
+    });
+
     Route::controller(ApiVacanciesController::class)->group(function () {
         Route::get('/vacancies', 'index');
         Route::get('/vacancies/{id}', 'show');
@@ -37,9 +30,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::controller(ApiCartController::class)->group(function () {
         Route::get('/cart', 'index');
-        Route::delete('/cart/{id}', 'destroy');
+        Route::delete('/cart/{cart_id}', 'destroy');
         Route::post('/orders', 'store');
-        Route::post('/cart/add/{product}', 'add');
+        Route::post('/cart/add/{product_id}', 'add');
     });
 
     Route::controller(ApiProductsController::class)->group(function () {
@@ -49,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
 });
+
+
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function() {
     Route::controller(ApiVacanciesController::class)->group(function () {

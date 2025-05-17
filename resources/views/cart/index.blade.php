@@ -67,9 +67,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (result.success) {
                     cartContainer.innerHTML = '';
+                    const productInfoElement = document.querySelector('.js-cart');
+                    const total = result.data.reduce((sum, item) => sum + item.total_price, 0);
+                    productInfoElement.innerHTML = `Корзина на ${total} руб.`;
 
                     result.data.forEach(item => {
                     const clone = productTemplate.content.cloneNode(true);
+
 
                     clone.querySelector('.image__product').src = item.product_image;
                     clone.querySelector('.js-title').textContent = item.title;

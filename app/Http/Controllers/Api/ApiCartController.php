@@ -15,10 +15,6 @@ class ApiCartController extends Controller
 {
     public function index(): JsonResponse
     {
-        if (!Auth::guard('sanctum')->user()) {
-            return response()->json(['message' => 'неавторизован!'], 401);
-        }
-
         $userId = Auth::guard('sanctum')->id();
 
         $cartItems = DB::select("
@@ -37,15 +33,19 @@ class ApiCartController extends Controller
             WHERE carts.user_id = ?;
         ", [$userId]);
 
+        foreach($cartItems as $item) {
+            $item->total_price = (float)$item->total_price;
+        }
+
         return response()->json([
             'success' => true,
             'data' => $cartItems
         ]);
     }
 
-    public function destroy(int $id): JsonResponse
+    public function destroy(int $cart_id): JsonResponse
     {
-        $cart = Cart::find($id);
+        $cart = Cart::find($cart_id);
 
         if (!$cart) {
             return response()->json([
@@ -63,17 +63,21 @@ class ApiCartController extends Controller
     public function store(Request $request): JsonResponse
     {
         $user = Auth::user();
+        $findUserFromCart = Cart::where('user_id', $user->user_id);
 
-        $cartItems = Cart::where('user_id', $user->user_id)->with('product')->get();
+        if(!$findUserFromCart) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Товар в корзине не найден',
+            ], 201);
+        }
 
+        $cartItems = $findUserFromCart->with('product')->get();
 
         $shippingCosts = [100, 150];
 
-        foreach ($cartItems as $item) {
-
-            $product = $item->product;
-
-            Order::create([
+        $orders = $cartItems->map(function ($item) use ($user, $request, $shippingCosts) {
+            return [
                 'user_id' => $user->user_id,
                 'product_id' => $item->product_id,
                 'quantity' => $item->quantity,
@@ -81,30 +85,34 @@ class ApiCartController extends Controller
                 'shipping_address' => $request->input('shipping_address'),
                 'shipping_cost' => $shippingCosts[array_rand($shippingCosts)],
                 'order_date' => now(),
-                'delivery' => $product->delivery,
-                'payment_method' => $request->input('payment_method'),
-            ]);
-        }
+                'delivery' => $item->product->delivery,
+                'payment_method' => $request->input('payment_method')
+            ];
+        });
 
-        Cart::where('user_id', $user->user_id)->delete();
+        Order::insert($orders->toArray());
+
+        $findUserFromCart->delete();
 
          return response()->json([
             'success' => true,
             'message' => 'Доставка успешно оформлена!',
         ], 201);
     }
-
-    public function add(Products $product): JsonResponse
+    public function add(int $product_id): JsonResponse
     {
         $cart = Cart::firstOrCreate(
         [
             'user_id' => Auth::id(),
-            'product_id' => $product->product_id,
+            'product_id' => $product_id,
         ],
             ['quantity' => 0]
         );
         $cart->increment('quantity');
 
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'message' => "Добавлено в корзину"
+        ]);
     }
 }

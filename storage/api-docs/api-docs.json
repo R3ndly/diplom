@@ -845,7 +845,301 @@
                     }
                 }
             }
-
+        }
+    },
+"/api/cart": {
+    "get": {
+        "tags": ["Cart"],
+        "summary": "Получение корзины товаров конкретного пользователя",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+            "200": {
+                "description": "Успешный ответ",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "total_price": {
+                                                "type": "integer",
+                                                "example": 3070
+                                            },
+                                            "product_image": {
+                                                "type": "string",
+                                                "example": "img/products/6540911367.webp"
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Полное название товара..."
+                                            },
+                                            "warranty": {
+                                                "type": "string",
+                                                "example": "1 год"
+                                            },
+                                            "brand": {
+                                                "type": "string",
+                                                "example": "OOO Компания"
+                                            },
+                                            "material": {
+                                                "type": "string",
+                                                "example": "Пластик"
+                                            },
+                                            "power_supply": {
+                                                "type": "string",
+                                                "example": "От батареек"
+                                            },
+                                            "quantity": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "cart_id": {
+                                                "type": "integer",
+                                                "example": 37
+                                            },
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Неавторизованный доступ",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Unauthenticated"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+        }
+    }
+},
+"/api/cart/{cart_id}": {
+    "delete": {
+        "tags": ["Cart"],
+        "summary": "Удаление товара из корзины",
+        "security": [{"bearerAuth": []}],
+        "parameters": [{
+            "name": "cart_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+                "type": "integer"
+            }
+        }],
+        "responses": {
+            "200": {
+                "description": "Успешное удаление товара из корзины",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Запись в таблице Cart успешно удалена"
+                                }
+                            }
+                        }
+                    }
+                }
+          },
+            "401": {
+                "description": "Неавторизованный доступ",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Unauthenticated"
+                                }
+                            }
+                        }
+                    }
+                }
+          },
+            "404": {
+                "description": "Товар в корзине не найден",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Запись в таблице Cart не найдена"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+"/api/orders": {
+    "post": {
+        "tags": ["Cart"],
+        "summary": "Оформление доставки",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+            "required": true,
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "required": ["user_id", "product_id", "quantity", "order_status", "shipping_address", "shipping_cost", "order_date", "delivery", "payment_method"],
+                        "properties": {
+                            "user_id": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "product_id": {
+                                "type": "integer",
+                                "example": 7
+                            },
+                            "quantity": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "order_status": {
+                                "type": "string",
+                                "example": "в обработке"
+                            },
+                            "shipping_address": {
+                                "type": "string",
+                                "example": "г.Город, дом 11"
+                            },
+                            "shipping_cost": {
+                                "type": "integer",
+                                "example": 150
+                            },
+                            "order_date": {
+                                "type": "string",
+                                "example": "2025-04-23"
+                            },
+                            "delivery": {
+                                "type": "string",
+                                "example": "2025-05-29"
+                            },
+                            "payment_method": {
+                                "type": "string",
+                                "example": "Kiwi"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "responses": {
+            "201": {
+                "description": "Успешное оформление доставки",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "example": true
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Доставка успешно офрмлена!"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Неавторизованный пользователь",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Unauthenticated."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/cart/add/{product_id}": {
+        "post": {
+            "tags": ["Cart"],
+            "summary": "Добавление товара в корзину",
+            "security": [{"bearerAuth": []}],
+            "parameters": [{
+                "name": "product_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }],
+            "responses": {
+                "200": {
+                    "description": "Успешное добавление товара в корзину",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "example": true
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Добавлено в корзину"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "description": "Неавторизованный пользователь",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Unauthenticated."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+            }
         }
     }
 },

@@ -182,7 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Добавление в корзину
-    async function addToCart(productId) {
+
+async function addToCart(productId) {
         try {
             const response = await fetch('/api/cart/add/' + productId, {
                 method: 'POST',
@@ -209,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showCartNotification(error.message || 'Не удалось добавить товар в корзину', true);
         }
     }
+
 
     // Удаление товара
    async function deleteProduct(productId) {
@@ -253,11 +255,7 @@ document.addEventListener('click', function(e) {
         deleteProduct(productId);
     }
 
-    if (e.target.classList.contains('Add-in-cart')) {
-        e.preventDefault();
-        const productId = e.target.dataset.productId;
-        addToCart(productId);
-    }
+
 });
     // Уведомления
     function showCartNotification(message, isError = false) {
