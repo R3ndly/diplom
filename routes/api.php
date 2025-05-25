@@ -9,7 +9,6 @@ use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiProductsController;
 
 
-
 Route::post('/register', [ApiAuthController::class, 'register']);
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::post('/logout', [ApiAuthController::class, 'logout'])->middleware('auth:sanctum');
@@ -44,7 +43,6 @@ Route::middleware('auth:sanctum')->group(function() {
 });
 
 
-
 Route::middleware(['auth:sanctum', 'admin'])->group(function() {
     Route::controller(ApiVacanciesController::class)->group(function () {
         Route::post('/vacancies', 'store');
@@ -61,9 +59,9 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function() {
     });
 
     Route::controller(ApiProductsController::class)->group(function () {
-        Route::get('/product/{id}', 'show');
+        Route::get('/products/{product_id}', 'show');
         Route::post('/products', 'store');
-        Route::put('/products/{id}', 'update');
+        Route::put('/products/{product_id}', 'update');
         Route::delete('/products/{product_id}', 'destroy');
     });
 });

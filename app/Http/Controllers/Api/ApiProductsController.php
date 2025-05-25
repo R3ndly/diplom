@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Products;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 
 class ApiProductsController extends Controller
 {
@@ -19,44 +20,51 @@ class ApiProductsController extends Controller
         ]);
     }
 
+
     public function filter(Request $request): JsonResponse
     {
+        $minPrice = $request->query('min_price', 0);
+        $maxPrice = $request->query('max_price', 10000);
+
+        $minPrice = (int)$minPrice;
+        $maxPrice = (int)$maxPrice;
+
+        if ($minPrice > $maxPrice) {
+            [$minPrice, $maxPrice] = [$maxPrice, $minPrice];
+        }
+
         $query = Products::query();
 
-        if ($request->has('brand') && $request->brand != '') {
+        if ($request->filled('brand')) {
             $query->where('brand', $request->brand);
         }
 
-        if ($request->has('category') && $request->category != '') {
+        if ($request->filled('category')) {
             $query->where('category', $request->category);
         }
 
-        if ($request->has('warranty') && $request->warranty != '') {
+        if ($request->filled('warranty')) {
             $query->where('warranty', $request->warranty);
         }
 
-        if ($request->has('material') && $request->material != '') {
+        if ($request->filled('material')) {
             $query->where('material', $request->material);
         }
 
-        if ($request->has('power_supply') && $request->power_supply != '') {
+        if ($request->filled('power_supply')) {
             $query->where('power_supply', $request->power_supply);
         }
 
-        if ($request->has('min_price') && $request->has('max_price')) {
-            $query->whereBetween('price', [
-                (int)$request->min_price,
-                (int)$request->max_price
-            ]);
-        }
+        $query->whereBetween('price', [$minPrice, $maxPrice]);
 
-        $products = $query->simplePaginate(21);
+        $products = $query->paginate(21);
 
         return response()->json([
             'success' => true,
             'products' => $products
         ]);
     }
+
 
     public function getFilters(): JsonResponse
     {
@@ -70,23 +78,30 @@ class ApiProductsController extends Controller
     }
 
 
-    public function store(Request $request): JsonResponse
+    public function show(int $product_id): JsonResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0|max:999999',
-            'brand' => 'required|string|max:100',
-            'delivery' => 'required|string|max:100',
-            'category' => 'required|string|max:100',
-            'warranty' => 'required|string|max:100',
-            'material' => 'required|string|max:100',
-            'power_supply' => 'required|string|max:100',
-            'product_image' => 'required|image|mimes:jpeg,png,jpg,webm',
-        ]);
+        $product = Products::find($product_id);
 
-        $filename = time() . '.' . $request->product_image->getClientOriginalExtension();
-        $request->product_image->move(public_path('img/products'), $filename);
-        $file_path = 'img/products/' . $filename;
+        if(!$product)   {
+            return response()->json([
+                'success' => false,
+                'message' => 'товар по id не найден.'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'product' => $product
+        ]);
+    }
+
+
+    public function store(ProductRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $filename = time() . '.' . $validated['product_image']->getClientOriginalExtension();
+        $validated['product_image']->move(public_path('img/products'), $filename);
 
         Products::create([
             'title' => $validated['title'],
@@ -97,7 +112,7 @@ class ApiProductsController extends Controller
             'warranty' => $validated['warranty'],
             'material' => $validated['material'],
             'power_supply' => $validated['power_supply'],
-            'product_image' => $file_path,
+            'product_image' => 'img/products/' . $filename,
         ]);
 
         return response()->json([
@@ -106,37 +121,17 @@ class ApiProductsController extends Controller
         ], 201);
     }
 
-    public function show(int $product_id): JsonResponse
+
+    public function update(ProductRequest $request, int $product_id): JsonResponse
     {
-        $product = Products::findOrFail($product_id);
+        $validated = $request->validated();
 
-        return response()->json([
-            'success' => true,
-            'product' => $product
-        ]);
-    }
+        $product = Products::find($product_id);
 
-    public function update(Request $request, Products $product, int $product_id): JsonResponse
-    {
-        $validated = $request->validate([
-            "title" => "required|string|max:255",
-            "price" => "required|numeric|min:0|max:9999999.99",
-            "brand" => "required|string|max:255",
-            "delivery" => "required|string|max:10",
-            "category" => "required|string|max:255",
-            "warranty" => "required|string|max:255",
-            "material" => "required|string|max:255",
-            "power_supply" => "required|string|max:255",
-            "product_image" => "nullable|image|mimes:jpg,jpeg,png,webp",
-        ]);
-
-        $product = Products::findOrFail($product_id);
-
-        if ($request->hasFile('product_image')) {
-            $file = $request->file('product_image');
-            $filename = 'product_'.time().'.'.$file->extension();
-            $file->move(public_path('img/products'), $filename);
-            $validated['product_image'] = 'img/products/'.$filename;
+        if(!$product)   {
+            return response()->json([
+                'message' => 'товар по id не найден.'
+            ], 404);
         }
 
         $product->update($validated);
@@ -147,17 +142,18 @@ class ApiProductsController extends Controller
         ]);
     }
 
-    public function destroy(string $id): JsonResponse
-    {
-         $products = Products::find($id);
 
-        if (!$products) {
+    public function destroy(int $id): JsonResponse
+    {
+         $product = Products::find($id);
+
+        if (!$product) {
             return response()->json([
                 'message' => 'Запись в таблице Products не найдена',
             ], 404);
         }
 
-        $products->delete();
+        $product->delete();
 
         return response()->json([
             'message' => 'Запись в таблице Products успешно удалена',

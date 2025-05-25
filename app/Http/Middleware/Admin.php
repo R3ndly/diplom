@@ -15,7 +15,8 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         $user = auth('sanctum')->user();
-        if ($user && $user->role === 'admin') {
+        
+        if ($user->role === 'admin') {
             return $next($request);
         } elseif ($user) {
             Log::info('User is not an admin', ['user' => $user]);

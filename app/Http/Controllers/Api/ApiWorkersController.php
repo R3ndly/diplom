@@ -5,15 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Worker;
 use Illuminate\Http\JsonResponse;
-
-use Illuminate\Http\Request;
+use App\Http\Requests\WorkerRequest;
 use Illuminate\Support\Facades\DB;
 
 class ApiWorkersController extends Controller
 {
     public function index(): JsonResponse
     {
-        $workers = DB::table('workers')->paginate(15);
+        $workers = Worker::paginate(15);
 
         return response()->json([
             'success' => true,
@@ -21,32 +20,28 @@ class ApiWorkersController extends Controller
         ]);
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(WorkerRequest $request): JsonResponse
     {
-       $validated = $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'patronymic' => 'required',
-            'position' => 'required',
-            'salary' => 'required|numeric',
-            'hire_date' => 'required',
-            'education' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required',
-        ]);
-
+       $validated = $request->validated();
 
         Worker::create($validated);
 
         return response()->json([
             'success' => true,
             'message' => 'Работник успешно добавлен',
-        ], 201);
+        ]);
     }
 
     public function show(int $worker_id): JsonResponse
     {
-        $worker = Worker::findOrFail($worker_id);
+        $worker = Worker::find($worker_id);
+
+        if(!$worker) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Запись не найдена.'
+            ]);
+        }
 
         return response()->json([
             'success' => true,
@@ -55,27 +50,25 @@ class ApiWorkersController extends Controller
     }
 
 
-    public function update(Request $request, int $worker_id): JsonResponse
+    public function update(WorkerRequest $request, int $worker_id): JsonResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'patronymic' => 'required',
-            'position' => 'required',
-            'salary' => 'required|numeric',
-            'hire_date' => 'required',
-            'education' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required',
-        ]);
+        $validated = $request->validated();
 
-        $worker = Worker::findOrFail($worker_id);
-        $worker->update($request->all());
+        $worker = Worker::find($worker_id);
+
+        if(!$worker) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Запись не найдена.'
+            ]);
+        }
+
+        $worker->update($validated);
 
         return response()->json([
             'success' => true,
             'message' => 'Данные успешно обновлены',
-        ], 201);
+        ]);
     }
 
     public function destroy(int $worker_id): JsonResponse
@@ -84,7 +77,7 @@ class ApiWorkersController extends Controller
 
         if (!$worker) {
             return response()->json([
-                'message' => 'Сотрудник не найдена',
+                'message' => 'Запись не найдена',
             ], 404);
         }
 

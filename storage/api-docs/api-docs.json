@@ -19,6 +19,14 @@
     {
       "name": "Vacancies",
       "description": "Управление вакансиями"
+    },
+    {
+        "name": "Cart",
+        "description": "Взаимодействия с корзиной"
+    },
+    {
+        "name": "Products",
+        "description": "Действия с товарами"
     }
   ],
 
@@ -259,20 +267,7 @@
             }
           },
           "401": {
-            "description": "Неавторизованный доступ",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Unauthenticated"
-                    }
-                  }
-                }
-              }
-            }
+                "$ref": "#/components/schemas/Unauthenticated"
           }
         }
       }
@@ -281,7 +276,6 @@
       "get": {
         "tags": ["Vacancies"],
         "summary": "Получение списка вакансий",
-        "operationId": "index",
         "security": [{"bearerAuth": []}],
         "parameters": [{
             "name": "page",
@@ -432,20 +426,7 @@
             }
           },
           "401": {
-            "description": "Неавторизованный доступ",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Unauthenticated"
-                    }
-                  }
-                }
-              }
-            }
+                "$ref": "#/components/schemas/Unauthenticated"
           }
         }
       },
@@ -521,67 +502,38 @@
                     }
                 },
                 "401": {
-                    "description": "Неавторизованный пользователь",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "message": {
-                                        "type": "string",
-                                        "example": "Unauthenticated."
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "$ref": "#/components/schemas/Unauthenticated"
                 },
                 "403": {
-                    "description": "Недостаточно прав",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "message": {
-                                        "type": "string",
-                                        "example": "User is not an admin"
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "$ref": "#/components/schemas/InsufficientRights"
                 }
             }
         }
-
-
-
     },
     "/api/vacancies/{id}": {
-      "get": {
+        "get": {
         "tags": ["Vacancies"],
         "summary": "Получение конкретной вакансии",
         "operationId": "show",
         "security": [{"bearerAuth": []}],
         "parameters": [
-          {
+        {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer"
+                "type": "integer"
             }
-          }
+        }
         ],
         "responses": {
-          "200": {
-            "description": "Успешное получение конкретной вакансии",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
+            "200": {
+                "description": "Успешное получение конкретной вакансии",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
                     "success": {
                       "type": "boolean",
                       "example": true
@@ -639,39 +591,13 @@
             }
           },
         "401": {
-            "description": "Неавторизованный доступ",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Unauthenticated"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/Unauthenticated"
           },
           "404": {
-            "description": "Вакансия не найдена",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "No query results for model [App\\Models\\Vacancies] {id}"
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/schemas/NotFound"
           }
-        }
-      },
+    }
+},
       "put": {
         "tags": ["Vacancies"],
         "summary": "Обновление вакансии",
@@ -749,23 +675,13 @@
                     }
                 },
                 "401": {
-                    "description": "Неавторизованный пользователь",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "message": {
-                                        "type": "string",
-                                        "example": "Unauthenticated."
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "$ref": "#/components/schemas/Unauthenticated"
                 },
                 "403": {
-                    "description": "Недостаточно прав",
+                    "$ref": "#/components/schemas/InsufficientRights"
+                },
+                "404": {
+                    "description": "Запись не найдена.",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -773,7 +689,7 @@
                                 "properties": {
                                     "message": {
                                         "type": "string",
-                                        "example": "User is not an admin"
+                                        "example": "Запись не найдена."
                                     }
                                 }
                             }
@@ -813,36 +729,13 @@
                     }
                 },
                 "401": {
-                    "description": "Неавторизованный пользователь",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "message": {
-                                        "type": "string",
-                                        "example": "Unauthenticated."
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "$ref": "#/components/schemas/Unauthenticated"
                 },
                 "403": {
-                    "description": "Недостаточно прав",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "message": {
-                                        "type": "string",
-                                        "example": "User is not an admin"
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    "$ref": "#/components/schemas/InsufficientRights"
+                },
+                "404": {
+                    "$ref": "#/components/schemas/NotFound"
                 }
             }
         }
@@ -914,20 +807,7 @@
                 }
             },
             "401": {
-                "description": "Неавторизованный доступ",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "message": {
-                                    "type": "string",
-                                    "example": "Unauthenticated"
-                                }
-                            }
-                        }
-                    }
-                }
+                "$ref": "#/components/schemas/401"
             },
         }
     }
@@ -938,12 +818,7 @@
         "summary": "Удаление товара из корзины",
         "security": [{"bearerAuth": []}],
         "parameters": [{
-            "name": "cart_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-                "type": "integer"
-            }
+            "$ref": "#/components/parameters/cart_id"
         }],
         "responses": {
             "200": {
@@ -963,21 +838,8 @@
                 }
           },
             "401": {
-                "description": "Неавторизованный доступ",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "message": {
-                                    "type": "string",
-                                    "example": "Unauthenticated"
-                                }
-                            }
-                        }
-                    }
-                }
-          },
+                "$ref": "#/components/schemas/Unauthenticated"
+            },
             "404": {
                 "description": "Товар в корзине не найден",
                 "content": {
@@ -1072,15 +934,22 @@
                     }
                 },
                 "401": {
-                    "description": "Неавторизованный пользователь",
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "404": {
+                    "description": "В корзине товар не найден",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
                                     "message": {
                                         "type": "string",
-                                        "example": "Unauthenticated."
+                                        "example": "Товар в корзине не найден"
                                     }
                                 }
                             }
@@ -1096,12 +965,7 @@
             "summary": "Добавление товара в корзину",
             "security": [{"bearerAuth": []}],
             "parameters": [{
-                "name": "product_id",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "integer"
-                }
+               "$ref": "#/components/parameters/product_id",
             }],
             "responses": {
                 "200": {
@@ -1124,7 +988,274 @@
                     }
                 },
                 "401": {
-                    "description": "Неавторизованный пользователь",
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "404": {
+                    "description": "Не удалось найти товар по ID",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Товар не найден."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/products": {
+        "get": {
+            "tags": ["Products"],
+            "summary": "Получение списка товаров",
+            "security": [{"bearerAuth": []}],
+            "parameters": [{
+                "name": "page",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "example": "2"
+                }
+            }],
+            "responses": {
+                "200": {
+                    "description": "Успешный ответ",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "products": {
+                                        "type": "object",
+                                        "properties": {
+                                            "current_page": {
+                                                "type": "integer",
+                                                "example": 2
+                                            },
+                                            "data": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "product_id": {
+                                                            "type": "integer",
+                                                            "example": 28
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Датчик температуры"
+                                                        },
+                                                        "price": {
+                                                            "type": "float",
+                                                            "example": 3850
+                                                        },
+                                                        "brand": {
+                                                            "type": "string",
+                                                            "example": "ООО Компания"
+                                                        },
+                                                        "delivery": {
+                                                            "type": "string",
+                                                            "example": "2025-11-10"
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "Датчик"
+                                                        },
+                                                        "warranty": {
+                                                            "type": "string",
+                                                            "example": "1 год"
+                                                        },
+                                                        "material": {
+                                                            "type": "string",
+                                                            "example": "От сети 220"
+                                                        },
+                                                        "product_image": {
+                                                            "type": "string",
+                                                            "example": "img/products/1739967318.webp"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "first_page_url": {
+                                                "type": "string",
+                                                "example": "http://127.0.0.1:8000/api/products?page=1"
+                                            },
+                                            "from": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "last_page": {
+                                                "type": "integer",
+                                                "example": 9
+                                            },
+                                            "last_page_url": {
+                                                "type": "string",
+                                                "example": "http://127.0.0.1:8000/api/products?page=9"
+                                            },
+                                            "links": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "url": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "example": null
+                                                        },
+                                                        "label": {
+                                                            "type": "string",
+                                                            "example": "&laquo; Previous"
+                                                        },
+                                                        "active": {
+                                                            "type": "boolean",
+                                                            "example": false
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "next_page_url": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": "http://127.0.0.1:8000/api/products?page=2"
+                                            },
+                                            "path": {
+                                                "type": "string",
+                                                "example": "http://127.0.0.1:8000/api/products"
+                                            },
+                                            "per_page": {
+                                                "type": "integer",
+                                                "example": 12
+                                            },
+                                            "prev_page_url": {
+                                                "type": "string",
+                                                "nullable": true,
+                                                "example": null
+                                            },
+                                            "to": {
+                                                "type": "integer",
+                                                "example": 12
+                                            },
+                                            "total": {
+                                                "type": "integer",
+                                                "example": 101
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                }
+            }
+        },
+        "post": {
+            "tags": ["Products"],
+            "summary": "Добавлене товара",
+            "security": [{"bearerAuth": []}],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "example": "Electric Kettle"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 40
+                                },
+                                "brand": {
+                                    "type": "string",
+                                    "example": "Acme"
+                                },
+                                "delivery": {
+                                    "type": "string",
+                                    "example": "2025-01-23"
+                                },
+                                "category": {
+                                    "type": "string",
+                                    "example": "Kitchen Appliances"
+                                },
+                                "warranty": {
+                                    "type": "string",
+                                    "example": "2 years"
+                                },
+                                "material": {
+                                    "type": "string",
+                                    "example": "Stainless Steel"
+                                },
+                                "power_supply": {
+                                    "type": "string",
+                                    "example": "220V"
+                                },
+                                "product_image": {
+                                    "type": "string",
+                                    "format": "binary",
+                                    "description": "Image file of the product"
+                                }
+                            },
+                            "required": [
+                                "title",
+                                "price",
+                                "brand",
+                                "delivery",
+                                "category",
+                                "warranty",
+                                "material",
+                                "power_supply",
+                                "product_image"
+                            ]
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "товар успешно добавлен",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Товар успешно добавлен"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "422": {
+                    "description": "Неверная валидация товара",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1132,24 +1263,708 @@
                                 "properties": {
                                     "message": {
                                         "type": "string",
-                                        "example": "Unauthenticated."
+                                        "example": "The (поле) field must be a (определённого значения)."
+                                    },
+                                    "errors": {
+                                        "type": "object",
+                                        "properties": {
+                                            "(поле)": {
+                                                "type": "string",
+                                                "example": "The (поле) field must be a (определённого значения)."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "/api/products/{product_id}": {
+        "get": {
+            "tags": ["Products"],
+            "summary": "Получение определённого продукта",
+            "security": [{"bearerAuth": []}],
+            "parameters": [{
+                "name": "product_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": 50
+                }
+            }],
+            "responses": {
+                "200": {
+                    "description": "Успешное получение товара",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "product": {
+                                        "type": "object",
+                                        "properties": {
+                                            "product_id": {
+                                                "type": "integer",
+                                                "example": 50
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Умный привод перекрытия газа"
+                                            },
+                                            "price": {
+                                                "type": "integer",
+                                                "example": 5990
+                                            },
+                                            "brand": {
+                                                "type": "string",
+                                                "example": "ЗАО ЮпитерIT"
+                                            },
+                                            "delivery": {
+                                                "type": "string",
+                                                "example": "1995-10-19"
+                                            },
+                                            "category": {
+                                                "type": "string",
+                                                "example": "Исполнительный элемент"
+                                            },
+                                            "warranty": {
+                                                "type": "string",
+                                                "example": "5 лет"
+                                            },
+                                            "material": {
+                                                "type": "string",
+                                                "example": "Комбинированные материалы"
+                                            },
+                                            "power_supply": {
+                                                "type": "string",
+                                                "example": "Сети 220"
+                                            },
+                                            "product_img": {
+                                                "type": "string",
+                                                "example": "img/products/1739967318.webp"
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "404": {
+                    "description": "Не удалось найти запись по id",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "товар по id не найден."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "post": {
+            "tags": ["Products"],
+            "summary": "Обновление товара",
+            "security": [{"bearerAuth": []}],
+            "parameters": [{
+                "name": "product_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": 50
+                }
+            }],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "multipart/form-data": {
+                        "schema": {
+                            "type": "object",
+                            "required": ["_method", "title", "price", "brand", "delivery", "category", "warranty", "material", "power_supply"],
+                            "properties": {
+                                "_method": {
+                                    "type": "string",
+                                    "example": "PUT"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "example": "Измененное название"
+                                },
+                                "price": {
+                                    "type": "integer",
+                                    "example": 1000
+                                },
+                                "brand": {
+                                    "type": "string",
+                                    "example": "бренд"
+                                },
+                                "delivery": {
+                                    "type": "string",
+                                    "example": "2025-01-23"
+                                },
+                                "category": {
+                                    "type": "string",
+                                    "example": "Категория"
+                                },
+                                "warranty": {
+                                    "type": "string",
+                                    "example": "1 год"
+                                },
+                                "material": {
+                                    "type": "string",
+                                    "example": "Пластик"
+                                },
+                                "power_supply": {
+                                    "type": "string",
+                                    "example": "Сети 220"
+                                },
+                                "product_image": {
+                                    "type": "string",
+                                    "format": "binary",
+                                    "description": "Image file of the product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Успешное обновление записи",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Товар успешно обновлён"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Измененное название"
+                                                },
+                                                "price": {
+                                                    "type": "integer",
+                                                    "example": 1000
+                                                },
+                                                "brand": {
+                                                    "type": "string",
+                                                    "example": "бренд"
+                                                },
+                                                "delivery": {
+                                                    "type": "string",
+                                                    "example": "2025-01-23"
+                                                },
+                                                "category": {
+                                                    "type": "string",
+                                                    "example": "Категория"
+                                                },
+                                                "warranty": {
+                                                    "type": "string",
+                                                    "example": "1 год"
+                                                },
+                                                "material": {
+                                                    "type": "string",
+                                                    "example": "Пластик"
+                                                },
+                                                "power_supply": {
+                                                    "type": "string",
+                                                    "example": "Сети 220"
+                                                },
+                                                "product_image": {
+                                                    "type": "string",
+                                                    "example": "img/products/14253267576.webp"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "403": {
+                    "$ref": "#/components/schemas/InsufficientRights"
+                },
+                "404": {
+                    "description": "Не удалось найти запись по id",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "товар по id не найден."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "tags": ["Products"],
+            "summary": "Удаление конкретной записи",
+            "security": [{"bearerAuth": []}],
+            "parameters": [{
+                "name": "product_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                "type": "integer"
+                }
+            }],
+            "responses": {
+                "200": {
+                    "description": "Успешное удаление записи",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Запись в таблице Products успешно удалена"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "403": {
+                    "$ref": "#/components/schemas/InsufficientRights"
+                },
+                "404": {
+                    "$ref": "#/components/schemas/NotFound"
+                }
+            }
+        }
+    },
+    "/api/products/filter": {
+        "get": {
+            "tags": ["Products"],
+            "summary": "Фильтрация продуктов",
+            "description": "Возвращает список продуктов с возможностью фильтрации по различным параметрам. Все параметры необязательные.",
+            "security": [{"bearerAuth": []}],
+            "parameters": [{
+                "name": "brand",
+                "in": "query",
+                "description": "Фильтр по бренду",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            {
+                "name": "category",
+                "in": "query",
+                "description": "Фильтр по категории",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            {
+                "name": "warranty",
+                "in": "query",
+                "description": "Фильтр по гарантии",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            {
+                "name": "material",
+                "in": "query",
+                "description": "Фильтр по материалу",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            {
+                "name": "power_supply",
+                "in": "query",
+                "description": "Фильтр по источнику питания",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            {
+                "name": "min_price",
+                "in": "query",
+                "description": "Минимальная цена",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "format": "float"
+                }
+            },
+            {
+                "name": "max_price",
+                "in": "query",
+                "description": "Максимальная цена",
+                "required": false,
+                "schema": {
+                    "type": "number",
+                    "format": "float"
+                }
+            },
+            {
+                "name": "page",
+                "in": "query",
+                "description": "Номер страницы для пагинации",
+                "required": false,
+                "schema": {
+                    "type": "integer",
+                      "default": 1
+                }
+            }],
+            "responses": {
+                "200": {
+                    "description": "Успешный ответ с пагинированным списком продуктов",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "products": {
+                                        "type": "object",
+                                        "properties": {
+                                            "current_page": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "data": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "product_id": {
+                                                            "type": "integer",
+                                                            "example": 7
+                                                        },
+                                                        "title": {
+                                                            "type": "string",
+                                                            "example": "Умный датчик протечки воды"
+                                                        },
+                                                        "price": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 500
+                                                        },
+                                                        "brand": {
+                                                            "type": "string",
+                                                            "example": "МФО CибСофтРыб"
+                                                        },
+                                                        "delivery": {
+                                                            "type": "string",
+                                                            "format": "date",
+                                                            "example": "2025-11-11"
+                                                        },
+                                                        "category": {
+                                                            "type": "string",
+                                                            "example": "Модуль в розетку"
+                                                        },
+                                                        "warranty": {
+                                                            "type": "string",
+                                                            "example": "1 год"
+                                                        },
+                                                        "material": {
+                                                            "type": "string",
+                                                            "example": "пластик"
+                                                        },
+                                                        "power_supply": {
+                                                            "type": "string",
+                                                            "example": "От Сети 220"
+                                                        },
+                                                        "product_image": {
+                                                            "type": "string",
+                                                            "example": "img/products/6540911367.webp"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "first_page_url": {
+                                                "type": "string",
+                                                "format": "uri",
+                                                "example": "http://127.0.0.1:8000/api/products/filter?page=1"
+                                            },
+                                            "from": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "last_page": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "last_page_url": {
+                                                "type": "string",
+                                                "format": "uri",
+                                                "example": "http://127.0.0.1:8000/api/products/filter?page=1"
+                                            },
+                                            "links": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "url": {
+                                                            "type": ["string", "null"],
+                                                            "format": "uri",
+                                                            "nullable": true,
+                                                            "example": null
+                                                        },
+                                                        "label": {
+                                                            "type": "string",
+                                                            "example": "&laquo; Previous"
+                                                        },
+                                                        "active": {
+                                                            "type": "boolean",
+                                                            "example": false
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "next_page_url": {
+                                                "type": ["string", "null"],
+                                                "format": "uri",
+                                                "nullable": true,
+                                                "example": null
+                                            },
+                                            "path": {
+                                                "type": "string",
+                                                "format": "uri",
+                                                "example": "http://127.0.0.1:8000/api/products/filter"
+                                            },
+                                            "per_page": {
+                                                "type": "integer",
+                                                "example": 21
+                                            },
+                                            "prev_page_url": {
+                                                "type": ["string", "null"],
+                                                "format": "uri",
+                                                "nullable": true,
+                                                "example": null
+                                            },
+                                            "to": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "total": {
+                                                "type": "integer",
+                                                "example": 1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                        "$ref": "#/components/schemas/Unauthenticated"
+                }
+            }
+        }
+    },
+    "/api/products/filters": {
+        "get": {
+            "tags": ["Products"],
+            "summary": "Получение всех фильтров",
+            "description": "Возвращает список значений, по которым можно отфильтровать товары",
+            "security": [{"bearerAuth": []}],
+            "responses": {
+                "200": {
+                    "description": "Успешный ответ с фильтрами",
+                    "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "brands": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "ООО Компания Пив",
+                                        "ООО Компания ITГлавУрал",
+                                        "Собачини"
+                                    ]
+                                },
+                                "categories": {
+                                    "type": "array",
+                                    "description": "Список категорий товаров",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "Исполнительный элемент",
+                                        "Датчик, устройство сбора и передачи данных",
+                                        "Модуль в розетку"
+                                    ]
+                                },
+                                "warranties": {
+                                    "type": "array",
+                                    "description": "Список вариантов гарантии",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "1 год",
+                                        "2 года",
+                                        "15 лет",
+                                        "10 лет",
+                                        "5 лет"
+                                    ]
+                                },
+                                "materials": {
+                                    "type": "array",
+                                    "description": "Список материалов",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "Пластик",
+                                        "Комбинированные материалы"
+                                    ]
+                                },
+                                "powerSupplies": {
+                                    "type": "array",
+                                    "description": "Варианты питания",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "example": [
+                                        "Батареек",
+                                        "Сети 220"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "401": {
+                "$ref": "#/components/schemas/Unauthenticated"
             }
         }
     }
+}
 },
 "components": {
-  "securitySchemes": {
-    "bearerAuth": {
-      "type": "http",
-      "scheme": "bearer",
-      "bearerFormat": "JWT"
+    "securitySchemes": {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+        }
+    },
+    "parameters": {
+        "product_id": {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+                "type": "integer"
+            }
+        },
+        "cart_id": {
+            "name": "cart_id",
+            "in": "path",
+            "description": "Удаляем не товар, а запись в товара в таблице cart",
+            "required": true,
+            "schema": {
+                "type": "integer"
+            }
+        },
+    },
+    "schemas": {
+        "Unauthenticated": {
+            "description": "Неавторизованный пользователь",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Unauthenticated."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "InsufficientRights": {
+            "description": "Недостаточно прав",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "User is not an admin"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "NotFound": {
+            "description": "Запись не найдена.",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "message": {
+                                "type": "string",
+                                "example": "Запись не найдена."
+                            }
+                        }
+                    }
+                }
+            }
+        },
     }
-  }
 }
 }

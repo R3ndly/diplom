@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vacancies;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use App\Http\Requests\VacancyRequest;
 
 class ApiVacanciesController extends Controller
 {
@@ -21,7 +21,14 @@ class ApiVacanciesController extends Controller
 
     public function show(int $vacancy_id): JsonResponse
     {
-        $vacancy = Vacancies::findOrFail($vacancy_id);
+        $vacancy = Vacancies::find($vacancy_id);
+
+        if(!$vacancy) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Запись не найдена.'
+            ]);
+        }
 
         return response()->json([
             'success' => true,
@@ -40,18 +47,9 @@ class ApiVacanciesController extends Controller
         ]);
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(VacancyRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'department' => 'required',
-            'location' => 'required',
-            'type' => 'required',
-            'salary' => 'nullable',
-            'contact_email' => 'required|email',
-            'contact_phone' => 'required',
-        ]);
+        $validated = $request->validated();
 
         Vacancies::create($validated);
 
@@ -61,23 +59,25 @@ class ApiVacanciesController extends Controller
         ], 201);
     }
 
-    public function update(Request $request, int $vacancy_id): JsonResponse
+    public function update(VacancyRequest $request, int $vacancy_id): JsonResponse
     {
-        $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'department' => 'required',
-            'location' => 'required',
-            'type' => 'required',
-            'salary' => 'nullable',
-            'contact_email' => 'required|email',
-            'contact_phone' => 'required',
-        ]);
+        $validated = $request->validated();
 
-        $vacancy = Vacancies::findOrFail($vacancy_id);
+        $vacancy = Vacancies::find($vacancy_id);
+
+        if(!$vacancy) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Запись не найдена.'
+            ]);
+        }
+
         $vacancy->update($validated);
 
-        return response()->json(['message' => 'Вакансия успешно обновлена']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Вакансия успешно обновлена'
+        ]);
     }
 
     public function destroy(int $vacancy_id): JsonResponse
@@ -86,13 +86,14 @@ class ApiVacanciesController extends Controller
 
         if (!$vacancy) {
             return response()->json([
-                'message' => 'Вакансия не найдена',
+                'message' => 'Запись не найдена.',
             ], 404);
         }
 
         $vacancy->delete();
 
         return response()->json([
+            'success' => true,
             'message' => 'Вакансия успешно удалена',
         ]);
     }

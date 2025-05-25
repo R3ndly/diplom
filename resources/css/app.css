@@ -71,7 +71,7 @@ ul {
 }
 
 a {
-    color: #1765b3; 
+    color: #1765b3;
     text-decoration: none;
 }
 
@@ -164,8 +164,12 @@ a:hover {
     margin-right: -15px;
 }
 
-.dropdown-menu { 
+.dropdown-menu {
     padding: 0;
+}
+
+.card-1 {
+    margin-bottom: 80px;
 }
 
 @media (max-width: 1134px) {

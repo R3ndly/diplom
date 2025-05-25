@@ -81,7 +81,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const productId = window.location.pathname.split('/').pop();
 
-    fetch(`/api/product/${productId}`)
+    fetch(`/api/products/${productId}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById('title').value = data.product.title;
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST', // Laravel распознает _method=PUT
                 headers: {
                     'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    //'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                 },
                 body: formData
             });

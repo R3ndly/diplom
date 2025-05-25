@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                    onclick="showProductDetails(${JSON.stringify(product).replace(/"/g, '&quot;')}, '${product.product_image.startsWith('http') ? product.product_image : '/' + product.product_image}')" />
 
                             <!-- Добавлены кнопки администрирования -->
-                            <form action="/api/product/${product.product_id}" method="POST" style="display: inline-block;">
+                            <form action="/api/products/${product.product_id}" method="POST" style="display: inline-block;">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button type="submit" class="ydalit"></button>

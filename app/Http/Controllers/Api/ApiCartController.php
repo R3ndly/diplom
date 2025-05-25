@@ -65,11 +65,11 @@ class ApiCartController extends Controller
         $user = Auth::user();
         $findUserFromCart = Cart::where('user_id', $user->user_id);
 
-        if(!$findUserFromCart) {
+        if($findUserFromCart->get()->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Товар в корзине не найден',
-            ], 201);
+            ], 404);
         }
 
         $cartItems = $findUserFromCart->with('product')->get();
@@ -96,11 +96,21 @@ class ApiCartController extends Controller
 
          return response()->json([
             'success' => true,
-            'message' => 'Доставка успешно оформлена!',
+            'message' => 'Доставка успешно оформлена!'
         ], 201);
     }
+
     public function add(int $product_id): JsonResponse
     {
+        $findProductID = Products::find($product_id);
+
+        if(!$findProductID) {
+            return response()->json([
+                'success' => false,
+                'message' => "Товар не найден."
+            ], 404);
+        }
+
         $cart = Cart::firstOrCreate(
         [
             'user_id' => Auth::id(),
