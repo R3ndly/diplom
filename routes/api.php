@@ -52,10 +52,11 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function() {
 
      Route::controller(ApiWorkersController::class)->group(function () {
         Route::get('/workers', 'index');
-        Route::get('/workers/{id}', 'show');
+        Route::get('/workers/{worker_id}', 'show');
         Route::post('/workers', 'store');
-        Route::put('/workers/{id}', 'update');
-        Route::delete('/workers/{id}', 'destroy');
+        Route::put('/workers/{worker_id}', 'update');
+        Route::delete('/workers/{worker_id}', 'destroy');
+        Route::get('/workers/{worker_id}/word', 'worker_docx');
     });
 
     Route::controller(ApiProductsController::class)->group(function () {

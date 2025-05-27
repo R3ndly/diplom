@@ -12,7 +12,7 @@ class ApiWorkersController extends Controller
 {
     public function index(): JsonResponse
     {
-        $workers = Worker::paginate(15);
+        $workers = Worker::simplePaginate(15);
 
         return response()->json([
             'success' => true,
@@ -22,7 +22,7 @@ class ApiWorkersController extends Controller
 
     public function store(WorkerRequest $request): JsonResponse
     {
-       $validated = $request->validated();
+        $validated = $request->validated();
 
         Worker::create($validated);
 
@@ -40,7 +40,7 @@ class ApiWorkersController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Запись не найдена.'
-            ]);
+            ], 404);
         }
 
         return response()->json([
@@ -60,7 +60,7 @@ class ApiWorkersController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Запись не найдена.'
-            ]);
+            ], 404);
         }
 
         $worker->update($validated);
@@ -84,7 +84,7 @@ class ApiWorkersController extends Controller
         $worker->delete();
 
         return response()->json([
-            'message' => 'Запись работника успешно удалена',
+            'message' => 'Запись успешно удалена',
         ]);
     }
 

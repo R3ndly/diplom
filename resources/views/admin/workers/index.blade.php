@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <button type="submit" class="izmenit"></button>
                         </form>
 
-                        <form action="/admin/workers/${worker.worker_id}/word" method="GET">
+                        <form action="/api/workers/${worker.worker_id}/word" method="GET">
                             <button type="submit" class="MSWord"></button>
                         </form>
                     </div>

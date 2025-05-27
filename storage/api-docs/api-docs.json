@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API Smart_home",
-    "description": "Документация API для системы Smart_home. Убедитесь что браузер не захешировал авторизационные токены",
-    "version": "1.0.0"
+    "title": "Smart_home: Api-документация",
+    "description": "Документация API для системы Smart_home.</br> **Note:** Убедитесь что браузер не захешировал авторизационные токены",
+    "version": "1.0.1"
   },
   "servers": [
     {
@@ -27,6 +27,10 @@
     {
         "name": "Products",
         "description": "Действия с товарами"
+    },
+    {
+        "name": "Workers",
+        "description": "Все api-маршруты связанные с таблицей работников"
     }
   ],
 
@@ -1887,7 +1891,495 @@
             }
         }
     }
-}
+},
+"/api/workers": {
+    "get": {
+        "tags": ["Workers"],
+        "summary": "Получение данных работников",
+        "security": [{"bearerAuth": []}],
+        "parameters": [{
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+                "type": "integer",
+                "example": 2
+            }
+        }],
+        "responses": {
+            "200": {
+                "description": "Успешное получение данных",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "workers": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "workers" : {
+                                            "type": "object",
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "worker_id": {
+                                                                "type": "integer",
+                                                                "example": 22
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Евгений"
+                                                            },
+                                                            "surname": {
+                                                                "type": "string",
+                                                                "example": "Калинин"
+                                                            },
+                                                            "patronymic": {
+                                                                "type": "string",
+                                                                "example": "Александрович"
+                                                            },
+                                                            "position": {
+                                                                "type": "string",
+                                                                "example": "Должность"
+                                                            },
+                                                            "salary": {
+                                                                "type": "integer",
+                                                                "example": 40000
+                                                            },
+                                                            "hire_date": {
+                                                                "type": "string",
+                                                                "example": "2025-12-12"
+                                                            },
+                                                            "education": {
+                                                                "type": "integer",
+                                                                "example": 0
+                                                            },
+                                                            "phone_number": {
+                                                                "type": "string",
+                                                                "example": "79041413515"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "example": "qwe@mail.ru"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "first_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/workers?page=1"
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": 16
+                                                },
+                                                "next_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/workers?page=3"
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/workers"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "prev_page_url": {
+                                                    "type": "string",
+                                                    "example": "http://127.0.0.1:8000/api/workers?page=1"
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": 30
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "post": {
+        "tags": ["Workers"],
+        "summary": "Добавление",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+            "required": true,
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Артём"
+                            },
+                            "surname": {
+                                "type": "string",
+                                "example": "Калинин"
+                            },
+                            "patronymic": {
+                                "type": "string",
+                                "example": "Александрович"
+                            },
+                            "position": {
+                                "type": "string",
+                                "example": "Программист"
+                            },
+                            "salary": {
+                                "type": "integer",
+                                "example": 70000
+                            },
+                            "hire_date": {
+                                "type": "string",
+                                "example": "2025-12-12"
+                            },
+                            "education": {
+                                "type": "integer",
+                                "example": 0
+                            },
+                            "phone_number": {
+                                "type": "string",
+                                "example": "+704141315"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "qwew@mail.ru"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "surname",
+                            "patronymic",
+                            "position",
+                            "salary",
+                            "hire_date",
+                            "education",
+                            "phone_number",
+                            "email"
+                        ]
+                    }
+                }
+            }
+        },
+        "responses": {
+            "200": {
+                "description": "Успешное добавление",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "example": "Работник успешно добавлен"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "401": {
+                "$ref": "#/components/schemas/Unauthenticated"
+            },
+            "403": {
+                "$ref": "#/components/schemas/InsufficientRights"
+            }
+        }
+    }
+},
+"/api/workers/{worker_id}": {
+    "get": {
+        "tags": ["Workers"],
+        "summary": "Получение данных конкретного работника",
+        "security": [{"bearerAuth": []}],
+        "parameters": [{
+            "name": "worker_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+                "type": "integer",
+                "example": 25
+            }
+        }],
+        "responses": {
+            "200": {
+                "description": "Успешное получение конкретной записи",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "worker": {
+                                    "type": "object",
+                                    "properties": {
+                                        "worker_id": {
+                                            "type": "integer",
+                                            "example": 26
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Иван"
+                                        },
+                                        "surname": {
+                                            "type": "string",
+                                            "example": "Андреев"
+                                        },
+                                        "patronymic": {
+                                            "type": "string",
+                                            "example": "Милан"
+                                        },
+                                        "position": {
+                                            "type": "string",
+                                            "example": "Физик"
+                                        },
+                                        "salary": {
+                                            "type": "integer",
+                                            "example": 50000
+                                        },
+                                        "hire_date": {
+                                            "type": "string",
+                                            "example": "2025-12-12"
+                                        },
+                                        "education": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "phone_number": {
+                                            "type": "string",
+                                            "example": "+790525913295"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "valeriy.eliseeva@example.com"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "404": {
+                "$ref": "#/components/schemas/NotFound"
+            }
+        }
+    },
+    "put": {
+        "tags": ["Workers"],
+        "summary": "Обновление",
+        "security": [{"bearerAuth": []}],
+        "parameters": [{
+            "name": "worker_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+                "type": "integer",
+                "example": 25
+            }
+        }],
+        "requestBody": {
+            "required": true,
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "required": ["name", "surname", "patronymic", "position", "salary", "hire_date", "education", "phone_number", "email"],
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Измененное имя"
+                            },
+                            "surname": {
+                                "type": "string",
+                                "example": "Изменённая фамилия"
+                            },
+                            "patronymic": {
+                                "type": "string",
+                                "example": "Изменённое отчество"
+                            },
+                            "position": {
+                                "type": "string",
+                                "example": "Изменённая должность"
+                            },
+                            "salary": {
+                                "type": "integer",
+                                "example": 50000
+                            },
+                            "hire_date": {
+                                "type": "string",
+                                "example": "2025-12-12"
+                            },
+                            "education": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "phone_number": {
+                                "type": "string",
+                                "example": "+7777777777"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "100@mail.ru"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "responses": {
+            "200": {
+                "description": "Успешное обновление записи",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "success": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Данные успешно обновлены"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "403": {
+                    "$ref": "#/components/schemas/InsufficientRights"
+                },
+                "404": {
+                    "description": "Запись не найдена.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Запись не найдена."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "tags": ["Workers"],
+            "summary": "Удаление конкретной записи",
+            "security": [{"bearerAuth": []}],
+            "parameters": [{
+                "name": "worker_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": 25
+                }
+            }],
+            "responses": {
+                "200": {
+                    "description": "Успешное удаление записи",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Запись успешно удалена"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "403": {
+                    "$ref": "#/components/schemas/InsufficientRights"
+                },
+                "404": {
+                    "$ref": "#/components/schemas/NotFound"
+                }
+            }
+        }
+    },
+    "/api/workers/{worker_id}/word": {
+        "get": {
+            "summary": "Создание файла",
+            "tags": ["Workers"],
+            "parameters": [{
+                "name": "worker_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                "type": "integer"
+                }
+            }],
+            "responses": {
+                "200": {
+                    "description": "Успешнае создание и отправка DOCX файла",
+                    "content": {
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+                            "schema": {
+                                "type": "string",
+                                "format": "binary"
+                            },
+                            "example": "Заявление о увольнении сотрудника\nОт директора ООО «Smart home»\nИванова И.И.\nПриказ\nПриказ уволить Аксёнов Артемий Святослав по собственному желанию в соответствии с п. 3 ч. 1 ст. 77 Трудового кодекса РФ. Приказ привести в исполнении немедленно.\n\nДата приёма на работу: 1990-10-31\nПодпись сотрудника _____________            Подпись директора _____________"
+                        }
+                    }
+                },
+                "401": {
+                    "$ref": "#/components/schemas/Unauthenticated"
+                },
+                "403": {
+                    "$ref": "#/components/schemas/InsufficientRights"
+                },
+
+                "404": {
+                    "$ref": "#/components/schemas/NotFound"
+                }
+            }
+        }
+    }
 },
 "components": {
     "securitySchemes": {
