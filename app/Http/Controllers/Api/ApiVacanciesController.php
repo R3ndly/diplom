@@ -27,7 +27,7 @@ class ApiVacanciesController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Запись не найдена.'
-            ]);
+            ], 404);
         }
 
         return response()->json([
@@ -69,7 +69,7 @@ class ApiVacanciesController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Запись не найдена.'
-            ]);
+            ], 404);
         }
 
         $vacancy->update($validated);
