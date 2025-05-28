@@ -72,6 +72,6 @@ php artisan DB:seed
     <img  src="https://github.com/R3ndly/diplom/blob/main/public/img/swagger1.png"/>
 </p>
 
-Подробнее про swagger в моём проекте можно посмотреть [тут](./README2.md)
+Ещё про swagger в моём проекте можно посмотреть [тут](./README2.md)
 
 
