@@ -20,7 +20,6 @@ class ApiProductsController extends Controller
         ]);
     }
 
-
     public function filter(Request $request): JsonResponse
     {
         $minPrice = $request->query('min_price', 0);
@@ -65,7 +64,6 @@ class ApiProductsController extends Controller
         ]);
     }
 
-
     public function getFilters(): JsonResponse
     {
         return response()->json([
@@ -76,7 +74,6 @@ class ApiProductsController extends Controller
             'powerSupplies' => Products::distinct()->pluck('power_supply')->toArray()
         ]);
     }
-
 
     public function show(int $product_id): JsonResponse
     {
@@ -94,7 +91,6 @@ class ApiProductsController extends Controller
             'product' => $product
         ]);
     }
-
 
     public function store(ProductRequest $request): JsonResponse
     {
@@ -121,7 +117,6 @@ class ApiProductsController extends Controller
         ], 201);
     }
 
-
     public function update(ProductRequest $request, int $product_id): JsonResponse
     {
         $validated = $request->validated();
@@ -141,7 +136,6 @@ class ApiProductsController extends Controller
             'data' => $product->fresh()
         ]);
     }
-
 
     public function destroy(int $id): JsonResponse
     {

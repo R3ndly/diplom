@@ -24,12 +24,12 @@
     "src": "public/img/Удалить.png"
   },
   "resources/css/about.css": {
-    "file": "assets/about-CGfjQD7m.css",
+    "file": "assets/about-B9qoV4Eq.css",
     "src": "resources/css/about.css",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-C9MiHNfD.css",
+    "file": "assets/app-CzOTeyDz.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -44,7 +44,7 @@
     "isEntry": true
   },
   "resources/css/home.css": {
-    "file": "assets/home-B9Pp8oZh.css",
+    "file": "assets/home-D2V-3xH7.css",
     "src": "resources/css/home.css",
     "isEntry": true
   },
@@ -59,7 +59,7 @@
     "isEntry": true
   },
   "resources/css/vacancies.css": {
-    "file": "assets/vacancies-ZntwgcB5.css",
+    "file": "assets/vacancies-DEIAzWWz.css",
     "src": "resources/css/vacancies.css",
     "isEntry": true
   },

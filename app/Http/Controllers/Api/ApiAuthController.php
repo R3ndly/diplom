@@ -42,17 +42,20 @@ class ApiAuthController extends Controller
             'password' => 'required|string|confirmed|min:8',
         ]);
 
-        $user = User::create([
+        $user = new User([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password'])
+            'password' => Hash::make($validatedData['password']),
         ]);
+        $user->save();
+
 
         Auth::login($user);
 
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([
+            'success' => true,
             'user' => $user,
             'token' => $token
         ], 201);

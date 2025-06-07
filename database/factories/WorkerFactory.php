@@ -14,11 +14,11 @@ class WorkerFactory extends Factory
             'name' => $faker->firstNameMale(),
             'surname' => $faker->lastNameMale(),
             'patronymic' => $faker->firstNameMale(),
-            'position' => $faker->jobTitle(), 
+            'position' => $faker->jobTitle(),
             'salary' => $faker->numerify('##000'),
             'hire_date' => $faker->date(),
-            'education' => $faker->boolean(), 
-            'phone_number' => $faker->e164PhoneNumber(),
+            'education' => $faker->boolean(),
+            'phone_number' => $faker->e164PhoneNumber(16),
             'email' => $faker->unique()->safeEmail(),
         ];
     }

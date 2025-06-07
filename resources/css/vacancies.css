@@ -28,6 +28,7 @@
 .vacancies_block {
     background-color: #fff;
     border-radius: 16px;
+    border: 1px solid #dee2e6;
     width: 500px;
     height: auto;
     margin: 20px;

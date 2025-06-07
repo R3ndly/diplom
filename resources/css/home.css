@@ -6,7 +6,6 @@
 
     background-size: cover;
     background-position: center;
-    background-color: #dff1f1;
     background-repeat: no-repeat;
 }
 
@@ -62,11 +61,11 @@
 
 .advantages-list__card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
 .log {
-    width: 290px;   
+    width: 290px;
     height: 240px;
     overflow: hidden;
     text-align: center;
@@ -176,7 +175,6 @@
 /* Пятая секция: Download*/
 .download {
     padding: 60px 0;
-    background-color: #dff1f1;
 }
 
 .download .container {
@@ -627,7 +625,7 @@
         width: 320px;
     }
     .download {
-        padding: 40px 0 30px 0; 
+        padding: 40px 0 30px 0;
     }
 }
 

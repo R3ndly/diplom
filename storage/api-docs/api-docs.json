@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "http://127.0.0.1:8000",
-      "description": "Локальный сервер разработки"
+      "url": "http://akalin8d.beget.tech",
+      "description": "сервер разработки"
     }
   ],
   "tags": [

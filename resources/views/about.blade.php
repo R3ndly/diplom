@@ -5,42 +5,24 @@
 @section('title')Об умных нас@endsection
 @section('content')
 
-<div class="container">
-  <div class="about-us">
-    <div class="first__block__information">
-      <img src="./img/mission.avif" class="about-us__img">
-      <div class="about-us__text">
-        <h3 class="about-us__title">Наша миссия</h3>
-        <p>Мы стремимся сделать жизнь наших клиентов более комфортной и безопасной с помощью современных технологий. Наша цель — предоставить высококачественные аксессуары для умных домов по доступным ценам.</p>
-      </div>
+<section class="welcome">
+    <div class="text_info">
+        <h2>Smart Home</h2>
+        <div class="title">
+            <h1>Make everything feel <span class="blue_word">easy</span></h1>
+        </div>
+        <div class="sub_title">
+            <h4>Удалённое управление интеллектуальной настройки, доступно в вашем доме.</h4>
+        </div>
+        <a href="/products" class="btn">Заказать!</a>
+        <div class="checkmark">
+            <p><img src="./img/checkmark.png"> Обеспечте себя самой комфортной средой</p>
+            <p><img src="./img/checkmark.png"> Следующий уровень комфорта</p>
+        </div>
     </div>
-    
-    <div class="second__block__information">
-      <div class="about-us__text">
-        <h3 class="about-us__title">Наши ценности</h3>
-        <ul>
-          <li>Качество: Мы гарантируем высокое качество всех наших товаров.</li>
-          <li>Доступность: Мы стараемся сделать умные технологии доступными для каждого.</li>
-          <li>Клиентоориентированность: Мы всегда на стороне наших клиентов и готовы помочь.</li>
-        </ul>
-      </div>
-      <img src="./img/worth.png" class="about-us__img">
+    <div class="image_hand">
+        <img src="./img/hand27.png" class="hand27">
     </div>
-
-    <div class="third__block__information">
-      <img src="./img/us-products.jpg" class="about-us__img">
-      <div class="about-us__text">
-        <h3 class="about-us__title">Наши продукты</h3>
-        <p>Мы предлагаем широкий ассортимент аксессуаров для умного дома, включая:</p>
-        <ul>
-          <li>Умные лампочки</li>
-          <li>Системы безопасности</li>
-          <li>Умные термостаты</li>
-          <li>Управление освещением и бытовой техникой</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 
 @endsection

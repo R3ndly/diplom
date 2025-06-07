@@ -1,7 +1,6 @@
 <?php
 namespace Database\Factories;
 
-use App\Models\Vacancies;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VacanciesFactory extends Factory

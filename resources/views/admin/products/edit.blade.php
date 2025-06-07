@@ -105,10 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             const response = await fetch(`/api/products/${productId}`, {
-                method: 'POST', // Laravel распознает _method=PUT
+                method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    //'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                 },
                 body: formData
             });

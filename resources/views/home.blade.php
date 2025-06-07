@@ -25,7 +25,7 @@
                 <p class="advantages-list__description">Умные технологии позволяют оптимизировать потребление энергии и ресурсов, что может снизить расходы на коммунальные услуги до 35%</p>
             </div>
 
-            <div class="advantages-list__card">        
+            <div class="advantages-list__card">
                 <h4 class="advantages-list__title">Повышение безопасности</h4>
                 <p class="advantages-list__description">Умные дома оснащены системами видеонаблюдения, сигнализации и датчиками, которые могут обнаруживать утечки газа или воды. </p>
             </div>
@@ -50,7 +50,7 @@
                 <h3 class="order__title">Мы самые крупные в России!</h3>
                 <p class="order__description">Наша компания была первой среди стран СНГ, которая начала продавать умные дома.<br>Мы строились, развивались и улучшались - всё ради ВАС!</p>
             </div>
-        </div> 
+        </div>
     </section>
 
     <section class="feedback">

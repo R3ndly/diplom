@@ -28,11 +28,12 @@ input[type="email"]:focus {
 }
 
 body {
-    background-color: #dff1f1;
     color: #202020;
     margin: 0;
     padding: 0;
 }
+
+
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
@@ -279,6 +280,7 @@ a:hover {
 /* Footer */
 .footer {
     background-color: #ffffff;
+    border-top: 1px solid #dee2e6;
 }
 
 .footer .container {
