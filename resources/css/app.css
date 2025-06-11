@@ -11,11 +11,11 @@ input[type="date"],
 input[type="tel"],
 input[type="email"],
 textarea {
-    width: 100%; /* Ширина на всю ширину контейнера */
-    padding: 10px; /* Внутренние отступы */
-    border: 1px solid #ccc; /* Цвет рамки */
-    border-radius: 4px; /* Скругление углов полей ввода */
-    transition: border-color 0.3s; /* Плавный переход цвета рамки при фокусе */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
 }
 
 /* Стили для полей ввода при фокусе */
@@ -32,8 +32,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
-
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;

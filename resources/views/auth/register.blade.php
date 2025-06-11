@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             // 1. Получаем CSRF-куки
-            const csrfResponse = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+            const csrfResponse = await fetch('/sanctum/csrf-cookie', {
                 credentials: 'include',
                 headers: {
                     'Accept': 'application/json',
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // 3. Отправляем запрос на регистрацию
-            const response = await fetch('http://127.0.0.1:8000/api/register', {
+            const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

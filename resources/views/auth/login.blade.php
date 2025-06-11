@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // 1. Получаем CSRF-куки (ОБЯЗАТЕЛЬНО с явным URL)
-        const csrfResponse = await fetch('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+        const csrfResponse = await fetch('/sanctum/csrf-cookie', {
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
@@ -60,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 3. Отправляем запрос на вход
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/login', {
+            const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
