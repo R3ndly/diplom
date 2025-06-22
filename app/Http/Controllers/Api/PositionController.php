@@ -16,6 +16,19 @@ class PositionController extends Controller
         return response()->json($position);
     }
 
+    public function show(int $id): JsonResponse
+    {
+        $position = Positions::find($id);
+
+        if(!$position) {
+            return response()->json([
+                'success' => false,
+            ], 404);
+        }
+
+        return response()->json($position, 200);
+    }
+
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([

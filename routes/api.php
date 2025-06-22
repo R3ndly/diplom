@@ -48,6 +48,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function() {
     Route::controller(PositionController::class)->group(function () {
         Route::get('/positions', 'index');
         Route::post('/position', 'store');
+        Route::get('/positions/{id}', 'show');
     });
     Route::controller(ApiProductsController::class)->group(function () {
         Route::get('/products/{product_id}', 'show');

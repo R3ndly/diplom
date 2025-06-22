@@ -30,7 +30,7 @@ class WorkerRequest extends FormRequest
             'hire_date' => ['required', 'date'],
             'education_id' => ['required', 'integer', 'exists:education,education_id'],
             'phone_number' => ['required', 'string', 'max:15'],
-            'email' => ['required','email', 'max:255', 'unique:workers,email'],
+            'email' => ['required','email', 'max:255'],
         ];
     }
 }
