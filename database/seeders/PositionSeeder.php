@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Vacancies;
+use App\Models\Positions;
 
-class VacanciesSeeder extends Seeder
+class PositionSeeder extends Seeder
 {
     public function run(): void
     {
-        Vacancies::factory()->count(100)->create();
+        Positions::factory()->count(10)->create();
     }
 }

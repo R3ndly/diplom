@@ -42,7 +42,18 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Должность:</strong>
-                    <input type="text" name="position" class="form-control" placeholder="Должность" required>
+                    <div class="input-group">
+                        <select name="position_id" id="positionSelect" class="form-control" required>
+                            <option value="">Загрузка должностей...</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" id="showPositionInput">+</button>
+                        </div>
+                    </div>
+                    <div id="newPositionContainer" style="display: none;">
+                        <input type="text" id="newPositionInput" class="form-control mt-2" placeholder="Введите новую должность">
+                        <button type="button" id="addPositionBtn" class="btn btn-primary mt-2">Добавить</button>
+                    </div>
                 </div>
             </div>
 
@@ -62,13 +73,11 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Образование:</strong><br>
-                    <div class="radio-group">
-                        <label for="yes">Имеется</label>
-                        <input type="radio" id="yes" name="education" value="1" checked>
-                        <label for="no">Отсутствует</label>
-                        <input type="radio" id="no" name="education" value="0">
-                    </div>
+                    <strong>Образование:</strong>
+                    <select name="education_id" class="form-control" required>
+                        <option value="1">Имеется</option>
+                        <option value="2">Отсутствует</option>
+                    </select>
                 </div>
             </div>
 
@@ -95,37 +104,135 @@
 </div>
 
 <script>
-    document.getElementById('createWorkerForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const select = document.getElementById('positionSelect');
+    const showBtn = document.getElementById('showPositionInput');
+    const newContainer = document.getElementById('newPositionContainer');
+    const addBtn = document.getElementById('addPositionBtn');
 
-        const form = event.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
+    loadPositions();
 
-        // Преобразование education в boolean
-        data.education = data.education === '1';
+    showBtn.addEventListener('click', function() {
+        newContainer.style.display = 'block';
+        this.style.display = 'none';
+    });
+
+    addBtn.addEventListener('click', addNewPosition);
+
+    document.getElementById('createWorkerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Создание...';
 
         try {
+            const formData = {
+                name: e.target.elements.name.value.trim(),
+                surname: e.target.elements.surname.value.trim(),
+                patronymic: e.target.elements.patronymic.value.trim(),
+                position_id: parseInt(e.target.elements.position_id.value),
+                salary: parseFloat(e.target.elements.salary.value),
+                hire_date: e.target.elements.hire_date.value,
+                education_id: parseInt(e.target.elements.education_id.value),
+                phone_number: e.target.elements.phone_number.value.trim(),
+                email: e.target.elements.email.value.trim()
+            };
+
             const response = await fetch('/api/workers', {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(formData)
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw errorData;
+                throw new Error(errorData.message || 'Ошибка сервера');
             }
 
             window.location.href = '/admin/workers';
+
         } catch (error) {
-            console.error('Ошибка при создании сотрудника:', error);
-            alert('Произошла ошибка: ' + (error.message || 'Проверьте введенные данные'));
+            console.error('Ошибка:', error);
+            alert('Ошибка: ' + error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Добавить';
         }
     });
-</script>
+});
+
+async function loadPositions() {
+    const select = document.getElementById('positionSelect');
+
+    try {
+        const response = await fetch('/api/positions');
+
+        if (!response.ok) {
+            throw new Error('Ошибка загрузки должностей');
+        }
+
+        const positions = await response.json();
+
+        select.innerHTML = '';
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = '-- Выберите должность --';
+        select.appendChild(defaultOption);
+
+        positions.forEach(position => {
+            const option = document.createElement('option');
+            option.value = position.position_id;
+            option.textContent = position.position_name;
+            select.appendChild(option);
+        });
+
+    } catch (error) {
+        console.error('Ошибка:', error);
+        select.innerHTML = '<option value="">Ошибка загрузки должностей</option>';
+    }
+}
+
+async function addNewPosition() {
+    const positionName = document.getElementById('newPositionInput').value.trim();
+    if (!positionName) return;
+
+    try {
+        const response = await fetch('/api/position', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ position_name: positionName })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Ошибка сервера');
+        }
+
+        await loadPositions();
+        const select = document.getElementById('positionSelect');
+        const newOption = Array.from(select.options)
+            .find(option => option.text === positionName);
+
+        if (newOption) {
+            select.value = newOption.value;
+        }
+
+        document.getElementById('newPositionContainer').style.display = 'none';
+        document.getElementById('showPositionInput').style.display = 'block';
+        document.getElementById('newPositionInput').value = '';
+
+    } catch (error) {
+        console.error('Ошибка:', error);
+        alert('Ошибка: ' + error.message);
+    }
+}</script>
 @endsection

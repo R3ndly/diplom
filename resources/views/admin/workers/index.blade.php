@@ -7,7 +7,7 @@
 
 <h1 class="text-center">Наши сотрудники</h1>
 
-<div class="row">
+<div>
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <div id="myModal" class="modal" style="display:none;">
@@ -138,14 +138,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function showWorkerDetails(worker) {
-    const educationText = worker.education ? "Имеется" : "Отсутствует";
     const detailsHtml = `
         <div class="window-info">
             <div><strong>ФИО:</strong> ${worker.surname} ${worker.name} ${worker.patronymic || ''}</div>
             <div><strong>Должность:</strong> ${worker.position}</div>
             <div><strong>Зарплата:</strong> ${worker.salary} руб.</div>
             <div><strong>Трудоустроен с:</strong> ${worker.hire_date}</div>
-            <div><strong>Образование:</strong> ${educationText}</div>
+            <div><strong>Образование:</strong> ${worker.education}</div>
             <div><strong>Номер телефона:</strong> ${worker.phone_number}</div>
             <div><strong>Электронная почта:</strong> ${worker.email}</div>
         </div>

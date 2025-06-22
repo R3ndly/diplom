@@ -25,10 +25,10 @@ class WorkerRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'patronymic' => ['required', 'string', 'max:255'],
-            'position' => ['required', 'string', 'max:255'],
+            'position_id' => ['required', 'integer', 'exists:positions,position_id'],
             'salary' => ['required', 'numeric', 'min:10000', 'max:2407000'],
             'hire_date' => ['required', 'date'],
-            'education' => ['required', 'boolean'],
+            'education_id' => ['required', 'integer', 'exists:education,education_id'],
             'phone_number' => ['required', 'string', 'max:15'],
             'email' => ['required','email', 'max:255', 'unique:workers,email'],
         ];

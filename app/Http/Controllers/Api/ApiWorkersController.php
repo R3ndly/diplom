@@ -12,7 +12,22 @@ class ApiWorkersController extends Controller
 {
     public function index(): JsonResponse
     {
-        $workers = Worker::simplePaginate(15);
+        $workers = DB::table('workers')->select([
+            'workers.worker_id',
+            'workers.name',
+            'workers.surname',
+            'workers.patronymic',
+            'positions.position_name as position',
+            'workers.salary',
+            'workers.hire_date',
+            'education.education_name as education',
+            'workers.phone_number',
+            'workers.email'
+        ])
+        ->join('positions', 'workers.position_id', '=', 'positions.position_id')
+        ->join('education', 'workers.education_id', '=', 'education.education_id')
+        ->orderBy('workers.worker_id')
+        ->simplePaginate(15);
 
         return response()->json([
             'success' => true,
@@ -27,9 +42,8 @@ class ApiWorkersController extends Controller
         Worker::create($validated);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Работник успешно добавлен',
-        ]);
+            'success' => true
+        ], 201);
     }
 
     public function show(int $worker_id): JsonResponse

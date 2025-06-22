@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ApiCartController;
 use App\Http\Controllers\Api\ApiWorkersController;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiProductsController;
+use App\Http\Controllers\Api\PositionController;
 
 Route::post('/register', [ApiAuthController::class, 'register']);
 Route::post('/login', [ApiAuthController::class, 'login']);
@@ -43,6 +44,10 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function() {
         Route::put('/workers/{worker_id}', 'update');
         Route::delete('/workers/{worker_id}', 'destroy');
         Route::get('/workers/{worker_id}/word', 'worker_docx');
+    });
+    Route::controller(PositionController::class)->group(function () {
+        Route::get('/positions', 'index');
+        Route::post('/position', 'store');
     });
     Route::controller(ApiProductsController::class)->group(function () {
         Route::get('/products/{product_id}', 'show');

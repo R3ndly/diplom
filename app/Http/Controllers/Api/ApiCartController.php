@@ -102,9 +102,9 @@ class ApiCartController extends Controller
 
     public function add(int $product_id): JsonResponse
     {
-        $findProductID = Products::find($product_id);
+        $findProduct = Products::find($product_id);
 
-        if(!$findProductID) {
+        if(!$findProduct) {
             return response()->json([
                 'success' => false,
                 'message' => "Товар не найден."

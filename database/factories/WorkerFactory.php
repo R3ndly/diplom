@@ -1,7 +1,6 @@
 <?php
 namespace Database\Factories;
 
-use App\Models\Worker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WorkerFactory extends Factory
@@ -14,10 +13,10 @@ class WorkerFactory extends Factory
             'name' => $faker->firstNameMale(),
             'surname' => $faker->lastNameMale(),
             'patronymic' => $faker->firstNameMale(),
-            'position' => $faker->jobTitle(),
+            'position_id' => $faker->numberBetween(1,10),
             'salary' => $faker->numerify('##000'),
             'hire_date' => $faker->date(),
-            'education' => $faker->boolean(),
+            'education_id' => $faker->numberBetween(1,2),
             'phone_number' => $faker->e164PhoneNumber(16),
             'email' => $faker->unique()->safeEmail(),
         ];

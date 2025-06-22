@@ -25,7 +25,7 @@ class ProductsFactory extends Factory
         ];
     }
 
-    public function randomImage() 
+    public function randomImage()
     {
         $pathToFolderImagesOfProducts = public_path('img/products');
         $Images = File::files($pathToFolderImagesOfProducts);
