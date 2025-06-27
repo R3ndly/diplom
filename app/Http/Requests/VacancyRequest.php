@@ -24,9 +24,9 @@ class VacancyRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'department' => ['required', 'string', 'max:255'],
-            'location' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'string', 'max:255'],
+            'department_id' => ['required', 'integer', 'exists:departments,department_id'],
+            'location_id' => ['required', 'integer', 'exists:locations,location_id'],
+            'working_hours_id' => ['required', 'integer', 'exists:working_hours,working_hours_id'],
             'salary' => ['required', 'numeric', 'min:0', 'max:9999999'],
             'contact_email' => ['required', 'string', 'max:255', 'email'],
             'contact_phone' => ['required', 'string'],

@@ -44,10 +44,10 @@
                     clone.querySelector('.vacancy-title').textContent = data.vacancy.title;
                     clone.querySelector('.vacancy-department').textContent += data.vacancy.department;
                     clone.querySelector('.vacancy-description').textContent = data.vacancy.description;
-                    clone.querySelector('.vacancy-location-type').textContent += `${data.vacancy.location}, ${data.vacancy.type}`;
+                    clone.querySelector('.vacancy-location-type').textContent += `${data.vacancy.location}, ${data.vacancy.working_hours}`;
                     clone.querySelector('.vacancy-salary').textContent += `${ data.vacancy.salary } руб.`;
-                    clone.querySelector('.vacancy-contact_email').textContent += data.vacancy.contact_email;
-                    clone.querySelector('.vacancy-contact_phone').textContent += data.vacancy.contact_phone;
+                    clone.querySelector('.vacancy-contact_email').textContent += data.vacancy.email;
+                    clone.querySelector('.vacancy-contact_phone').textContent += data.vacancy.phone_number;
                     clone.querySelector('.vacancy-publication').textContent += data.vacancy.published_at;
 
                     container.appendChild(clone);

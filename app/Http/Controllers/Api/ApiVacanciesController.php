@@ -6,12 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Models\Vacancies;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\VacancyRequest;
+use Illuminate\Support\Facades\DB;
 
 class ApiVacanciesController extends Controller
 {
     public function index(): JsonResponse
     {
-        $vacancies = Vacancies::paginate(12);
+        $vacancies = DB::table('vacancies')->select([
+            'vacancies.vacancy_id',
+            'vacancies.title',
+            'vacancies.description',
+            'departments.department',
+            'locations.location',
+            'working_hours.working_hours',
+            'workers.phone_number',
+            'workers.email',
+            'vacancies.salary',
+            'vacancies.published_at'
+        ])
+        ->join('departments', 'vacancies.department_id', '=', 'departments.department_id')
+        ->join('locations', 'vacancies.location_id', '=', 'locations.location_id')
+        ->join('working_hours', 'vacancies.working_hours_id', '=', 'working_hours.working_hours_id')
+        ->join('workers', 'vacancies.worker_id', '=', 'workers.worker_id')
+        ->orderBy('vacancies.vacancy_id')
+        ->simplePaginate(12);
 
         return response()->json([
             'success' => true,
@@ -19,9 +37,26 @@ class ApiVacanciesController extends Controller
         ]);
     }
 
-    public function show(int $vacancy_id): JsonResponse
+    public function show(int $id): JsonResponse
     {
-        $vacancy = Vacancies::find($vacancy_id);
+        $vacancy = DB::table('vacancies')->select([
+            'vacancies.vacancy_id',
+            'vacancies.title',
+            'vacancies.description',
+            'departments.department',
+            'locations.location',
+            'working_hours.working_hours',
+            'workers.phone_number',
+            'workers.email',
+            'vacancies.salary',
+            DB::raw("DATE_FORMAT(vacancies.published_at, '%d.%m.%Y') as published_at"),
+        ])
+        ->join('departments', 'vacancies.department_id', '=', 'departments.department_id')
+        ->join('locations', 'vacancies.location_id', '=', 'locations.location_id')
+        ->join('working_hours', 'vacancies.working_hours_id', '=', 'working_hours.working_hours_id')
+        ->join('workers', 'vacancies.worker_id', '=', 'workers.worker_id')
+        ->where('vacancies.vacancy_id', $id)
+        ->first();
 
         if(!$vacancy) {
             return response()->json([
@@ -32,18 +67,7 @@ class ApiVacanciesController extends Controller
 
         return response()->json([
             'success' => true,
-            'vacancy' => [
-                'vacancy_id' => $vacancy->vacancy_id,
-                'title' => $vacancy->title,
-                'description' => $vacancy->description,
-                'department' => $vacancy->department,
-                'location' => $vacancy->location,
-                'type' => $vacancy->type,
-                'salary' => $vacancy->salary,
-                'published_at' => $vacancy->getFormattedTime(),
-                'contact_email' => $vacancy->contact_email,
-                'contact_phone' => $vacancy->contact_phone
-            ]
+            'vacancy' => $vacancy
         ]);
     }
 

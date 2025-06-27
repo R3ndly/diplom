@@ -12,13 +12,12 @@ class VacanciesFactory extends Factory
         return [
             'title' => $faker->jobTitle(),
             'description' => $faker->sentence(50),
-            'department' => $faker->jobTitle(),
-            'location' => $faker->randomElement(['В офисе', 'Удалённо']),
-            'type' => $faker->randomElement(['Полный рабочий день', 'Сокращённый рабочий день']),
+            'department_id' => $faker->numberBetween(1,5),
+            'location_id' => $faker->numberBetween(1,3),
+            'working_hours_id' => $faker->numberBetween(1, 3),
+            'worker_id' => $faker->numberBetween(1,30),
             'salary' => $faker->numerify('##000'),
             'published_at' => $faker->date(),
-            'contact_email' => $faker->unique()->safeEmail(),
-            'contact_phone' => $faker->phoneNumber()
         ];
     }
 }

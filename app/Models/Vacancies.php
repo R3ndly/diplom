@@ -15,16 +15,27 @@ class Vacancies extends Model
 
     protected $keyType = 'int';
 
-    protected $fillable = ['title', 'description', 'department', 'location', 'type', 'salary', 'published_at', 'contact_email', 'contact_phone'];
+    protected $fillable = ['title', 'description', 'department_id', 'location_id', 'working_hours_id', 'worker_id', 'salary', 'published_at'];
 
     public $timestamps = false;
 
-    protected $casts = [
-        'published_at' => 'datetime',
-    ];
-
-    public function getFormattedTime(): string
+    public function department()
     {
-        return $this->published_at->format('d.m.Y');
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    public function working_hours()
+    {
+        return $this->belongsTo(Working_hours::class, 'working_hours_id');
+    }
+
+    public function workers()
+    {
+        return $this->belongsTo(Worker::class, 'worker_id');
     }
 }

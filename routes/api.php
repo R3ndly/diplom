@@ -8,6 +8,9 @@ use App\Http\Controllers\Api\ApiWorkersController;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiProductsController;
 use App\Http\Controllers\Api\PositionController;
+use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\WorkingHoursController;
 
 Route::post('/register', [ApiAuthController::class, 'register']);
 Route::post('/login', [ApiAuthController::class, 'login']);
@@ -37,6 +40,18 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function() {
         Route::put('/vacancies/{id}', 'update');
         Route::delete('/vacancies/{id}', 'destroy');
     });
+    Route::controller(DepartmentController::class)->group(function () {
+        Route::get('/departments', 'index');
+        Route::post('/departments', 'store');
+    });
+    Route::controller(LocationController::class)->group(function () {
+        Route::get('/locations', 'index');
+        Route::post('/locations', 'store');
+    });
+    Route::controller(WorkingHoursController::class)->group(function () {
+        Route::get('/working-hours', 'index');
+        Route::post('/working-hours', 'store');
+    });
      Route::controller(ApiWorkersController::class)->group(function () {
         Route::get('/workers', 'index');
         Route::get('/workers/{worker_id}', 'show');
@@ -48,7 +63,6 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function() {
     Route::controller(PositionController::class)->group(function () {
         Route::get('/positions', 'index');
         Route::post('/position', 'store');
-        Route::get('/positions/{id}', 'show');
     });
     Route::controller(ApiProductsController::class)->group(function () {
         Route::get('/products/{product_id}', 'show');

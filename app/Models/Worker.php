@@ -20,11 +20,16 @@ class Worker extends Model
 
     public function position()
     {
-        return $this->belongsTo(Position::class, 'position_id');
+        return $this->belongsTo(Positions::class, 'position_id');
     }
 
     public function education()
     {
         return $this->belongsTo(Education::class, 'education_id');
+    }
+
+    public function vacancies()
+    {
+        return $this->hasMany(Vacancies::class);
     }
 }
