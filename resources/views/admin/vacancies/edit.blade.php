@@ -67,18 +67,12 @@
                 </div>
             </div>
 
-            <!-- Контактные данные -->
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Email для связи:</strong>
-                    <input type="email" name="email" id="contact_email" class="form-control" placeholder="Email" required>
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Телефон для связи:</strong>
-                    <input type="tel" name="phone_number" id="contact_phone" class="form-control" placeholder="Телефон" required>
+                    <strong>Контактное лицо:</strong>
+                    <select name="worker_id" id="workerSelect" class="form-control" required>
+                        <option value="">Загрузка контактных лиц...</option>
+                    </select>
                 </div>
             </div>
 
@@ -98,19 +92,16 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`/api/vacancies/${vacancyId}`).then(res => res.json()),
         fetch('/api/departments').then(res => res.json()),
         fetch('/api/locations').then(res => res.json()),
-        fetch('/api/working-hours').then(res => res.json())
+        fetch('/api/working-hours').then(res => res.json()),
+        fetch('/api/workers').then(res => res.json())
     ])
-    .then(([vacancyData, departments, locations, workingHours]) => {
-        const vacancy = vacancyData.vacancy || vacancyData;
+    .then(([vacancyData, departments, locations, workingHours, workers]) => {
+        const vacancy = vacancyData.vacancy;
 
-        // Заполняем основные поля (исправленные ID)
-        document.getElementById('title').value = vacancy.title || '';
-        document.getElementById('description').value = vacancy.description || '';
-        document.getElementById('salary').value = vacancy.salary || '';
-        document.getElementById('contact_email').value = vacancy.email || '';       // Исправлено с contact_email на email
-        document.getElementById('contact_phone').value = vacancy.phone_number || ''; // Исправлено с contact_phone на phone_number
+        document.getElementById('title').value = vacancy.title;
+        document.getElementById('description').value = vacancy.description;
+        document.getElementById('salary').value = vacancy.salary;
 
-        // Заполняем select для отделов
         const departmentSelect = document.getElementById('departmentSelect');
         departmentSelect.innerHTML = '';
         departments.forEach(dept => {
@@ -121,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
             departmentSelect.value = vacancy.department_id;
         }
 
-        // Заполняем select для местоположений
         const locationSelect = document.getElementById('locationSelect');
         locationSelect.innerHTML = '';
         locations.forEach(loc => {
@@ -132,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
             locationSelect.value = vacancy.location_id;
         }
 
-        // Заполняем select для графика работы
         const workingHoursSelect = document.getElementById('workingHoursSelect');
         workingHoursSelect.innerHTML = '';
         workingHours.forEach(wh => {
@@ -142,13 +131,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (vacancy.working_hours_id) {
             workingHoursSelect.value = vacancy.working_hours_id;
         }
+
+        const workerSelect = document.getElementById('workerSelect');
+        workerSelect.innerHTML = '';
+        workers.workers.data.forEach(worker => {
+            const option = new Option(worker.surname + ' ' + worker.name + ' ' + worker.patronymic + ' (' + worker.position + ')', worker.worker_id);
+            workerSelect.add(option);
+        });
+        if (workers.worker_id) {
+            workerSelect.worker = worker.worker_id;
+        }
     })
     .catch(error => {
         console.error('Ошибка загрузки данных:', error);
-        alert('Не удалось загрузить данные для редактирования');
     });
 
-    // Обработка отправки формы
     document.getElementById('editVacancyForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
@@ -157,10 +154,9 @@ document.addEventListener('DOMContentLoaded', function() {
             description: document.getElementById('description').value,
             department_id: document.getElementById('departmentSelect').value,
             location_id: document.getElementById('locationSelect').value,
-            working_hours_id: document.getElementById('workingHoursSelect').value, // Исправлена опечатка working_hours_id
+            working_hours_id: document.getElementById('workingHoursSelect').value,
             salary: document.getElementById('salary').value,
-            contact_email: document.getElementById('contact_email').value,
-            contact_phone: document.getElementById('contact_phone').value,
+            worker_id: document.getElementById('workerSelect').value,
             _method: 'PUT'
         };
 
@@ -175,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(formData)
             });
 
-            if (!response.ok) {
+            if(!response.ok) {
                 const errorData = await response.json();
                 throw errorData;
             }
@@ -183,7 +179,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = '/admin/vacancies';
         } catch (error) {
             console.error('Ошибка при обновлении:', error);
-            alert('Произошла ошибка: ' + (error.message || 'Проверьте введенные данные'));
         }
     });
 });

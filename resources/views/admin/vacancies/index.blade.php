@@ -32,20 +32,22 @@
             </div>
         </template>
 
-        <div class="pagination-container">
-            <button id="prev-page" class="btn btn-pagination" disabled>Назад</button>
-            <button id="next-page" class="btn btn-pagination">Вперёд</button>
-        </div>
+        <div class="paginate__menu" id="pagination-links"></div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    let page = 1;
     const container = document.getElementById('vacancies-container');
     const template = document.getElementById('vacancy-template');
+    const paginationContainer = document.getElementById('pagination-links');
+    let currentPage = 1;
 
     const loadVacancies = async () => {
         try {
-            const response = await fetch(`/api/vacancies?page=${page}`);
+            const response = await fetch(`/api/vacancies?page=${currentPage}`);
             const data = await response.json();
+
+            if (!data.vacancies || !data.vacancies.data) {
+                throw new Error('Invalid data format');
+            }
 
             container.innerHTML = '';
             data.vacancies.data.forEach(vacancy => {
@@ -61,19 +63,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 clone.querySelector('.js-delete-form').onsubmit = async (event) => {
                     event.preventDefault();
-                        await fetch(`/api/vacancies/${vacancy.vacancy_id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                            }
-                        });
-                        loadVacancies();
+                    await fetch(`/api/vacancies/${vacancy.vacancy_id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        }
+                    });
+                    loadVacancies();
                 };
                 container.appendChild(clone);
             });
 
-            document.getElementById('prev-page').disabled = data.vacancies.current_page === 1;
-            document.getElementById('next-page').disabled = data.vacancies.current_page === data.vacancies.last_page;
+            renderPagination(data.vacancies);
 
         } catch (error) {
             container.innerHTML = '<div class="alert alert-danger">Ошибка загрузки</div>';
@@ -81,10 +82,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    document.getElementById('prev-page').onclick = () => { if (page > 1) loadVacancies(--page); };
-    document.getElementById('next-page').onclick = () => loadVacancies(++page);
+    function renderPagination(pagination) {
+        let links = '';
+
+        if (pagination.prev_page_url) {
+            links += `<button id="prev-page" onclick="loadPage(${pagination.current_page - 1})" class="page-link btn">&laquo; Назад</button> `;
+        }
+
+        if (pagination.next_page_url) {
+            links += `<button id="next-page" onclick="loadPage(${pagination.current_page + 1})" class="page-link btn">Вперед &raquo;</button>`;
+        }
+
+        paginationContainer.innerHTML = links;
+    }
+
+    window.loadPage = function(page) {
+        currentPage = page;
+        loadVacancies();
+        return false;
+    }
 
     loadVacancies();
-});
-</script>
+});</script>
 @endsection
