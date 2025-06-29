@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Vacancies;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\VacancyRequest;
-use App\Http\Requests\VacancyCreateRequest;
 use Illuminate\Support\Facades\DB;
 
 class ApiVacanciesController extends Controller
@@ -72,7 +71,7 @@ class ApiVacanciesController extends Controller
         ]);
     }
 
-    public function store(VacancyCreateRequest $request): JsonResponse
+    public function store(VacancyRequest $request): JsonResponse
     {
         Vacancies::create([
             'title' => $request->title,
@@ -89,7 +88,7 @@ class ApiVacanciesController extends Controller
         ], 201);
     }
 
-    public function update(VacancyCreateRequest $request, int $vacancy_id): JsonResponse
+    public function update(VacancyRequest $request, int $vacancy_id): JsonResponse
     {
         $validated = $request->validated();
 
